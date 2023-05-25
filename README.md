@@ -1,5 +1,9 @@
 # G3Canada-3 
 
+## Summary Statement
+
+TasteBud will be used to store and look for user recipes, recommend recipes given particular ingredients, and share recipes. 
+
 ## What is TasteBud? 
 
 TasteBud is a storage app that allows you to locally store a collection of recipes within your phone. The app allows users to create a detailed description, from cooking procedures, necessary ingredients, and user-inserted photos of the desired food. For convenience, we allow users to edit recipes. When searching through a large list of recipes, users will be able to narrow down their search via name, ingredients, meals of the day, etc. Additionally, users will be able to rate and share their recipes. 
