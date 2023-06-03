@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main_bg">#F2F3F5</color>
+    <color name="homecolorno">#bfbfbf</color>
+    <color name="homecolor">#d81e06</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="transparent">#00000000</color>
 </resources>
