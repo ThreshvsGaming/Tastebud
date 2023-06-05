@@ -3,19 +3,24 @@ package comp3350.g3.tasteBud.object;
 import java.util.*;
 
 public class Recipe {
+
+    private int id;
     private String name;
     private String desc;
-    private List<String> ingredients;
-    private List<String> tags;
+    private String[] ingredients;
+    private String[] tags;
 
     // Class constructor
-    public Recipe(String name, String desc, List<String> ingredients, List <String> tags) {
+    public Recipe(int id, String name, String desc, String[] ingredients, String[] tags) {
         this.name = name;
         this.desc = desc;
         this.ingredients = ingredients;
         this.tags = tags;
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return this.name;
@@ -25,12 +30,16 @@ public class Recipe {
         return this.name;
     }
 
-    public List<String> getIngredients() {
+    public String[] getIngredients() {
         return this.ingredients;
     }
 
-    public List<String> tags() {
+    public String[] tags() {
         return this.tags;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -41,11 +50,11 @@ public class Recipe {
         this.desc = desc;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(String[] ingredients) {
         this.ingredients = ingredients;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String[] tags) {
         this.tags = tags;
     }
 }
