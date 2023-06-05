@@ -17,6 +17,13 @@ public class Recipe {
         this.ingredients = ingredients;
         this.tags = tags;
     }
+    public Recipe(String name, String desc, String[] ingredients, String[] tags) {
+        this.id = -1;     //placeholder id
+        this.name = name;
+        this.desc = desc;
+        this.ingredients = ingredients;
+        this.tags = tags;
+    }
 
     public int getId() {
         return id;
