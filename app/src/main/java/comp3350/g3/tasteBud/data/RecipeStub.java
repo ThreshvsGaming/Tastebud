@@ -6,7 +6,8 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class RecipeStub implements RecipeDB {
     private ArrayList<Recipe> storedRecipes;
 
-    public RecipeStub(ArrayList<Recipe> storedRecipes) {
+    public static  ArrayList<Recipe> storedRecipes(){
+        ArrayList<Recipe> list=new ArrayList<>();
         String[] recipe1ingredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
         String[] recipe1tags = {"Dinner", "Fried"};
         String[] recipe2ingredients = {"Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"};
@@ -19,7 +20,7 @@ public class RecipeStub implements RecipeDB {
         String[] recipe5tags = {"Dinner", "Italian"};
         String[] recipe6ingredients = {"Eggs", "Spinach", "Cheddar cheese", "Onion", "Salt", "Pepper", "Butter"};
         String[] recipe6tags = {"Breakfast", "Omelette"};
-        this.storedRecipes = new ArrayList<Recipe>();
+        //this.storedRecipes = new ArrayList<Recipe>();
         Recipe recipe1 = new Recipe(
                 1,
                 "Fried Chicken",
@@ -27,13 +28,15 @@ public class RecipeStub implements RecipeDB {
                 recipe1ingredients,
                 recipe1tags
         );
+        list.add(recipe1);
         Recipe recipe2 = new Recipe(
                 2,
-               "Chicken Adobo",
+                "Chicken Adobo",
                 "Combine soy sauce, vinegar, garlic, bay leaves, peppercorns, and brown sugar. Marinate chicken in the mixture for 1 hour. Cook chicken in the marinade until tender.",
                 recipe2ingredients,
                 recipe2tags
         );
+        list.add(recipe2);
         Recipe recipe3 = new Recipe(
                 3,
                 "Kacchi Biryani",
@@ -41,6 +44,7 @@ public class RecipeStub implements RecipeDB {
                 recipe3ingredients,
                 recipe3tags
         );
+        list.add(recipe3);
         Recipe recipe4 = new Recipe(
                 4,
                 "Crispy Calamari",
@@ -48,6 +52,7 @@ public class RecipeStub implements RecipeDB {
                 recipe4ingredients,
                 recipe4tags
         );
+        list.add(recipe4);
         Recipe recipe5 = new Recipe(
                 5,
                 "Classic Lasagna",
@@ -55,6 +60,7 @@ public class RecipeStub implements RecipeDB {
                 recipe5ingredients,
                 recipe5tags
         );
+        list.add(recipe5);
         Recipe recipe6 = new Recipe(
                 6,
                 "Cheesy Spinach Omelette",
@@ -62,6 +68,8 @@ public class RecipeStub implements RecipeDB {
                 recipe6ingredients,
                 recipe6tags
         );
+        list.add(recipe6);
+        return list;
     }
 
     public void add(Recipe newRecipe) {

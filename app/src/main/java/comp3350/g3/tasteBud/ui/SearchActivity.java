@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.FirstBean;
+import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.object.homePageAdapter;
 
 public class SearchActivity extends Fragment {
@@ -34,16 +36,9 @@ public class SearchActivity extends Fragment {
         recycler=view.findViewById(R.id.recycler);
         homePageAdapter madapter=new homePageAdapter();
         recycler.setAdapter(madapter);
-        List<FirstBean> list=new ArrayList<>();
-        //Replace them with the Existing Recipe to display on the first page
-        list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
-                "Fried Chicken","Good food"));
-        list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
-                "Chicken Adobo","Good food"));
-        list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
-                "Kacchi Biryani","Good food"));
-        list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
-                "Prison Food","Good food"));
+
+        ArrayList<Recipe> list=new ArrayList<>();
+        list= RecipeStub.storedRecipes();
         madapter.setNewData(list);
     }
 }
