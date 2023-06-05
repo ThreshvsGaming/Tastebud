@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.data.RecipeStub;
@@ -66,11 +67,16 @@ public class CreateActivity extends Fragment {
                         );
 
                         database.add(newRecipe);
+
+                        /*Codes for troubleshooting
                         ArrayList<Recipe> allRecipes = database.getStoredRecipes();
                         for (Recipe recipe : allRecipes) {
                             Log.d("CreateActivity", "Stored recipe: " + recipe.getName());
+                            Log.d("CreateActivity", "Stored recipe: " + recipe.getdesc());
+                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getIngredients()));
+                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getTags()));
                         }
-
+                        */
 
                         validationStatus.setText("Recipe Successfully Added!");
                         validationStatus.setVisibility(View.VISIBLE);

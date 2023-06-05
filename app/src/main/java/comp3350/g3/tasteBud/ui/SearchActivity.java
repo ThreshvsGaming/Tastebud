@@ -44,8 +44,6 @@ public class SearchActivity extends Fragment {
                 "Kacchi Biryani","Good food"));
         list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
                 "Prison Food","Good food"));
-        list.add(new FirstBean("https://media.istockphoto.com/id/1207976129/photo/close-up-fried-chickens-on-white-plate-isolated-on-table-look-yummy-and-yellow-gold-color.jpg?s=612x612&w=0&k=20&c=8Hh-554Lrsm_MjorxwrKM0CfJ0wTEX9IHkagHcr7BYk=",
-                "Prison Food","Good food"));
         madapter.setNewData(list);
     }
 }

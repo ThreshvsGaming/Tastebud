@@ -34,14 +34,14 @@ public class Recipe {
     }
 
     public String getdesc() {
-        return this.name;
+        return this.desc;
     }
 
     public String[] getIngredients() {
         return this.ingredients;
     }
 
-    public String[] tags() {
+    public String[] getTags() {
         return this.tags;
     }
 
