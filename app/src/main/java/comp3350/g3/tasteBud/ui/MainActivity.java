@@ -42,7 +42,6 @@ public class MainActivity extends FragmentActivity {
         llCreateButton.setOnClickListener(v -> {
             //   setButtonStatue(false,true,false);
             addFragment(new CreateActivity());
-
         });
         llChefButton.setOnClickListener(v -> {
             // setButtonStatue(false,false,true);

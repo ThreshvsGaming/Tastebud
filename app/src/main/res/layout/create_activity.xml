@@ -10,12 +10,13 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_300"
+        android:layout_height="237dp"
         android:background="#bfbfbf"
         android:padding="@dimen/dp_15"
         android:src="@mipmap/ic_adds" />
 
     <EditText
+        android:id="@+id/recipeTitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_20"
@@ -24,13 +25,34 @@
         android:paddingHorizontal="@dimen/dp_20" />
 
     <EditText
+        android:id="@+id/recipeDescription"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="226dp"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
         android:background="@color/white"
         android:gravity="start"
-        android:paddingVertical="@dimen/dp_20"
         android:hint="Add a description..."
-        android:paddingHorizontal="@dimen/dp_20" />
+        android:paddingHorizontal="@dimen/dp_20"
+        android:paddingVertical="@dimen/dp_20" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#E91E63"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/recipeSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="handleText"
+        android:text="Submit" />
+
 </LinearLayout>
+
