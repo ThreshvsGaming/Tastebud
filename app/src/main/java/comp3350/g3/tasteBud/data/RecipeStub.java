@@ -4,14 +4,10 @@ import java.util.*;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeStub implements RecipeDB {
-    private ArrayList<Recipe> storedRecipes;
-    private int recipeId;
+    private static ArrayList<Recipe> storedRecipes;
 
-    public RecipeStub() {
-        this.storedRecipes = new ArrayList<Recipe>();
-        this.recipeId = 1;
-    }
-    public RecipeStub(ArrayList<Recipe> storedRecipes) {
+    public static  ArrayList<Recipe> storedRecipes(){
+        ArrayList<Recipe> list=new ArrayList<>();
         String[] recipe1ingredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
         String[] recipe1tags = {"Dinner", "Fried"};
         String[] recipe2ingredients = {"Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"};
@@ -24,8 +20,7 @@ public class RecipeStub implements RecipeDB {
         String[] recipe5tags = {"Dinner", "Italian"};
         String[] recipe6ingredients = {"Eggs", "Spinach", "Cheddar cheese", "Onion", "Salt", "Pepper", "Butter"};
         String[] recipe6tags = {"Breakfast", "Omelette"};
-        this.storedRecipes = storedRecipes;
-        this.recipeId = storedRecipes.size() + 1; //with the assumption that passed arrayList already contains some recipes.
+        //this.storedRecipes = new ArrayList<Recipe>();
         Recipe recipe1 = new Recipe(
                 1,
                 "Fried Chicken",
@@ -33,13 +28,15 @@ public class RecipeStub implements RecipeDB {
                 recipe1ingredients,
                 recipe1tags
         );
+        list.add(recipe1);
         Recipe recipe2 = new Recipe(
                 2,
-               "Chicken Adobo",
+                "Chicken Adobo",
                 "Combine soy sauce, vinegar, garlic, bay leaves, peppercorns, and brown sugar. Marinate chicken in the mixture for 1 hour. Cook chicken in the marinade until tender.",
                 recipe2ingredients,
                 recipe2tags
         );
+        list.add(recipe2);
         Recipe recipe3 = new Recipe(
                 3,
                 "Kacchi Biryani",
@@ -47,6 +44,7 @@ public class RecipeStub implements RecipeDB {
                 recipe3ingredients,
                 recipe3tags
         );
+        list.add(recipe3);
         Recipe recipe4 = new Recipe(
                 4,
                 "Crispy Calamari",
@@ -54,42 +52,16 @@ public class RecipeStub implements RecipeDB {
                 recipe4ingredients,
                 recipe4tags
         );
-        Recipe recipe5 = new Recipe(
-                5,
-                "Classic Lasagna",
-                "Cook lasagna noodles according to package instructions. In a skillet, brown ground beef with onion and garlic. Add tomato sauce, tomato paste, Italian seasoning, salt, and pepper to the beef mixture. In a baking dish, layer noodles, beef mixture, ricotta cheese, mozzarella cheese, and Parmesan cheese. Repeat layers. Bake in the oven until cheese is melted and lasagna is bubbly.",
-                recipe5ingredients,
-                recipe5tags
-        );
-        Recipe recipe6 = new Recipe(
-                6,
-                "Cheesy Spinach Omelette",
-                "Whisk eggs in a bowl and season with salt and pepper. Heat butter in a non-stick skillet over medium heat. Add chopped onion and sauté until softened. Add spinach and cook until wilted. Pour the beaten eggs into the skillet and let it cook until the edges set. Sprinkle grated cheddar cheese over the eggs and fold the omelette in half. Cook for another minute until the cheese melts. Serve hot.",
-                recipe6ingredients,
-                recipe6tags
-        );
-        this.storedRecipes.add(recipe1);
-        recipeId++;   //2
-        this.storedRecipes.add(recipe2);
-        recipeId++;   //3
-        this.storedRecipes.add(recipe3);
-        recipeId++;   //4
-        this.storedRecipes.add(recipe4);
-        recipeId++;   //5
-        this.storedRecipes.add(recipe5);
-        recipeId++;   //6
-        this.storedRecipes.add(recipe6);
-        recipeId++;   //7, for new recipes being added using add method
-
+        list.add(recipe4);
+        storedRecipes = list;
+        return list;
     }
 
     public void add(Recipe newRecipe) {
-        newRecipe.setId(recipeId);
-        this.storedRecipes.add(newRecipe);
-        recipeId++;   //update nextId
+        storedRecipes.add(newRecipe);
     }
 
-    public ArrayList<Recipe> getStoredRecipes() {
+    public static ArrayList<Recipe> getStoredRecipes() {
         return storedRecipes;
     }
 
