@@ -17,6 +17,13 @@ public class Recipe {
         this.ingredients = ingredients;
         this.tags = tags;
     }
+    public Recipe(String name, String desc, String[] ingredients, String[] tags) {
+        this.id = -1;     //placeholder id
+        this.name = name;
+        this.desc = desc;
+        this.ingredients = ingredients;
+        this.tags = tags;
+    }
 
     public int getId() {
         return id;
@@ -26,15 +33,15 @@ public class Recipe {
         return this.name;
     }
 
-    public String getdesc() {
-        return this.name;
+    public String getDesc() {
+        return this.desc;
     }
 
     public String[] getIngredients() {
         return this.ingredients;
     }
 
-    public String[] tags() {
+    public String[] getTags() {
         return this.tags;
     }
 
@@ -46,7 +53,7 @@ public class Recipe {
         this.name = name;
     }
 
-    public void setdesc(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 

@@ -14,13 +14,21 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.data.RecipeStub;
+import comp3350.g3.tasteBud.object.Recipe;
 
 public class CreateActivity extends Fragment {
     //The layout connect with "+" Button
     Button submitRecipeButton;
     String recipeTitle;
     String recipeDescription;
+    String recipeTags;
+    String recipeIngredients;
+
 
     TextView validationStatus;
 
@@ -40,10 +48,36 @@ public class CreateActivity extends Fragment {
             public void onClick(View v) {
                 recipeTitle = ((EditText) view.findViewById(R.id.recipeTitle)).getText().toString();
                 recipeDescription = ((EditText) view.findViewById(R.id.recipeDescription)).getText().toString();
+                recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
+                recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
 
-                if (inputValidation(recipeTitle, recipeDescription)) {
+                if (inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags)) {
 
                     try {
+                        String[] ingredientsArray = recipeIngredients.split(",");
+                        String[] tags = recipeTags.split(",");
+
+                        RecipeStub database = new RecipeStub();
+
+                        Recipe newRecipe = new Recipe(
+                          recipeTitle,
+                          recipeDescription,
+                          ingredientsArray,
+                          tags
+                        );
+
+                        database.add(newRecipe);
+
+                        /*Codes for troubleshooting
+                        ArrayList<Recipe> allRecipes = database.getStoredRecipes();
+                        for (Recipe recipe : allRecipes) {
+                            Log.d("CreateActivity", "Stored recipe: " + recipe.getName());
+                            Log.d("CreateActivity", "Stored recipe: " + recipe.getDesc());
+                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getIngredients()));
+                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getTags()));
+                        }
+                        */
+
                         validationStatus.setText("Recipe Successfully Added!");
                         validationStatus.setVisibility(View.VISIBLE);
                         validationStatus.setTextColor(Color.GREEN);
@@ -89,7 +123,7 @@ public class CreateActivity extends Fragment {
     }
 
 
-    private boolean inputValidation (String recipeName, String recipeInstructions){
+    private boolean inputValidation (String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags){
         boolean validated = true;
         if(recipeName.isEmpty()) {
             validated = false;
