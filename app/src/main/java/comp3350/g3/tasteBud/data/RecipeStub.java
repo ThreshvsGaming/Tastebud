@@ -5,11 +5,11 @@ import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeStub implements RecipeDB {
     private ArrayList<Recipe> storedRecipes;
-    private int nextId;
+    private int recipeId;
 
     public RecipeStub() {
         this.storedRecipes = new ArrayList<Recipe>();
-        this.nextId = 1;
+        this.recipeId = 1;
     }
     public RecipeStub(ArrayList<Recipe> storedRecipes) {
         String[] recipe1ingredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
@@ -24,8 +24,8 @@ public class RecipeStub implements RecipeDB {
         String[] recipe5tags = {"Dinner", "Italian"};
         String[] recipe6ingredients = {"Eggs", "Spinach", "Cheddar cheese", "Onion", "Salt", "Pepper", "Butter"};
         String[] recipe6tags = {"Breakfast", "Omelette"};
-        this.storedRecipes = new ArrayList<Recipe>();
-        this.nextId = storedRecipes.size() + 1; //with the assumption that passed arrayList already contains some recipes.
+        this.storedRecipes = storedRecipes;
+        this.recipeId = storedRecipes.size() + 1; //with the assumption that passed arrayList already contains some recipes.
         Recipe recipe1 = new Recipe(
                 1,
                 "Fried Chicken",
@@ -69,24 +69,24 @@ public class RecipeStub implements RecipeDB {
                 recipe6tags
         );
         this.storedRecipes.add(recipe1);
-        nextId++;   //2
+        recipeId++;   //2
         this.storedRecipes.add(recipe2);
-        nextId++;   //3
+        recipeId++;   //3
         this.storedRecipes.add(recipe3);
-        nextId++;   //4
+        recipeId++;   //4
         this.storedRecipes.add(recipe4);
-        nextId++;   //5
+        recipeId++;   //5
         this.storedRecipes.add(recipe5);
-        nextId++;   //6
+        recipeId++;   //6
         this.storedRecipes.add(recipe6);
-        nextId++;   //7, for new recipes being added using add method
+        recipeId++;   //7, for new recipes being added using add method
 
     }
 
     public void add(Recipe newRecipe) {
-        newRecipe.setId(nextId);
+        newRecipe.setId(recipeId);
         this.storedRecipes.add(newRecipe);
-        nextId++;   //update nextId
+        recipeId++;   //update nextId
     }
 
     public ArrayList<Recipe> getStoredRecipes() {
