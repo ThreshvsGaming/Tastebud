@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.data.RecipeStub;
 
 public class MainActivity extends FragmentActivity {
     //Define LinearLayout Button, TextView Button, ImageView Button
@@ -48,6 +49,8 @@ public class MainActivity extends FragmentActivity {
             addFragment(new ChefActivity());
 
         });
+
+        RecipeStub.storedRecipes();
     }
 
     private void addFragment(Fragment fragment) {
