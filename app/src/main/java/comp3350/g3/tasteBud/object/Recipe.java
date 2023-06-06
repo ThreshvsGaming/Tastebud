@@ -1,8 +1,9 @@
 package comp3350.g3.tasteBud.object;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
     private int id;
     private String name;
