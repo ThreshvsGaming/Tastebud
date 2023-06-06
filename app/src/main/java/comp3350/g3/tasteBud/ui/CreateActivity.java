@@ -72,7 +72,7 @@ public class CreateActivity extends Fragment {
                         ArrayList<Recipe> allRecipes = database.getStoredRecipes();
                         for (Recipe recipe : allRecipes) {
                             Log.d("CreateActivity", "Stored recipe: " + recipe.getName());
-                            Log.d("CreateActivity", "Stored recipe: " + recipe.getdesc());
+                            Log.d("CreateActivity", "Stored recipe: " + recipe.getDesc());
                             Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getIngredients()));
                             Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getTags()));
                         }

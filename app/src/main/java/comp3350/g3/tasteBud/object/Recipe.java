@@ -33,7 +33,7 @@ public class Recipe {
         return this.name;
     }
 
-    public String getdesc() {
+    public String getDesc() {
         return this.desc;
     }
 
@@ -53,7 +53,7 @@ public class Recipe {
         this.name = name;
     }
 
-    public void setdesc(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 
