@@ -49,7 +49,8 @@ public class MainActivity extends FragmentActivity {
             addFragment(new ChefActivity());
 
         });
-        RecipeStub.storedRecipes();
+
+
     }
 
     private void addFragment(Fragment fragment) {

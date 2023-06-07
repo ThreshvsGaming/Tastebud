@@ -34,21 +34,21 @@ public class DetailActivity extends FragmentActivity {
         recipeDescription = findViewById(R.id.recipeDescription);
 
         //Create the instance of Recipe to get information of Each recipe
-        Recipe bean = (Recipe) getIntent().getSerializableExtra("bean");
-        recipeTitle.setText(bean.getName());
-        recipeDescription.setText(bean.getDesc());
+        Recipe recipe = (Recipe) getIntent().getSerializableExtra("bean");
+        recipeTitle.setText(recipe.getName());
+        recipeDescription.setText(recipe.getDesc());
         String detailText="";
         //Use For loop to go over the length of Tags and
-        for (int n=0;n<bean.getTags().length;n++){
+        for (int n=0;n<recipe.getTags().length;n++){
             String tag=TextUtils.isEmpty(detailText)?"":""+detailText+",";
-            detailText=tag+(bean.getTags()[n]);
+            detailText=tag+(recipe.getTags()[n]);
         }
 
         recipeTags.setText(detailText);
         String Ing="";
-        for (int n=0;n<bean.getIngredients().length;n++){
+        for (int n=0;n<recipe.getIngredients().length;n++){
             String Ingredients=TextUtils.isEmpty(Ing)?"":""+Ing+",";
-            Ing=Ingredients+(bean.getIngredients()[n]);
+            Ing=Ingredients+(recipe.getIngredients()[n]);
         }
         recipeIngredients.setText(Ing);
         findViewById(R.id.ivBack).setOnClickListener(v -> {

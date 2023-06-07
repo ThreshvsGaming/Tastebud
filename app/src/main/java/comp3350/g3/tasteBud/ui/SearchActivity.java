@@ -47,6 +47,9 @@ public class SearchActivity extends Fragment {
         //Search View
         searchView = view.findViewById(R.id.searchView);
         searchView.clearFocus();
+
+        searchView.setOnClickListener(v -> searchView.setIconified(false));
+
         //Enables a function that detects text changes in the Search View
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
@@ -80,4 +83,5 @@ public class SearchActivity extends Fragment {
         List<Recipe> list = SearchProcessor.searchResults(text);
         madapter.setNewData(list);
     }
+
 }

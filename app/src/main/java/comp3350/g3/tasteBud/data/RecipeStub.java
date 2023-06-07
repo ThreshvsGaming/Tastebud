@@ -3,11 +3,10 @@ package comp3350.g3.tasteBud.data;
 import java.util.*;
 import comp3350.g3.tasteBud.object.Recipe;
 
-public class RecipeStub implements RecipeDB {
+public class RecipeStub implements IRecipeDB {
     private static ArrayList<Recipe> storedRecipes;
 
-    public static  ArrayList<Recipe> storedRecipes(){
-        ArrayList<Recipe> list=new ArrayList<>();
+    public void initRecipeDatabase(){
         String[] recipe1ingredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
         String[] recipe1tags = {"Dinner", "Fried"};
         String[] recipe2ingredients = {"Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"};
@@ -16,11 +15,6 @@ public class RecipeStub implements RecipeDB {
         String[] recipe3tags = {"Dinner", "Indian"};
         String[] recipe4ingredients = {"Calamari", "Flour", "Cornmeal", "Paprika", "Salt", "Pepper", "Garlic powder", "Egg", "Milk", "Oil"};
         String[] recipe4tags = {"Appetizer", "Seafood", "Fried"};
-        String[] recipe5ingredients = {"Lasagna noodles", "Ground beef", "Onion", "Garlic", "Tomato sauce", "Tomato paste", "Italian seasoning", "Salt", "Pepper", "Ricotta cheese", "Mozzarella cheese", "Parmesan cheese"};
-        String[] recipe5tags = {"Dinner", "Italian"};
-        String[] recipe6ingredients = {"Eggs", "Spinach", "Cheddar cheese", "Onion", "Salt", "Pepper", "Butter"};
-        String[] recipe6tags = {"Breakfast", "Omelette"};
-        //this.storedRecipes = new ArrayList<Recipe>();
         Recipe recipe1 = new Recipe(
                 1,
                 "Fried Chicken",
@@ -28,7 +22,6 @@ public class RecipeStub implements RecipeDB {
                 recipe1ingredients,
                 recipe1tags
         );
-        list.add(recipe1);
         Recipe recipe2 = new Recipe(
                 2,
                 "Chicken Adobo",
@@ -36,7 +29,6 @@ public class RecipeStub implements RecipeDB {
                 recipe2ingredients,
                 recipe2tags
         );
-        list.add(recipe2);
         Recipe recipe3 = new Recipe(
                 3,
                 "Kacchi Biryani",
@@ -44,7 +36,6 @@ public class RecipeStub implements RecipeDB {
                 recipe3ingredients,
                 recipe3tags
         );
-        list.add(recipe3);
         Recipe recipe4 = new Recipe(
                 4,
                 "Crispy Calamari",
@@ -52,16 +43,19 @@ public class RecipeStub implements RecipeDB {
                 recipe4ingredients,
                 recipe4tags
         );
-        list.add(recipe4);
-        storedRecipes = list;
-        return list;
+
+        storedRecipes = new ArrayList<>();
+        storedRecipes.add(recipe1);
+        storedRecipes.add(recipe2);
+        storedRecipes.add(recipe3);
+        storedRecipes.add(recipe4);
     }
 
-    public void add(Recipe newRecipe) {
+    public void addRecipe(Recipe newRecipe) {
         storedRecipes.add(newRecipe);
     }
 
-    public static ArrayList<Recipe> getStoredRecipes() {
+    public ArrayList<Recipe> getStoredRecipes() {
         return storedRecipes;
     }
 

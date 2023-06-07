@@ -1,18 +1,16 @@
 package comp3350.g3.tasteBud.object;
 
 import java.io.Serializable;
-import java.util.*;
 
 public class Recipe implements Serializable {
-
     private int id;
     private String name;
     private String desc;
     private String[] ingredients;
     private String[] tags;
 
-    // Class constructor
     public Recipe(int id, String name, String desc, String[] ingredients, String[] tags) {
+        this.id = id;
         this.name = name;
         this.desc = desc;
         this.ingredients = ingredients;
@@ -27,7 +25,7 @@ public class Recipe implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
@@ -44,26 +42,6 @@ public class Recipe implements Serializable {
 
     public String[] getTags() {
         return this.tags;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public void setIngredients(String[] ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
     }
 }
 
