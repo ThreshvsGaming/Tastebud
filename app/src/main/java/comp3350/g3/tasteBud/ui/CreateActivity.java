@@ -51,22 +51,11 @@ public class CreateActivity extends Fragment {
             if (validationError == null) {
 
                 try {
-                    String[] ingredientsArray = recipeIngredients.split(",");
-                    String[] tags = recipeTags.split(",");
-
-                    Recipe newRecipe = new Recipe(
-                            recipeTitle,
-                            recipeDescription,
-                            ingredientsArray,
-                            tags
-                    );
-
-                    recipeProcessor.addRecipes(newRecipe);
+                    recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
 
                     validationStatus.setText("Recipe Successfully Added!");
                     validationStatus.setVisibility(View.VISIBLE);
                     validationStatus.setTextColor(Color.GREEN);
-
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {

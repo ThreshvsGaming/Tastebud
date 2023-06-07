@@ -57,7 +57,6 @@ public class DetailActivity extends FragmentActivity {
     }
     public static String byteArrayToString(byte[] bytes)
     {
-
         return new String(bytes);
     }
 }
