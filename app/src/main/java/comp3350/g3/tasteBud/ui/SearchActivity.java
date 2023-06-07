@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,15 +16,15 @@ import java.util.List;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.data.RecipeStub;
-import comp3350.g3.tasteBud.object.FirstBean;
-import comp3350.g3.tasteBud.object.Recipe;
+import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
+import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchActivity extends Fragment {
     //Modify the Search Page
-    RecyclerView recycler;
+    private RecyclerView recycler;
     private HomePageAdapter madapter;
-    List<Recipe> list;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,17 +40,44 @@ public class SearchActivity extends Fragment {
         madapter = new HomePageAdapter();
         recycler = view.findViewById(R.id.recycler);
         recycler.setAdapter(madapter);
-        list = RecipeStub.getStoredRecipes();
-        madapter.setNewData(list);
         madapter.setOnItemClickListener((adapter, view1, position) -> {
             startActivity(new Intent(getActivity(),DetailActivity.class).putExtra("bean",madapter.getData().get(position)));
         });
+
+        //Search View
+        searchView = view.findViewById(R.id.searchView);
+        searchView.clearFocus();
+        //Enables a function that detects text changes in the Search View
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                //Filters recipes based on user input
+                filterRecipeList(newText);
+                return true;
+            }
+        });
+
     }
 
     @Override
     public void onStart() {
         //Refresh page when adding new recipe
         super.onStart();
-        madapter.setNewData(RecipeStub.getStoredRecipes());
+        filterRecipeList("");
+    }
+
+
+    private void filterRecipeList(String text)
+    {
+        List<Recipe> list = SearchProcessor.searchResults(text);
+        madapter.setNewData(list);
     }
 }
