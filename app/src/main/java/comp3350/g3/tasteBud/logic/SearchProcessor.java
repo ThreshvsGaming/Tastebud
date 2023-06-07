@@ -4,12 +4,18 @@ import java.util.*;
 import java.util.regex.*;
 
 import comp3350.g3.tasteBud.application.Services;
+import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchProcessor {
+    private static IRecipeDB recipeDB;
+
+    public SearchProcessor() {
+        recipeDB = Services.getRecipeDB();
+    }
     public static List<Recipe> searchResults(String text) {
-        List<Recipe> results = Services.getRecipeDB().getStoredRecipes();
+        List<Recipe> results = recipeDB.getStoredRecipes();
 
         results = searchName(results,text);
 
