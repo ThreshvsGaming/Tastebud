@@ -2,7 +2,9 @@ package comp3350.g3.tasteBud.object;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
 import java.util.Arrays;
+
 import comp3350.g3.tasteBud.R;
 
 public class HomePageAdapter extends BaseQuickAdapter<Recipe, BaseViewHolder> {
@@ -14,7 +16,7 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Recipe recipe) {
         String tags = Arrays.toString(recipe.getTags());
-        tags = tags.replace("[","").replace("]", "");
+        tags = tags.replace("[", "").replace("]", "");
 
         helper.setText(R.id.tvTitle, recipe.getName());
         helper.setText(R.id.num2, tags);

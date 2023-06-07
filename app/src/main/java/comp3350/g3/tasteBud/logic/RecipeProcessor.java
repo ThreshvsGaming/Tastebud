@@ -39,7 +39,7 @@ public class RecipeProcessor {
         return null;
     }
 
-    public void addRecipes (String recipeName, String recipeDesc, String ingredients, String tags) {
+    public void addRecipes(String recipeName, String recipeDesc, String ingredients, String tags) {
         String[] ingredientsArray = ingredients.split(",");
         String[] tagsArray = tags.split(",");
 

@@ -2,6 +2,7 @@ package comp3350.g3.tasteBud.logic;
 
 import java.util.*;
 import java.util.regex.*;
+
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -16,7 +17,7 @@ public class SearchProcessor {
     public static List<Recipe> searchResults(String text) {
         List<Recipe> results = recipeDB.getStoredRecipes();
 
-        results = searchName(results,text);
+        results = searchName(results, text);
 
         return results;
     }
@@ -28,11 +29,9 @@ public class SearchProcessor {
         Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
 
-        for(Recipe recipe : list)
-        {
+        for (Recipe recipe : list) {
             matcher = pattern.matcher(recipe.getName());
-            if(matcher.find())
-            {
+            if (matcher.find()) {
                 searchResults.add(recipe);
             }
         }
@@ -40,14 +39,13 @@ public class SearchProcessor {
         return searchResults;
     }
 
-    private static String tokenizer(String text){
+    private static String tokenizer(String text) {
         //Grabs tokens from input string via space delimiter
         String[] textSplit = text.split("\\s+");
 
         //Assembles the regex pattern so that it contains all tokens
         String patternText = "";
-        for(int i = 0; i < textSplit.length; i++)
-        {
+        for (int i = 0; i < textSplit.length; i++) {
             patternText += "(?=.*" + textSplit[i] + ")";
         }
 

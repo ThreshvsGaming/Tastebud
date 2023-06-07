@@ -16,6 +16,7 @@ public class Recipe implements Serializable {
         this.ingredients = ingredients;
         this.tags = tags;
     }
+
     public Recipe(String name, String desc, String[] ingredients, String[] tags) {
         this.id = -1;     //placeholder id
         this.name = name;

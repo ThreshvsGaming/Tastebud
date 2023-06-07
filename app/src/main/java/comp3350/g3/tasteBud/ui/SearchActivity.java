@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
@@ -39,7 +42,7 @@ public class SearchActivity extends Fragment {
         recycler = view.findViewById(R.id.recycler);
         recycler.setAdapter(madapter);
         madapter.setOnItemClickListener((adapter, view1, position) -> {
-            startActivity(new Intent(getActivity(),DetailActivity.class).putExtra("bean",madapter.getData().get(position)));
+            startActivity(new Intent(getActivity(), DetailActivity.class).putExtra("bean", madapter.getData().get(position)));
         });
 
         searchView = view.findViewById(R.id.searchView);
@@ -48,17 +51,14 @@ public class SearchActivity extends Fragment {
         searchView.setOnClickListener(v -> searchView.setIconified(false));
 
         //Enables a function that detects text changes in the Search View
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-        {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText)
-            {
+            public boolean onQueryTextChange(String newText) {
                 //Filters recipes based on user input
                 filterRecipeList(newText);
                 return true;
@@ -73,8 +73,7 @@ public class SearchActivity extends Fragment {
         filterRecipeList("");
     }
 
-    private void filterRecipeList(String text)
-    {
+    private void filterRecipeList(String text) {
         List<Recipe> list = searchProcessor.searchResults(text);
         madapter.setNewData(list);
     }
