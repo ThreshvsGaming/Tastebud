@@ -1,30 +1,31 @@
 package comp3350.g3.tasteBud.logic;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class CreateActivityLogic {
     private TextView validationStatus;
+    private RecipeStub database;
+    private Handler handler;
 
     public CreateActivityLogic(TextView validationStatus) {
         this.validationStatus = validationStatus;
+        this.database = new RecipeStub();
+        this.handler = new Handler();
+    }
+
+    public void setDatabase(RecipeStub database) {
+        this.database = database;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
     }
 
     public void submitRecipe(View view, EditText recipeTitleEditText, EditText recipeDescriptionEditText, EditText recipeIngredientsEditText, EditText recipeTagsEditText) {
@@ -37,8 +38,6 @@ public class CreateActivityLogic {
             try {
                 String[] ingredientsArray = recipeIngredients.split(",");
                 String[] tags = recipeTags.split(",");
-
-                RecipeStub database = new RecipeStub();
 
                 Recipe newRecipe = new Recipe(
                         recipeTitle,
@@ -53,7 +52,7 @@ public class CreateActivityLogic {
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);
 
-                new Handler().postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         validationStatus.setVisibility(View.INVISIBLE);
@@ -67,14 +66,14 @@ public class CreateActivityLogic {
         }
     }
 
-    private boolean inputValidation(String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags) {
+    public boolean inputValidation(String recipeName, String recipeDescription, String recipeIngredients, String recipeTags) {
         boolean validated = true;
         if (recipeName.isEmpty() || recipeName.matches("^\\s+$") || recipeName.matches("^\\p{Punct}+$") || recipeName.matches("\\d+$")) {
             handleValidationFailure("Invalid recipe name!");
             validated = false;
         }
 
-        if (recipeInstructions.isEmpty() || recipeInstructions.matches("^\\p{Punct}+$") || recipeInstructions.matches("\\d+$") || recipeInstructions.matches("^\\s+$")) {
+        if (recipeDescription.isEmpty() || recipeDescription.matches("^\\p{Punct}+$") || recipeDescription.matches("\\d+$") || recipeDescription.matches("^\\s+$")) {
             handleValidationFailure("Invalid recipe description!");
             validated = false;
         }
@@ -87,7 +86,7 @@ public class CreateActivityLogic {
         validationStatus.setVisibility(View.VISIBLE);
         validationStatus.setTextColor(Color.RED);
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 validationStatus.setVisibility(View.INVISIBLE);
@@ -95,3 +94,4 @@ public class CreateActivityLogic {
         }, 3000); //Show dialog for 3 seconds
     }
 }
+

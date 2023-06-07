@@ -1,6 +1,7 @@
 package comp3350.g3.tasteBud.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
+import comp3350.g3.tasteBud.logic.CreateActivityLogic;
 
 public class CreateActivity extends Fragment {
     //The layout connect with "+" Button
