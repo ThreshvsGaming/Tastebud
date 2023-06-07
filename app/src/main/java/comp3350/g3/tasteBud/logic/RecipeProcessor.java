@@ -1,10 +1,7 @@
 package comp3350.g3.tasteBud.logic;
 
-import java.util.ArrayList;
-
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.IRecipeDB;
-import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeProcessor {
@@ -12,10 +9,6 @@ public class RecipeProcessor {
 
     public RecipeProcessor() {
         recipeDB = Services.getRecipeDB();
-    }
-
-    public ArrayList<Recipe> getStoredRecipes(){
-        return recipeDB.getStoredRecipes();
     }
 
     public String inputValidation(String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags) {
@@ -58,6 +51,4 @@ public class RecipeProcessor {
         );
         recipeDB.addRecipe(newRecipe);
     }
-
-
 }
