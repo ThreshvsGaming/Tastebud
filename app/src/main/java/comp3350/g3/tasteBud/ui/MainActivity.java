@@ -49,7 +49,6 @@ public class MainActivity extends FragmentActivity {
             addFragment(new ChefActivity());
 
         });
-
         RecipeStub.storedRecipes();
     }
 
@@ -58,6 +57,7 @@ public class MainActivity extends FragmentActivity {
         FragmentManager manager = this.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.contenLayout, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
