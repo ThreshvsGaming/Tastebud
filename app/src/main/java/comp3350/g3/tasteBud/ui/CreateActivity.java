@@ -10,15 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.data.RecipeStub;
+import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class CreateActivity extends Fragment {
@@ -29,11 +32,15 @@ public class CreateActivity extends Fragment {
     String recipeTags;
     String recipeIngredients;
 
-
+    RecipeProcessor recipeProcessor;
+    RecipeStub database;
     TextView validationStatus;
 
-  //  @SuppressLint("MissingInflatedId")
-    @Override
+    ImageView backButton;
+
+
+    //  @SuppressLint("MissingInflatedId")
+   // @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -43,6 +50,11 @@ public class CreateActivity extends Fragment {
 
         validationStatus = view.findViewById(R.id.textView2);
 
+        database = new RecipeStub();
+
+        recipeProcessor = new RecipeProcessor(database);
+
+        backButton = view.findViewById(R.id.returnButton);
         submitRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,32 +63,23 @@ public class CreateActivity extends Fragment {
                 recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
                 recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
 
-                if (inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags)) {
+                String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
+
+
+                if (validationError == null) {
 
                     try {
                         String[] ingredientsArray = recipeIngredients.split(",");
                         String[] tags = recipeTags.split(",");
 
-                        RecipeStub database = new RecipeStub();
-
                         Recipe newRecipe = new Recipe(
-                          recipeTitle,
-                          recipeDescription,
-                          ingredientsArray,
-                          tags
+                                recipeTitle,
+                                recipeDescription,
+                                ingredientsArray,
+                                tags
                         );
 
                         database.add(newRecipe);
-
-                        /*Codes for troubleshooting
-                        ArrayList<Recipe> allRecipes = database.getStoredRecipes();
-                        for (Recipe recipe : allRecipes) {
-                            Log.d("CreateActivity", "Stored recipe: " + recipe.getName());
-                            Log.d("CreateActivity", "Stored recipe: " + recipe.getDesc());
-                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getIngredients()));
-                            Log.d("CreateActivity", "Stored recipe: " + Arrays.toString(recipe.getTags()));
-                        }
-                        */
 
                         validationStatus.setText("Recipe Successfully Added!");
                         validationStatus.setVisibility(View.VISIBLE);
@@ -89,8 +92,7 @@ public class CreateActivity extends Fragment {
                             }
 
                         }, 3000); //Show dialog for 3 seconds
-                    }
-                    catch (IllegalArgumentException e) {
+                    } catch (IllegalArgumentException e) {
                         validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
                         validationStatus.setVisibility(View.VISIBLE);
                         validationStatus.setTextColor(Color.RED);
@@ -100,9 +102,8 @@ public class CreateActivity extends Fragment {
                                 validationStatus.setVisibility(View.INVISIBLE);
                             }
 
-                        }, 3000); //Show dialog for 3 seconds
-                    }
-                    catch (Exception e) {
+                        }, 10000); //Show dialog for 10 seconds
+                    } catch (Exception e) {
                         validationStatus.setText("System Error: " + e.getMessage());
                         validationStatus.setVisibility(View.VISIBLE);
                         validationStatus.setTextColor(Color.RED);
@@ -112,110 +113,32 @@ public class CreateActivity extends Fragment {
                                 validationStatus.setVisibility(View.INVISIBLE);
                             }
 
-                        }, 3000); //Show dialog for 3 seconds
+                        }, 10000); //Show dialog for 10 seconds
                     }
+                } else {
+                    validationStatus.setText(validationError);
+                    validationStatus.setVisibility(View.VISIBLE);
+                    validationStatus.setTextColor(Color.RED);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            validationStatus.setVisibility(View.INVISIBLE);
+                        }
+
+                    }, 3000); //Show dialog for 3 seconds
                 }
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getParentFragmentManager() != null) {
+                    getParentFragmentManager().popBackStack();
+                }
+            }
+        });
 
         return view;
-    }
-
-
-    private boolean inputValidation (String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags){
-        boolean validated = true;
-        if(recipeName.isEmpty()) {
-            validated = false;
-            validationStatus.setText("Name cannot be empty!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-        if(recipeName.matches("^\\s+$")) {
-            validated = false;
-            validationStatus.setText("Name cannot be spaces only!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-
-        if(recipeName.matches("^\\p{Punct}+$") || recipeName.matches("\\d+$")) {
-            validated = false;
-            validationStatus.setText("Name cannot be numbers or symbols only!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-        if(recipeInstructions.isEmpty()) {
-            validated = false;
-            validationStatus.setText("Description cannot be empty!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-        if(recipeInstructions.matches("^\\p{Punct}+$") || recipeName.matches("\\d+$")) {
-            validated = false;
-            validationStatus.setText("Description cannot be numbers or symbols only!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-        if(recipeInstructions.matches("^\\s+$")) {
-            validated = false;
-            validationStatus.setText("Description cannot be spaces only!!");
-            validationStatus.setVisibility(View.VISIBLE);
-            validationStatus.setTextColor(Color.RED);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
-        }
-
-        return validated;
     }
 }
