@@ -46,4 +46,9 @@ public class RecipeProcessor {
         return null;
     }
 
+    public void addRecipes (Recipe newRecipe) {
+        recipeDB.addRecipe(newRecipe);
+    }
+
+
 }

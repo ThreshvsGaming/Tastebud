@@ -24,7 +24,6 @@ public class CreateActivity extends Fragment {
     private String recipeTags;
     private String recipeIngredients;
     private RecipeProcessor recipeProcessor;
-    private RecipeStub database;
     private TextView validationStatus;
     private ImageView backButton;
 
@@ -38,8 +37,6 @@ public class CreateActivity extends Fragment {
 
         validationStatus = view.findViewById(R.id.textView2);
 
-        database = new RecipeStub();
-
         recipeProcessor = new RecipeProcessor();
 
         backButton = view.findViewById(R.id.returnButton);
@@ -50,7 +47,6 @@ public class CreateActivity extends Fragment {
             recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
 
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
-
 
             if (validationError == null) {
 
@@ -65,7 +61,7 @@ public class CreateActivity extends Fragment {
                             tags
                     );
 
-                    database.addRecipe(newRecipe);
+                    recipeProcessor.addRecipes(newRecipe);
 
                     validationStatus.setText("Recipe Successfully Added!");
                     validationStatus.setVisibility(View.VISIBLE);

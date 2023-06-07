@@ -2,12 +2,14 @@ package comp3350.g3.tasteBud.logic;
 
 import java.util.*;
 import java.util.regex.*;
+
+import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchProcessor {
     public static List<Recipe> searchResults(String text) {
-        List<Recipe> results = RecipeStub.getStoredRecipes();
+        List<Recipe> results = Services.getRecipeDB().getStoredRecipes();
 
         results = searchName(results,text);
 
