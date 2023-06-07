@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
         android:layout_margin="@dimen/dp_20"
-        android:background="@drawable/shape_mainbg_25" />
+        android:background="@drawable/shape_mainbg_25"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

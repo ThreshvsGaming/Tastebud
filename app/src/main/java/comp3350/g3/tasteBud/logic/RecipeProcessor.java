@@ -1,24 +1,16 @@
 package comp3350.g3.tasteBud.logic;
 
-import android.graphics.Color;
-import android.os.Handler;
-import android.view.View;
-
-import comp3350.g3.tasteBud.data.RecipeDB;
-import comp3350.g3.tasteBud.data.RecipeStub;
+import comp3350.g3.tasteBud.application.Services;
+import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
-
 public class RecipeProcessor {
+    private static IRecipeDB recipeDB;
 
-    private RecipeDB recipeDB;
-
-    public RecipeProcessor(RecipeDB recipeDB) {
-        this.recipeDB = recipeDB;
+    public RecipeProcessor() {
+        recipeDB = Services.getRecipeDB();
     }
 
-
-    //User input validation
     public String inputValidation(String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags) {
         String[] inputTypes = {recipeName, recipeInstructions, recipeIngredients, recipeTags};
         String[] inputFields = {"Name", "Description", "Ingredients", "Tags"};
@@ -29,20 +21,34 @@ public class RecipeProcessor {
                 return error;
             }
         }
+
+        //return null for any uncaught exceptions for now
         return null;
     }
 
-
-    //Helper method for user input validation
     private String inputValidationHelper(String input, String fieldName) {
         if (input.isEmpty()) {
             return fieldName + " cannot be empty!!";
         } else if (input.matches("^\\s+$")) {
-            return fieldName + " cannot be spaces only!!";
+            return fieldName + " cannot be spaces only!!!";
         } else if (input.matches("^\\p{Punct}+$") || input.matches("\\d+$")) {
-            return fieldName + " cannot be numbers or symbols only!!";
+            return fieldName + " cannot be numbers or symbols only!!!";
         }
+
+        //return null for any uncaught exceptions for now
         return null;
     }
 
+    public void addRecipes (String recipeName, String recipeDesc, String ingredients, String tags) {
+        String[] ingredientsArray = ingredients.split(",");
+        String[] tagsArray = tags.split(",");
+
+        Recipe newRecipe = new Recipe(
+                recipeName,
+                recipeDesc,
+                ingredientsArray,
+                tagsArray
+        );
+        recipeDB.addRecipe(newRecipe);
+    }
 }
