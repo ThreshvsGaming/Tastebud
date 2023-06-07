@@ -13,10 +13,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
-import comp3350.g3.tasteBud.object.Recipe;
 
 public class CreateActivity extends Fragment {
-    //The layout connect with "+" Button
     private Button submitRecipeButton;
     private String recipeTitle;
     private String recipeDescription;
@@ -47,46 +45,36 @@ public class CreateActivity extends Fragment {
 
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
 
-            if (validationError == null) {
+            handleValidation(validationError);
+        });
 
-                try {
-                    recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
+        backButton.setOnClickListener(v -> {
+            if (getParentFragmentManager() != null) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
 
-                    validationStatus.setText("Recipe Successfully Added!");
-                    validationStatus.setVisibility(View.VISIBLE);
-                    validationStatus.setTextColor(Color.GREEN);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            validationStatus.setVisibility(View.INVISIBLE);
-                        }
+        return view;
+    }
 
-                    }, 3000); //Show dialog for 3 seconds
-                } catch (IllegalArgumentException e) {
-                    validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
-                    validationStatus.setVisibility(View.VISIBLE);
-                    validationStatus.setTextColor(Color.RED);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            validationStatus.setVisibility(View.INVISIBLE);
-                        }
+    public void handleValidation(String validationError){
+        if (validationError == null) {
 
-                    }, 10000); //Show dialog for 10 seconds
-                } catch (Exception e) {
-                    validationStatus.setText("System Error: " + e.getMessage());
-                    validationStatus.setVisibility(View.VISIBLE);
-                    validationStatus.setTextColor(Color.RED);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            validationStatus.setVisibility(View.INVISIBLE);
-                        }
+            try {
+                recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
 
-                    }, 10000); //Show dialog for 10 seconds
-                }
-            } else {
-                validationStatus.setText(validationError);
+                validationStatus.setText("Recipe Successfully Added!");
+                validationStatus.setVisibility(View.VISIBLE);
+                validationStatus.setTextColor(Color.GREEN);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        validationStatus.setVisibility(View.INVISIBLE);
+                    }
+
+                }, 3000); //Show dialog for 3 seconds
+            } catch (IllegalArgumentException e) {
+                validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.RED);
                 new Handler().postDelayed(new Runnable() {
@@ -95,19 +83,30 @@ public class CreateActivity extends Fragment {
                         validationStatus.setVisibility(View.INVISIBLE);
                     }
 
-                }, 3000); //Show dialog for 3 seconds
-            }
-        });
+                }, 10000); //Show dialog for 10 seconds
+            } catch (Exception e) {
+                validationStatus.setText("System Error: " + e.getMessage());
+                validationStatus.setVisibility(View.VISIBLE);
+                validationStatus.setTextColor(Color.RED);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        validationStatus.setVisibility(View.INVISIBLE);
+                    }
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getParentFragmentManager() != null) {
-                    getParentFragmentManager().popBackStack();
+                }, 10000); //Show dialog for 10 seconds
+            }
+        } else {
+            validationStatus.setText(validationError);
+            validationStatus.setVisibility(View.VISIBLE);
+            validationStatus.setTextColor(Color.RED);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    validationStatus.setVisibility(View.INVISIBLE);
                 }
-            }
-        });
 
-        return view;
+            }, 3000); //Show dialog for 3 seconds
+        }
     }
 }

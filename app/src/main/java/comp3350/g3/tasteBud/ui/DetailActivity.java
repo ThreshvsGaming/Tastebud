@@ -4,19 +4,12 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class DetailActivity extends FragmentActivity {
-    // This page is intent to show the detail of each recipe:
-    // *Title
-    // *Description
-    // *Tags
-    // *Ingredients
     TextView recipeTitle;
     TextView recipeDescription;
     TextView recipeTags;
@@ -26,6 +19,7 @@ public class DetailActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Connect with Layout File:"detail_activity"
         setContentView(R.layout.detail_activity);
         recipeTitle = findViewById(R.id.recipeTitle);
@@ -33,30 +27,25 @@ public class DetailActivity extends FragmentActivity {
         recipeIngredients = findViewById(R.id.recipeIngredients);
         recipeDescription = findViewById(R.id.recipeDescription);
 
-        //Create the instance of Recipe to get information of Each recipe
+        //Create the instance of Recipe to get information of each recipe
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("bean");
         recipeTitle.setText(recipe.getName());
         recipeDescription.setText(recipe.getDesc());
-        String detailText="";
-        //Use For loop to go over the length of Tags and
-        for (int n=0;n<recipe.getTags().length;n++){
-            String tag=TextUtils.isEmpty(detailText)?"":""+detailText+",";
-            detailText=tag+(recipe.getTags()[n]);
-        }
 
-        recipeTags.setText(detailText);
-        String Ing="";
-        for (int n=0;n<recipe.getIngredients().length;n++){
-            String Ingredients=TextUtils.isEmpty(Ing)?"":""+Ing+",";
-            Ing=Ingredients+(recipe.getIngredients()[n]);
+        String tagCollection = "";
+        for (int n = 0; n < recipe.getTags().length; n++){
+            String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
+            tagCollection = tag + (recipe.getTags()[n]); //to get appropriately indexed tag
         }
-        recipeIngredients.setText(Ing);
-        findViewById(R.id.ivBack).setOnClickListener(v -> {
-            finish();
-        });
-    }
-    public static String byteArrayToString(byte[] bytes)
-    {
-        return new String(bytes);
+        recipeTags.setText(tagCollection);
+
+        String ingredientsCollection = "";
+        for (int n = 0; n<recipe.getIngredients().length; n++){
+            String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
+            ingredientsCollection = ingredients + (recipe.getIngredients()[n]); //to get appropriately indexed ingredients
+        }
+        recipeIngredients.setText(ingredientsCollection);
+
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
     }
 }

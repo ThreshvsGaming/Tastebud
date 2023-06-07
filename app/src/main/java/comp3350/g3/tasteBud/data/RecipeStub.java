@@ -58,8 +58,4 @@ public class RecipeStub implements IRecipeDB {
     public ArrayList<Recipe> getStoredRecipes() {
         return storedRecipes;
     }
-
-    public void clear() {
-        storedRecipes.clear();
-    }
 }

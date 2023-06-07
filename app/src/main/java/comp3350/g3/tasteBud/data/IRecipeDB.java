@@ -6,5 +6,4 @@ import comp3350.g3.tasteBud.object.Recipe;
 public interface IRecipeDB {
     ArrayList<Recipe> getStoredRecipes();
     void addRecipe(Recipe newRecipe);
-    void clear();
 }

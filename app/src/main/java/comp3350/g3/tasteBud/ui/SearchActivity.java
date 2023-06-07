@@ -6,26 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
-
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchActivity extends Fragment {
-    //Modify the Search Page
     private RecyclerView recycler;
     private HomePageAdapter madapter;
     private SearchView searchView;
-
     private SearchProcessor searchProcessor;
 
     @Override
@@ -37,7 +31,6 @@ public class SearchActivity extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //To display the Recipe on the "SearchRecipePage"
         super.onViewCreated(view, savedInstanceState);
 
         searchProcessor = new SearchProcessor();
@@ -49,7 +42,6 @@ public class SearchActivity extends Fragment {
             startActivity(new Intent(getActivity(),DetailActivity.class).putExtra("bean",madapter.getData().get(position)));
         });
 
-        //Search View
         searchView = view.findViewById(R.id.searchView);
         searchView.clearFocus();
 
@@ -72,7 +64,6 @@ public class SearchActivity extends Fragment {
                 return true;
             }
         });
-
     }
 
     @Override
@@ -82,11 +73,9 @@ public class SearchActivity extends Fragment {
         filterRecipeList("");
     }
 
-
     private void filterRecipeList(String text)
     {
         List<Recipe> list = searchProcessor.searchResults(text);
         madapter.setNewData(list);
     }
-
 }
