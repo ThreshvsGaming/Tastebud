@@ -5,7 +5,6 @@ import java.util.regex.*;
 
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.IRecipeDB;
-import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchProcessor {
@@ -14,6 +13,7 @@ public class SearchProcessor {
     public SearchProcessor() {
         recipeDB = Services.getRecipeDB();
     }
+
     public static List<Recipe> searchResults(String text) {
         List<Recipe> results = recipeDB.getStoredRecipes();
 

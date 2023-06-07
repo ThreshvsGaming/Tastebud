@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 

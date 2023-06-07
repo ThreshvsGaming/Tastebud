@@ -26,6 +26,8 @@ public class SearchActivity extends Fragment {
     private HomePageAdapter madapter;
     private SearchView searchView;
 
+    private SearchProcessor searchProcessor;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class SearchActivity extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //To display the Recipe on the "SearchRecipePage"
         super.onViewCreated(view, savedInstanceState);
+
+        searchProcessor = new SearchProcessor();
+
         madapter = new HomePageAdapter();
         recycler = view.findViewById(R.id.recycler);
         recycler.setAdapter(madapter);
@@ -80,7 +85,7 @@ public class SearchActivity extends Fragment {
 
     private void filterRecipeList(String text)
     {
-        List<Recipe> list = SearchProcessor.searchResults(text);
+        List<Recipe> list = searchProcessor.searchResults(text);
         madapter.setNewData(list);
     }
 
