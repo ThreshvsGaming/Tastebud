@@ -48,17 +48,14 @@ public class SearchActivity extends Fragment {
         searchView.setOnClickListener(v -> searchView.setIconified(false));
 
         //Enables a function that detects text changes in the Search View
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-        {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
+            public boolean onQueryTextSubmit(String query)  {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText)
-            {
+            public boolean onQueryTextChange(String newText) {
                 //Filters recipes based on user input
                 filterRecipeList(newText);
                 return true;
@@ -73,8 +70,7 @@ public class SearchActivity extends Fragment {
         filterRecipeList("");
     }
 
-    private void filterRecipeList(String text)
-    {
+    private void filterRecipeList(String text) {
         List<Recipe> list = searchProcessor.searchResults(text);
         madapter.setNewData(list);
     }

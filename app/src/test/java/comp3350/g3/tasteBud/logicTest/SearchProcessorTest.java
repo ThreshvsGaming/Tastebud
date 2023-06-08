@@ -1,5 +1,6 @@
 package comp3350.g3.tasteBud.logicTest;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,8 +32,7 @@ public class SearchProcessorTest {
     @Test
     public void testSearchName() {
         //Does a generic search of chicken
-        SearchProcessor searchProcessor = new SearchProcessor();
-        searchProcessor.setRecipeDB(recipeStub);
+        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         ArrayList<Recipe> searchResults = searchProcessor.searchResults("cHicKeN");
 
@@ -46,7 +46,7 @@ public class SearchProcessorTest {
 
 
         //Specific Search for Chicken Adobo
-        searchResults = searchProcessor.searchResults("chicken ADOBO");
+        searchResults = searchProcessor.searchResults("chicken                  ADOBO");
 
         assertTrue(searchResults.size() == 1);
 
@@ -58,8 +58,7 @@ public class SearchProcessorTest {
     //Example: "Chicken Adobo" and "Adobo Chicken" should return the same recipe
     @Test
     public void testSearchQueryOrder() {
-        SearchProcessor searchProcessor = new SearchProcessor();
-        searchProcessor.setRecipeDB(recipeStub);
+        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         //Checks one way to query the search
         ArrayList<Recipe> searchResults = searchProcessor.searchResults("KacChi BIRYANI");
@@ -73,13 +72,11 @@ public class SearchProcessorTest {
 
         assertTrue(searchResults.size() == 1);
         assertTrue(searchResults.contains(recipe1));
-
     }
     //Test whether the search logic will return newly added recipes
     @Test
     public void testSearchNewRecipes() {
-        SearchProcessor searchProcessor = new SearchProcessor();
-        searchProcessor.setRecipeDB(recipeStub);
+        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
 
         ArrayList<Recipe> searchResults = searchProcessor.searchResults("Test Recipe");
@@ -103,16 +100,12 @@ public class SearchProcessorTest {
         assertTrue(searchResults.size() == 1);
         Recipe recipe1 = searchResults.get(0);
         assertEquals("Test Recipe", recipe1.getName());
-
-
-
     }
 
     //Test whether an empty inputted search query will return all the recipes in the database
     @Test
     public void testSearchEmptyQuery() {
-        SearchProcessor searchProcessor = new SearchProcessor();
-        searchProcessor.setRecipeDB(recipeStub);
+        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         //Make empty query doesn't filter the list
         ArrayList<Recipe> searchResults = searchProcessor.searchResults("");
@@ -125,4 +118,9 @@ public class SearchProcessorTest {
         assertTrue(searchResults.size() == 4);
     }
 
+
+    @After
+    public void end() {
+        System.out.println("Finish Test on SearchProcessor");
+    }
 }

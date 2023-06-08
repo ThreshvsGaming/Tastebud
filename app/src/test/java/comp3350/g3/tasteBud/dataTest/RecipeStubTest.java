@@ -1,5 +1,6 @@
 package comp3350.g3.tasteBud.dataTest;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -79,6 +80,11 @@ public class RecipeStubTest {
 
         // Ensure the stored recipes list contains the new recipe
         assertTrue(storedRecipes.contains(newRecipe));
+    }
+
+    @After
+    public void end(){
+        System.out.println("End of test for RecipeStub");
     }
 
 }
