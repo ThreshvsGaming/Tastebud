@@ -7,6 +7,12 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class RecipeProcessor {
     private static IRecipeDB recipeDB;
 
+    // Constructor for unit testing with custom DBs
+    public RecipeProcessor(IRecipeDB recipeDB) {
+        this.recipeDB = recipeDB;
+    }
+
+    // Production constructor
     public RecipeProcessor() {
         recipeDB = Services.getRecipeDB();
     }
@@ -51,4 +57,5 @@ public class RecipeProcessor {
         );
         recipeDB.addRecipe(newRecipe);
     }
+
 }

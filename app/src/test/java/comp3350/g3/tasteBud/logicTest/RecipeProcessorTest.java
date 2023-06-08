@@ -1,6 +1,8 @@
 package comp3350.g3.tasteBud.logicTest;
 
+import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
+import comp3350.g3.tasteBud.object.Recipe;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,12 +12,16 @@ import static org.junit.Assert.*;
 
 
 public class RecipeProcessorTest {
-    RecipeProcessor recipeProcessor = new RecipeProcessor();
+    RecipeStub testStub = new RecipeStub();
+    RecipeProcessor recipeProcessor = new RecipeProcessor(testStub);
 
-    String recipeIngredients = "Chicken drumsticks, Chicken, Buttermilk, Salt, Pepper, Flour, Corn starch, Paprika, Onion powder";
-    String recipeTags = "Dinner, Fried";
-    String recipeName = "Fried Chicken";
-    String recipeDesc = "Combine dry ingredients. Combine wet ingredients to make a batter. Heat oil to 350 degrees. Dredge chicken and fry for 10 minutes.";
+    String recipeIngredients = "Bread,vienna sausage,scrambled egg,cheese";
+    String[] recipeIngredientsArray = recipeIngredients.split(",");
+    String recipeTags = "Lunch,Bad food";
+    String[] recipeTagsArray = recipeTags.split(",");
+
+    String recipeName = "Prison food";
+    String recipeDesc = "Place vienna sausages and scrambled eggs on sliced bread. Top with another slice of bread and unmelted cheese.";
     String[] inputFields = {"Name", "Description", "Ingredients", "Tags"};
     String[] parameters = {recipeName, recipeDesc, recipeIngredients, recipeTags};
 
@@ -54,12 +60,10 @@ public class RecipeProcessorTest {
         String emptyError = " cannot be empty!!";
 
         String testEmpty = "";
-        String testNull = null;
 
         String[] testParameters = parameters.clone();
 
-
-        // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
+        // This ensures that this works no matter where in .inputValidator() the empty string is placed.
         for (int i = 0; i < inputFields.length; i++) {
             String swap = testParameters[i];
 
@@ -85,7 +89,7 @@ public class RecipeProcessorTest {
 
         String[] symbolTest = {testNumber, testDifferentNumbers, testSameNumbers, testSymbol, testDifferentSymbols, testSameSymbols};// testNumberSymbols, testSymbolWhitespaceNumber};
 
-        // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
+        // This ensures that this works no matter where in .inputValidator() symbols are placed.
         for (int i = 0; i < inputFields.length; i++) {
             String swap = testParameters[i];
             for (int j = 0; j < symbolTest.length; j++){
@@ -94,6 +98,31 @@ public class RecipeProcessorTest {
             }
             testParameters[i] = swap;
         }
+    }
+
+    @Test
+    public void testAdding() {
+        // Tests that the processor adds to the database
+        testStub.initRecipeDatabase();
+        int checkSize = testStub.getStoredRecipes().size();
+
+        recipeProcessor.addRecipes(recipeName, recipeDesc, recipeIngredients, recipeTags);
+
+        // Asserts that the size of database changed
+        assertEquals(testStub.getStoredRecipes().size(), checkSize + 1);
+
+        // Asserts that the recipe was created properly
+        Recipe storedRecipe = testStub.getStoredRecipes().get(checkSize);
+
+        assertEquals(storedRecipe.getName(), recipeName);
+        assertEquals(storedRecipe.getDesc(), recipeDesc);
+        assertEquals(storedRecipe.getIngredients(), recipeIngredientsArray);
+        assertEquals(storedRecipe.getTags(), recipeTagsArray);
+    }
+
+    @After
+    public void end() {
+        System.out.println("Finished test of recipe processor.");
     }
 
 }
