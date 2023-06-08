@@ -124,5 +124,4 @@ public class RecipeProcessorTest {
     public void end() {
         System.out.println("Finished test of recipe processor.");
     }
-
 }

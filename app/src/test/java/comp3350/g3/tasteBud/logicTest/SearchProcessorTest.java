@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 public class SearchProcessorTest {
-
     private RecipeStub recipeStub;
 
     @Before
@@ -43,7 +42,6 @@ public class SearchProcessorTest {
         Recipe recipe2 = searchResults.get(1);
         assertEquals("Fried Chicken", recipe1.getName());
         assertEquals("Chicken Adobo", recipe2.getName());
-
 
         //Specific Search for Chicken Adobo
         searchResults = searchProcessor.searchResults("chicken                  ADOBO");
@@ -77,7 +75,6 @@ public class SearchProcessorTest {
     @Test
     public void testSearchNewRecipes() {
         SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
-
 
         ArrayList<Recipe> searchResults = searchProcessor.searchResults("Test Recipe");
 
@@ -117,7 +114,6 @@ public class SearchProcessorTest {
 
         assertTrue(searchResults.size() == 4);
     }
-
 
     @After
     public void end() {
