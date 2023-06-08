@@ -9,9 +9,9 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class SearchProcessor {
     private IRecipeDB recipeDB;
 
-    public SearchProcessor() {recipeDB = Services.getRecipeDB();}
-    //Mostly for unit testing
+    public SearchProcessor() {recipeDB = Services.getRecipeDB(); }
 
+    //Mostly for unit testing
     public SearchProcessor(IRecipeDB newRecipeDB) {recipeDB = newRecipeDB;}
 
     public ArrayList<Recipe> searchResults(String text) {
