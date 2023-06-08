@@ -7,22 +7,22 @@ import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchProcessor {
-    private static IRecipeDB recipeDB;
+    private IRecipeDB recipeDB;
 
     public SearchProcessor() {
         recipeDB = Services.getRecipeDB();
     }
 
-    public static List<Recipe> searchResults(String text) {
-        List<Recipe> results = recipeDB.getStoredRecipes();
+    public ArrayList<Recipe> searchResults(String text) {
+        ArrayList<Recipe> results = recipeDB.getStoredRecipes();
 
         results = searchName(results,text);
 
         return results;
     }
 
-    private static List<Recipe> searchName(List<Recipe> list, String text) {
-        List<Recipe> searchResults = new ArrayList<>();
+    private ArrayList<Recipe> searchName(List<Recipe> list, String text) {
+        ArrayList<Recipe> searchResults = new ArrayList<>();
 
         String patternText = tokenizer(text);
         Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
@@ -40,9 +40,9 @@ public class SearchProcessor {
         return searchResults;
     }
 
-    private static String tokenizer(String text){
+    private String tokenizer(String text){
         //Grabs tokens from input string via space delimiter
-        String[] textSplit = text.split("\\s+");
+        String[] textSplit = text.split("[^a-zA-Z0-9']");
 
         //Assembles the regex pattern so that it contains all tokens
         String patternText = "";
@@ -52,5 +52,15 @@ public class SearchProcessor {
         }
 
         return patternText + ".+"; //puts all pattern text together to be consumed by a pattern matcher
+    }
+
+    public void setRecipeDB(IRecipeDB newRecipeDB)
+    {
+        recipeDB = newRecipeDB;
+    }
+
+    public IRecipeDB getRecipeDB()
+    {
+        return recipeDB;
     }
 }
