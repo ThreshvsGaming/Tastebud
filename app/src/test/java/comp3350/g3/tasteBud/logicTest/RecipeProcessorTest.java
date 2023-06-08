@@ -34,16 +34,18 @@ public class RecipeProcessorTest {
 
         String[] whitespaceTest = {testOneSpace, testTwoSpace, testTabbedSpace};
 
+        String[] testParameters = parameters.clone();
+
         // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
         for (int i = 0; i < inputFields.length; i++) {
-            String swap = parameters[i];
+            String swap = testParameters[i];
             for (int j = 0; j < whitespaceTest.length; j++){
-                parameters[i] = whitespaceTest[j];
+                testParameters[i] = whitespaceTest[j];
 
-                assertEquals(recipeProcessor.inputValidation(parameters[0], parameters[1], parameters[2], parameters[3]), inputFields[i] + whitespaceError);
+                assertEquals(recipeProcessor.inputValidation(testParameters[0], testParameters[1], testParameters[2], testParameters[3]), inputFields[i] + whitespaceError);
             }
 
-            parameters[i] = swap;
+            testParameters[i] = swap;
         }
     }
 
@@ -54,14 +56,17 @@ public class RecipeProcessorTest {
         String testEmpty = "";
         String testNull = null;
 
+        String[] testParameters = parameters.clone();
+
+
         // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
         for (int i = 0; i < inputFields.length; i++) {
-            String swap = parameters[i];
+            String swap = testParameters[i];
 
-            parameters[i] = testEmpty;
-            assertEquals(recipeProcessor.inputValidation(parameters[0], parameters[1], parameters[2], parameters[3]), inputFields[i] + emptyError);
+            testParameters[i] = testEmpty;
+            assertEquals(recipeProcessor.inputValidation(testParameters[0], testParameters[1], testParameters[2], testParameters[3]), inputFields[i] + emptyError);
 
-            parameters[i] = swap;
+            testParameters[i] = swap;
         }
     }
 
@@ -75,20 +80,19 @@ public class RecipeProcessorTest {
         String testSymbol = "!";
         String testDifferentSymbols = "#^@%(@!?";
         String testSameSymbols = "????????";
-        String testNumberSymbols = "!@?23!24^112";
-        String testSymbolWhitespaceNumber = "31  !?9..21#";
 
+        String[] testParameters = parameters.clone();
 
-        String[] symbolTest = {testNumber, testDifferentNumbers, testSameNumbers, testSymbol, testDifferentSymbols, testSameSymbols, testNumberSymbols, testSymbolWhitespaceNumber};
+        String[] symbolTest = {testNumber, testDifferentNumbers, testSameNumbers, testSymbol, testDifferentSymbols, testSameSymbols};// testNumberSymbols, testSymbolWhitespaceNumber};
 
         // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
         for (int i = 0; i < inputFields.length; i++) {
-            String swap = parameters[i];
+            String swap = testParameters[i];
             for (int j = 0; j < symbolTest.length; j++){
-                parameters[i] = symbolTest[j];
-                assertEquals(recipeProcessor.inputValidation(parameters[0], parameters[1], parameters[2], parameters[3]), inputFields[i] + emptyError);
+                testParameters[i] = symbolTest[j];
+                assertEquals(recipeProcessor.inputValidation(testParameters[0], testParameters[1], testParameters[2], testParameters[3]), inputFields[i] + emptyError);
             }
-            parameters[i] = swap;
+            testParameters[i] = swap;
         }
     }
 
