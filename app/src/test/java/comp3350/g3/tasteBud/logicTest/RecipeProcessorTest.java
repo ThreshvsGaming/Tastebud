@@ -116,8 +116,8 @@ public class RecipeProcessorTest {
 
         assertEquals(storedRecipe.getName(), recipeName);
         assertEquals(storedRecipe.getDesc(), recipeDesc);
-        assertEquals(storedRecipe.getIngredients(), recipeIngredientsArray);
-        assertEquals(storedRecipe.getTags(), recipeTagsArray);
+        assertArrayEquals(storedRecipe.getIngredients(), recipeIngredientsArray);
+        assertArrayEquals(storedRecipe.getTags(), recipeTagsArray);
     }
 
     @After
