@@ -1,12 +1,13 @@
 package comp3350.g3.tasteBud.data;
 
 import java.util.*;
+
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeStub implements IRecipeDB {
     private static ArrayList<Recipe> storedRecipes;
 
-    public void initRecipeDatabase(){
+    public void initRecipeDatabase() {
         String[] recipe1ingredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
         String[] recipe1tags = {"Dinner", "Fried"};
         String[] recipe2ingredients = {"Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"};

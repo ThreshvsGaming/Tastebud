@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.object.Recipe;
 
@@ -33,14 +35,14 @@ public class DetailActivity extends FragmentActivity {
         recipeDescription.setText(recipe.getDesc());
 
         String tagCollection = "";
-        for (int n = 0; n < recipe.getTags().length; n++){
+        for (int n = 0; n < recipe.getTags().length; n++) {
             String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
             tagCollection = tag + (recipe.getTags()[n]); //to get appropriately indexed tag
         }
         recipeTags.setText(tagCollection);
 
         String ingredientsCollection = "";
-        for (int n = 0; n<recipe.getIngredients().length; n++){
+        for (int n = 0; n < recipe.getIngredients().length; n++) {
             String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
             ingredientsCollection = ingredients + (recipe.getIngredients()[n]); //to get appropriately indexed ingredients
         }

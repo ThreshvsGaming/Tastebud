@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
+
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 
@@ -42,9 +44,7 @@ public class CreateActivity extends Fragment {
             recipeDescription = ((EditText) view.findViewById(R.id.recipeDescription)).getText().toString();
             recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
             recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
-
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
-
             handleValidation(validationError);
         });
 
@@ -57,56 +57,31 @@ public class CreateActivity extends Fragment {
         return view;
     }
 
-    public void handleValidation(String validationError){
+    public void handleValidation(String validationError) {
         if (validationError == null) {
 
             try {
                 recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
-
                 validationStatus.setText("Recipe Successfully Added!");
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        validationStatus.setVisibility(View.INVISIBLE);
-                    }
-
-                }, 3000); //Show dialog for 3 seconds
+                new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
             } catch (IllegalArgumentException e) {
                 validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.RED);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        validationStatus.setVisibility(View.INVISIBLE);
-                    }
-
-                }, 10000); //Show dialog for 10 seconds
+                new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 10000); //Show dialog for 10 seconds
             } catch (Exception e) {
                 validationStatus.setText("System Error: " + e.getMessage());
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.RED);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        validationStatus.setVisibility(View.INVISIBLE);
-                    }
-
-                }, 10000); //Show dialog for 10 seconds
+                new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 10000); //Show dialog for 10 seconds
             }
         } else {
             validationStatus.setText(validationError);
             validationStatus.setVisibility(View.VISIBLE);
             validationStatus.setTextColor(Color.RED);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    validationStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }, 3000); //Show dialog for 3 seconds
+            new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
         }
     }
 }
