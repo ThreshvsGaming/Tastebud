@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.Arrays;
+import java.util.List;
+
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.RecipeManager;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
@@ -23,7 +26,7 @@ public class CreateActivity extends Fragment {
     private String recipeTitle;
     private String recipeDescription;
     private String recipeTags;
-    private String recipeIngredients;
+    private List<String> recipeIngredients;
     private RecipeProcessor recipeProcessor;
     private TextView validationStatus;
     private ImageView backButton;
@@ -46,7 +49,7 @@ public class CreateActivity extends Fragment {
         submitRecipeButton.setOnClickListener(v -> {
             recipeTitle = ((EditText) view.findViewById(R.id.recipeTitle)).getText().toString();
             recipeDescription = ((EditText) view.findViewById(R.id.recipeDescription)).getText().toString();
-            recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
+            recipeIngredients = Arrays.asList(((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString().split(","));
             recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
             recipeManager.addRecipe(new Recipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags));
 

@@ -72,4 +72,5 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }

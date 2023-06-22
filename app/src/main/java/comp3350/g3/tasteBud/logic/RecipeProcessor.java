@@ -1,5 +1,9 @@
 package comp3350.g3.tasteBud.logic;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -11,9 +15,19 @@ public class RecipeProcessor {
         recipeDB = Services.getRecipeDB();
     }
 
-    public String inputValidation(String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags) {
-        String[] inputTypes = {recipeName, recipeInstructions, recipeIngredients, recipeTags};
-        String[] inputFields = {"Name", "Description", "Ingredients", "Tags"};
+    public String inputValidation(String recipeName, String recipeInstructions, List recipeIngredients, String recipeTags) {
+        String[] inputTypes = {
+                recipeName,
+                recipeInstructions,
+                String.join(",", recipeIngredients), // Convert a List<String> to a comma-separated string
+                recipeTags
+        };
+        String[] inputFields = {
+                "Name",
+                "Description",
+                "Ingredients",
+                "Tags"
+        };
 
         for (int i = 0; i < inputTypes.length; i++) {
             String error = inputValidationHelper(inputTypes[i], inputFields[i]);
@@ -39,8 +53,8 @@ public class RecipeProcessor {
         return null;
     }
 
-    public void addRecipes(String recipeName, String recipeDesc, String ingredients, String tags) {
-        String[] ingredientsArray = ingredients.split(",");
+    public void addRecipes(String recipeName, String recipeDesc, List<String> ingredients, String tags) {
+        String ingredientsString = StringUtils.join(ingredients, ",");
         String[] tagsArray = tags.split(",");
 
         /*Recipe newRecipe = new Recipe(

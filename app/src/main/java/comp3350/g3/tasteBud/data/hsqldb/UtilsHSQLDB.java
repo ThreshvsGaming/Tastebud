@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class UtilsHSQLDB {
-
-    public static final String ENTRY_SEP = "\n\n";
     public static final String FIELD_SEP = "\n";
 
     /**
@@ -45,30 +43,6 @@ public class UtilsHSQLDB {
         } else {
             String[] stringArray = str.split(FIELD_SEP);
             return new ArrayList<>(Arrays.asList(stringArray));
-        }
-    }
-    /**
-     * Returns a list from select results from data backend.
-     * Lists are decoded by splitting on separation characters.
-     */
-    public static ArrayList<Ingredient> decodeIngredients(String str) {
-        if (str == null) {
-            throw new IllegalArgumentException("String must not be null");
-        }
-
-        if (str.length() == 0) {
-            return new ArrayList<>();
-        } else {
-            String[] stringArray = str.split(ENTRY_SEP);
-            ArrayList<Ingredient> ingredientList = new ArrayList<>();
-            for (String s : stringArray) {
-                String[] entryArray = s.split(FIELD_SEP);
-                if (entryArray.length >= 3) {
-                    Ingredient ingredient = new Ingredient(entryArray);
-                    ingredientList.add(ingredient);
-                }
-            }
-            return ingredientList;
         }
     }
 }

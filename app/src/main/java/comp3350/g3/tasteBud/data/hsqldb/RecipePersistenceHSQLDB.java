@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.data.RecipePersistence;
@@ -177,12 +179,13 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final int id = rs.getInt("ID");
         final String name = rs.getString("NAME");
         final String description = rs.getString("DESC");
-        final String directions = rs.getString("INGREDIENTS");
+        final String ingredientsString = rs.getString("INGREDIENTS");
+        final List<String> ingredients = Arrays.asList(ingredientsString.split(",")); // 拆分字符串并转换为List
         String tags = rs.getString("TAGS");
 
         // re-create recipe from constructor
         try {
-            Recipe recipe = new Recipe(name, description, directions);
+            Recipe recipe = new Recipe(name, description, ingredients);
             // fill other fields
             recipe.setId(id);
             recipe.setTags(tags.split(UtilsHSQLDB.FIELD_SEP));

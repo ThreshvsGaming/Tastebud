@@ -24,23 +24,24 @@ public class Recipe implements Serializable {
                 '}';
     }
 
-    public Recipe(String name, String desc, String ingredients) throws IllegalArgumentException {
+    public Recipe(String name, String desc, List ingredients) throws IllegalArgumentException {
 
         if (desc == null) desc = "";
 
         this.id = UNSET_ID;
         this.name = name;
         this.desc = desc;
+        this.ingredients = ingredients;
 
-        setDirections(ingredients);
+     //   setDirections(ingredients);
 
         if (tags == null) {
             this.tags = new ArrayList<>();
         }
     }
 
-    public Recipe(String name, String desc, String directions, String tags) throws IllegalArgumentException {
-        this(name, desc, directions);
+    public Recipe(String name, String desc, List ingredients, String tags) throws IllegalArgumentException {
+        this(name, desc, ingredients );
 
         setTags(tags);
     }
