@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">tasteBud</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
+</resources>
