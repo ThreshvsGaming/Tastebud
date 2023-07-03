@@ -51,7 +51,7 @@ public class CreateActivity extends Fragment {
             recipeDescription = ((EditText) view.findViewById(R.id.recipeDescription)).getText().toString();
             recipeIngredients = Arrays.asList(((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString().split(","));
             recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
-            recipeManager.addRecipe(new Recipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags));
+
 
 
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
@@ -75,6 +75,7 @@ public class CreateActivity extends Fragment {
                 validationStatus.setText("Recipe Successfully Added!");
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);
+                recipeManager.addRecipe(new Recipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags));
                 new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
             } catch (IllegalArgumentException e) {
                 validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
