@@ -71,7 +71,7 @@ public class CreateActivity extends Fragment {
         if (validationError == null) {
 
             try {
-                recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
+                //recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
                 validationStatus.setText("Recipe Successfully Added!");
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);

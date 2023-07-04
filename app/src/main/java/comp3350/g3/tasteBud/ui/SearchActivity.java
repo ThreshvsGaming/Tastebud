@@ -90,11 +90,11 @@ public class SearchActivity extends Fragment {
         Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
         Matcher matcher;
 
-        List<Recipe> date = new ArrayList<>();
+        List<Recipe> data = new ArrayList<>();
         for (Recipe recipe : list) {
             matcher = pattern.matcher(recipe.getName());
             if (matcher.find()) {
-                date.add(recipe);
+                data.add(recipe);
             }
         }
        /* for (Recipe bean : list) {
@@ -105,7 +105,7 @@ public class SearchActivity extends Fragment {
         if (TextUtils.isEmpty(text)){
             madapter.setNewData(list);
         }else {
-            madapter.setNewData(date);
+            madapter.setNewData(data);
         }
 
     }
