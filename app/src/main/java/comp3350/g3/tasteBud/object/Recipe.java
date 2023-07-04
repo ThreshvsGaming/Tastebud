@@ -74,12 +74,6 @@ public class Recipe implements Serializable {
         this.id = id;
     }
 
-
-
-    public void setDirections(String directions) throws IllegalArgumentException
-    {
-        this.ingredients = Arrays.asList(directions.split("\n"));
-    }
     public void setTags(String tags) {
         this.tags = new ArrayList<>();
         if (tags != null && !tags.isEmpty()) {
@@ -111,9 +105,6 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
-    public void toggleFavourite() {
-    } //toggle favourite
-    //  public void setFavourite() {this.favourite = !favourite;} //toggle favourite
 
 }
 

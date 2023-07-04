@@ -57,12 +57,5 @@ public class RecipeProcessor {
         String ingredientsString = StringUtils.join(ingredients, ",");
         String[] tagsArray = tags.split(",");
 
-        /*Recipe newRecipe = new Recipe(
-                recipeName,
-                recipeDesc,
-                ingredientsArray,
-                tagsArray
-        );
-        recipeDB.addRecipe(newRecipe);*/
     }
 }

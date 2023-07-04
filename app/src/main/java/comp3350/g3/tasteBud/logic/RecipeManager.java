@@ -29,23 +29,4 @@ public class RecipeManager {
     }
 }
 
-//    public void delete(int id) throws IllegalArgumentException
-//    {
-//        if(id < 0) throw new IllegalArgumentException(("Recipe Id must be positive"));
-//        recipePersistence.deleteRecipe(id);
-//    }
-//public void editRecipe(Recipe recipe) {
-//    if (recipe == null) throw new IllegalArgumentException("Recipe cannot be null");
-//
-//    recipePersistence.updateRecipe(recipe);
-//}
-//
-//    public Recipe getRecipe(int id) throws RecipeNotFoundException, IllegalArgumentException {
-//        if (id < 0) throw new IllegalArgumentException(("Recipe Id must be positive"));
-//        Recipe found = null;
-//
-//        found = recipePersistence.getRecipe(id);
-//        if (found == null) throw new RecipeNotFoundException();
-//
-//        return found;
-//    }
+
