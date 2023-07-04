@@ -3,6 +3,7 @@ package comp3350.g3.tasteBud.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.RecipeManager;
@@ -80,19 +83,42 @@ public class SearchActivity extends Fragment {
     }
 
     private void filterRecipeList(String text) {
-        //List<Recipe> list = searchProcessor.searchResults(text);
+        // List<Recipe> list = searchProcessor.searchResults(text);
         List<Recipe> list = recipeManager.getAllRecipes();
+
+        String patternText = tokenizer(text);
+        Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+
         List<Recipe> date = new ArrayList<>();
-        for (Recipe bean : list) {
+        for (Recipe recipe : list) {
+            matcher = pattern.matcher(recipe.getName());
+            if (matcher.find()) {
+                date.add(recipe);
+            }
+        }
+       /* for (Recipe bean : list) {
             if (bean.getName().indexOf(text) != -1){
                 date.add(bean);
             }
-        }
+        }*/
         if (TextUtils.isEmpty(text)){
             madapter.setNewData(list);
         }else {
             madapter.setNewData(date);
         }
 
+    }
+    private static String tokenizer(String text) {
+        //Grabs tokens from input string via space delimiter
+        String[] textSplit = text.split("\\s+");
+
+        //Assembles the regex pattern so that it contains all tokens
+        String patternText = "";
+        for (int i = 0; i < textSplit.length; i++) {
+            patternText += "(?=.*" + textSplit[i] + ")";
+        }
+
+        return patternText + ".+"; //puts all pattern text together to be consumed by a pattern matcher
     }
 }
