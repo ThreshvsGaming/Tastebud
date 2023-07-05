@@ -22,7 +22,7 @@ public class Main
 			e.printStackTrace();
 		}
 		dbName = name;
-		Log.d(null, "AHHHHHHHHHHHHHHHHHHHH: " + name);
+
 	}
 
 	public static String getDBPathName() {

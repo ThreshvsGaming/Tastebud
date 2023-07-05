@@ -1,5 +1,7 @@
 package comp3350.g3.tasteBud.data.hsqldb;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
