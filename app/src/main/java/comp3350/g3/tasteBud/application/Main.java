@@ -1,5 +1,7 @@
 package comp3350.g3.tasteBud.application;
 
+import android.util.Log;
+
 public class Main
 {
 	public static String dbName="SC";
@@ -20,6 +22,7 @@ public class Main
 			e.printStackTrace();
 		}
 		dbName = name;
+		Log.d(null, "AHHHHHHHHHHHHHHHHHHHH: " + name);
 	}
 
 	public static String getDBPathName() {

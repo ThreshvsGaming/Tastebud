@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity {
 
         //connect all types of button with the ButtonId in "layout" package
         setContentView(R.layout.activity_main);
+        copyDatabaseToDevice();
         llSearchButton = findViewById(R.id.llSearchButton);
         llCreateButton = findViewById(R.id.llCreateButton);
         llChefButton = findViewById(R.id.llChefButton);
