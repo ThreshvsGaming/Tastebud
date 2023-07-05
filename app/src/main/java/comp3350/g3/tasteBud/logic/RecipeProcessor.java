@@ -1,6 +1,5 @@
 package comp3350.g3.tasteBud.logic;
 
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -9,10 +8,10 @@ import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeProcessor {
-    private static IRecipeDB recipeDB;
+    private IRecipeDB recipeDB;
 
-    public RecipeProcessor() {
-        recipeDB = Services.getRecipeDB();
+    public RecipeProcessor(Boolean isPersistence) {
+        recipeDB = Services.getRecipeDB(isPersistence);
     }
 
     public String inputValidation(String recipeName, String recipeInstructions, List recipeIngredients, String recipeTags) {
@@ -53,9 +52,13 @@ public class RecipeProcessor {
         return null;
     }
 
-    public void addRecipes(String recipeName, String recipeDesc, List<String> ingredients, String tags) {
-        String ingredientsString = StringUtils.join(ingredients, ",");
-        String[] tagsArray = tags.split(",");
+    public void addRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags) throws IllegalArgumentException {
+        Recipe recipe = buildRecipe(recipeName, recipeDesc, ingredients, tags);
 
+        recipeDB.addRecipe(recipe);
+    }
+
+    private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags){
+        return new Recipe(recipeName, recipeDesc, ingredients, tags);
     }
 }

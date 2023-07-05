@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.RecipeManager;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
@@ -30,7 +30,6 @@ public class CreateActivity extends Fragment {
     private RecipeProcessor recipeProcessor;
     private TextView validationStatus;
     private ImageView backButton;
-    RecipeManager recipeManager;
 
     //@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,12 +37,11 @@ public class CreateActivity extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.create_activity, container, false);
 
-        recipeManager = new RecipeManager();
         submitRecipeButton = view.findViewById(R.id.recipeSubmit);
 
         validationStatus = view.findViewById(R.id.textView2);
 
-        recipeProcessor = new RecipeProcessor();
+        recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         backButton = view.findViewById(R.id.returnButton);
         submitRecipeButton.setOnClickListener(v -> {
@@ -71,11 +69,11 @@ public class CreateActivity extends Fragment {
         if (validationError == null) {
 
             try {
-                //recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
+                //recipeProcessor.addRecipe(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
                 validationStatus.setText("Recipe Successfully Added!");
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);
-                recipeManager.addRecipe(new Recipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags));
+                recipeProcessor.addRecipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags);
                 new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
             } catch (IllegalArgumentException e) {
                 validationStatus.setText("Recipe Creation Failed: " + e.getMessage());

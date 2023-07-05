@@ -10,27 +10,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
-import comp3350.g3.tasteBud.data.RecipePersistence;
 
-
-public class RecipePersistenceHSQLDB implements RecipePersistence {
-
+public class RecipePersistenceHSQLDB implements IRecipeDB {
     private final String dbPath;
     private final String dbType;
 
     public RecipePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
         this.dbType = "file";
-    }
-
-    public RecipePersistenceHSQLDB(final String dbPath, boolean fileMode) {
-        this.dbPath = dbPath;
-        if (fileMode) {
-            this.dbType = "file";
-        } else {
-            this.dbType = "mem";
-        }
     }
 
     /**
