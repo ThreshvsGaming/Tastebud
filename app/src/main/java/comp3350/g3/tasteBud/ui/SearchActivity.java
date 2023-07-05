@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.RecipeManager;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -27,7 +27,6 @@ public class SearchActivity extends Fragment {
     private HomePageAdapter madapter;
     private SearchView searchView;
     private SearchProcessor searchProcessor;
-    RecipeManager recipeManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,9 +38,9 @@ public class SearchActivity extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recipeManager = new RecipeManager();
+//        recipeManager = new RecipeManager();
 
-        searchProcessor = new SearchProcessor();
+        searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         madapter = new HomePageAdapter();
         recycler = view.findViewById(R.id.recycler);
@@ -66,7 +65,7 @@ public class SearchActivity extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Filters recipes based on user input
-                filterRecipeList(newText);
+//                filterRecipeList(newText);
                 return true;
             }
         });
@@ -76,23 +75,23 @@ public class SearchActivity extends Fragment {
     public void onStart() {
         //Refresh page when adding new recipe
         super.onStart();
-        filterRecipeList("");
+//        filterRecipeList("");
     }
 
-    private void filterRecipeList(String text) {
-        //List<Recipe> list = searchProcessor.searchResults(text);
-        List<Recipe> list = recipeManager.getAllRecipes();
-        List<Recipe> date = new ArrayList<>();
-        for (Recipe bean : list) {
-            if (bean.getName().indexOf(text) != -1){
-                date.add(bean);
-            }
-        }
-        if (TextUtils.isEmpty(text)){
-            madapter.setNewData(list);
-        }else {
-            madapter.setNewData(date);
-        }
-
-    }
+//    private void filterRecipeList(String text) {
+//        //List<Recipe> list = searchProcessor.searchResults(text);
+//        List<Recipe> list = recipeManager.getAllRecipes();
+//        List<Recipe> date = new ArrayList<>();
+//        for (Recipe bean : list) {
+//            if (bean.getName().indexOf(text) != -1){
+//                date.add(bean);
+//            }
+//        }
+//        if (TextUtils.isEmpty(text)){
+//            madapter.setNewData(list);
+//        }else {
+//            madapter.setNewData(date);
+//        }
+//
+//    }
 }

@@ -27,12 +27,10 @@ public class UtilsHSQLDB {
         return sb.toString();
     }
 
-
     /**
      * Returns a list from select results from data backend.
      * Lists are decoded by splitting on separation characters.
      */
-
     public static ArrayList<String> decodeString(String str) {
         if (str == null) {
             throw new IllegalArgumentException("String must not be null");

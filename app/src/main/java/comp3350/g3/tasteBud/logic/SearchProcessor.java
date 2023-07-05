@@ -10,12 +10,12 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class SearchProcessor {
     private static IRecipeDB recipeDB;
 
-    public SearchProcessor() {
-        recipeDB = Services.getRecipeDB();
+    public SearchProcessor(boolean isPersistence) {
+        recipeDB = Services.getRecipeDB(isPersistence);
     }
 
     public static List<Recipe> searchResults(String text) {
-        List<Recipe> results = recipeDB.getStoredRecipes();
+        List<Recipe> results = recipeDB.getAllRecipes();
 
         results = searchName(results, text);
 
