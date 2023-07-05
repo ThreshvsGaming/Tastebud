@@ -15,7 +15,7 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, Recipe recipe) {
-        String tags = Arrays.toString(recipe.getTags());
+        String tags = recipe.getTags().toString();;
         tags = tags.replace("[", "").replace("]", "");
 
         helper.setText(R.id.tvTitle, recipe.getName());

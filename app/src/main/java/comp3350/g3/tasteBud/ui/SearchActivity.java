@@ -10,8 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -33,7 +36,7 @@ public class SearchActivity extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        searchProcessor = new SearchProcessor();
+        searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         madapter = new HomePageAdapter();
         recycler = view.findViewById(R.id.recycler);

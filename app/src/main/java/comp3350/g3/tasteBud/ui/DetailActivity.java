@@ -35,16 +35,16 @@ public class DetailActivity extends FragmentActivity {
         recipeDescription.setText(recipe.getDesc());
 
         String tagCollection = "";
-        for (int n = 0; n < recipe.getTags().length; n++) {
+        for (int n = 0; n < recipe.getTags().size(); n++) {
             String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
-            tagCollection = tag + (recipe.getTags()[n]); //to get appropriately indexed tag
+            tagCollection = tag + (recipe.getTags().get(n)); //to get appropriately indexed tag
         }
         recipeTags.setText(tagCollection);
 
         String ingredientsCollection = "";
-        for (int n = 0; n < recipe.getIngredients().length; n++) {
+        for (int n = 0; n < recipe.getIngredients().size(); n++) {
             String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
-            ingredientsCollection = ingredients + (recipe.getIngredients()[n]); //to get appropriately indexed ingredients
+            ingredientsCollection = ingredients + (recipe.getIngredients().get(n)); //to get appropriately indexed ingredients
         }
         recipeIngredients.setText(ingredientsCollection);
 
