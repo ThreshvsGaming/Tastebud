@@ -8,7 +8,7 @@ import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeProcessor {
-    private static IRecipeDB recipeDB;
+    private IRecipeDB recipeDB;
 
     public RecipeProcessor(Boolean isPersistence) {
         recipeDB = Services.getRecipeDB(isPersistence);

@@ -8,13 +8,13 @@ import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class SearchProcessor {
-    private static IRecipeDB recipeDB;
+    private IRecipeDB recipeDB;
 
     public SearchProcessor(boolean isPersistence) {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-    public static List<Recipe> searchResults(String text) {
+    public List<Recipe> searchResults(String text) {
         List<Recipe> results = recipeDB.getAllRecipes();
 
         results = searchName(results, text);
@@ -22,17 +22,19 @@ public class SearchProcessor {
         return results;
     }
 
-    private static List<Recipe> searchName(List<Recipe> list, String text) {
+    private List<Recipe> searchName(List<Recipe> list, String text) {
         List<Recipe> searchResults = new ArrayList<>();
 
-        String patternText = tokenizer(text);
-        Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
-        Matcher matcher;
+        if(list != null) {
+            String patternText = tokenizer(text);
+            Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
+            Matcher matcher;
 
-        for (Recipe recipe : list) {
-            matcher = pattern.matcher(recipe.getName());
-            if (matcher.find()) {
-                searchResults.add(recipe);
+            for (Recipe recipe : list) {
+                matcher = pattern.matcher(recipe.getName());
+                if (matcher.find()) {
+                    searchResults.add(recipe);
+                }
             }
         }
 

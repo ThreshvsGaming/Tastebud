@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
@@ -38,7 +39,6 @@ public class SearchActivity extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        recipeManager = new RecipeManager();
 
         searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
@@ -54,9 +54,11 @@ public class SearchActivity extends Fragment {
         searchView.clearFocus();
 
         searchView.setOnClickListener(v -> searchView.setIconified(false));
+        filterRecipeList("");
 
         //Enables a function that detects text changes in the Search View
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -65,7 +67,7 @@ public class SearchActivity extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Filters recipes based on user input
-//                filterRecipeList(newText);
+                filterRecipeList(newText);
                 return true;
             }
         });
@@ -78,20 +80,10 @@ public class SearchActivity extends Fragment {
 //        filterRecipeList("");
     }
 
-//    private void filterRecipeList(String text) {
-//        //List<Recipe> list = searchProcessor.searchResults(text);
-//        List<Recipe> list = recipeManager.getAllRecipes();
-//        List<Recipe> date = new ArrayList<>();
-//        for (Recipe bean : list) {
-//            if (bean.getName().indexOf(text) != -1){
-//                date.add(bean);
-//            }
-//        }
-//        if (TextUtils.isEmpty(text)){
-//            madapter.setNewData(list);
-//        }else {
-//            madapter.setNewData(date);
-//        }
-//
-//    }
+    private void filterRecipeList(String text) {
+        List<Recipe> list = searchProcessor.searchResults(text);
+        madapter.setNewData(list);
+
+
+    }
 }

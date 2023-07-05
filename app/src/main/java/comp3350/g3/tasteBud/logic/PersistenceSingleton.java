@@ -1,7 +1,7 @@
 package comp3350.g3.tasteBud.logic;
 
 public class PersistenceSingleton {
-    private Boolean isPersistence = false;
+    private Boolean isPersistence = true;
     public Boolean GetIsPersistence() { return isPersistence; }
 
     private static final PersistenceSingleton persistenceSingleton = new PersistenceSingleton();

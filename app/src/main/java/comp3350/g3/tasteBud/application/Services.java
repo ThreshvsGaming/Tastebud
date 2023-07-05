@@ -3,6 +3,7 @@ package comp3350.g3.tasteBud.application;
 import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.data.hsqldb.RecipePersistenceHSQLDB;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 
 public class Services {
     private static IRecipeDB recipeDB;
@@ -13,10 +14,14 @@ public class Services {
                 recipeDB = new RecipePersistenceHSQLDB(Main.getDBPathName());
             }
             else{
-                recipeDB = new RecipeStub();
+                RecipeStub stub = new RecipeStub();
+                stub.initRecipeDatabase();
+                recipeDB = stub;
+
             }
         }
 
         return recipeDB;
     }
+
 }
