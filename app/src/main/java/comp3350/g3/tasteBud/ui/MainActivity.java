@@ -1,7 +1,6 @@
 package comp3350.g3.tasteBud.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.ImageView;
