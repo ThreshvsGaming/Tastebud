@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.object.Recipe;
 
-public class DetailActivity extends FragmentActivity {
+public class EditActivity extends FragmentActivity {
     TextView recipeTitle;
     TextView recipeDescription;
     TextView recipeTags;

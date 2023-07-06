@@ -13,15 +13,21 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.Arrays;
+import java.util.List;
+
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
+import comp3350.g3.tasteBud.object.Recipe;
+
 
 public class CreateActivity extends Fragment {
     private Button submitRecipeButton;
     private String recipeTitle;
     private String recipeDescription;
     private String recipeTags;
-    private String recipeIngredients;
+    private List<String> recipeIngredients;
     private RecipeProcessor recipeProcessor;
     private TextView validationStatus;
     private ImageView backButton;
@@ -36,13 +42,14 @@ public class CreateActivity extends Fragment {
 
         validationStatus = view.findViewById(R.id.textView2);
 
-        recipeProcessor = new RecipeProcessor();
+        recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         backButton = view.findViewById(R.id.returnButton);
         submitRecipeButton.setOnClickListener(v -> {
             recipeTitle = ((EditText) view.findViewById(R.id.recipeTitle)).getText().toString();
             recipeDescription = ((EditText) view.findViewById(R.id.recipeDescription)).getText().toString();
-            recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
+            //recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
+            recipeIngredients = Arrays.asList(((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString().split(","));
             recipeTags = ((EditText) view.findViewById(R.id.recipeTags)).getText().toString();
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
             handleValidation(validationError);
@@ -61,10 +68,11 @@ public class CreateActivity extends Fragment {
         if (validationError == null) {
 
             try {
-                recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
+                //recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
                 validationStatus.setText("Recipe Successfully Added!");
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.GREEN);
+                recipeProcessor.addRecipe(recipeTitle, recipeDescription, recipeIngredients,recipeTags);
                 new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
             } catch (IllegalArgumentException e) {
                 validationStatus.setText("Recipe Creation Failed: " + e.getMessage());

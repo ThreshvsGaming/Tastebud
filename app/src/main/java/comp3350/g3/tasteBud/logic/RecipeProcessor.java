@@ -1,5 +1,7 @@
 package comp3350.g3.tasteBud.logic;
 
+import java.util.List;
+
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -13,13 +15,24 @@ public class RecipeProcessor {
     }
 
     // Production constructor
-    public RecipeProcessor() {
-        recipeDB = Services.getRecipeDB();
+    public RecipeProcessor(Boolean isPersistence) {
+        recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-    public String inputValidation(String recipeName, String recipeInstructions, String recipeIngredients, String recipeTags) {
-        String[] inputTypes = {recipeName, recipeInstructions, recipeIngredients, recipeTags};
-        String[] inputFields = {"Name", "Description", "Ingredients", "Tags"};
+    public String inputValidation(String recipeName, String recipeInstructions, List recipeIngredients, String recipeTags) {
+        String[] inputTypes = {
+                recipeName,
+                recipeInstructions,
+                String.join(",", recipeIngredients), // Convert a List<String> to a comma-separated string
+                recipeTags
+        };
+        String[] inputFields = {
+                "Name",
+                "Description",
+                "Ingredients",
+                "Tags"
+        };
+
 
         for (int i = 0; i < inputTypes.length; i++) {
             String error = inputValidationHelper(inputTypes[i], inputFields[i]);
@@ -45,17 +58,26 @@ public class RecipeProcessor {
         return null;
     }
 
-    public void addRecipes(String recipeName, String recipeDesc, String ingredients, String tags) {
-        String[] ingredientsArray = ingredients.split(",");
-        String[] tagsArray = tags.split(",");
+    public void addRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags) throws IllegalArgumentException{
+//        String[] ingredientsArray = ingredients.split(",");
+//        String[] tagsArray = tags.split(",");
+//
+//        Recipe newRecipe = new Recipe(
+//                recipeName,
+//                recipeDesc,
+//                ingredientsArray,
+//                tagsArray
+//        );
+//        recipeDB.addRecipe(newRecipe);
+        Recipe recipe = buildRecipe(recipeName, recipeDesc, ingredients, tags);
 
-        Recipe newRecipe = new Recipe(
-                recipeName,
-                recipeDesc,
-                ingredientsArray,
-                tagsArray
-        );
-        recipeDB.addRecipe(newRecipe);
+        recipeDB.addRecipe(recipe);
+
     }
+
+    private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags){
+        return new Recipe(recipeName, recipeDesc, ingredients, tags);
+    }
+
 
 }
