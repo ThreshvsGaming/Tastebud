@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.application.Main;
-import comp3350.g3.tasteBud.data.Messages;
+import comp3350.g3.tasteBud.logic.Messages;
 
 
 public class MainActivity extends FragmentActivity {

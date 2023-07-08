@@ -9,10 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/dp_10">
+        android:padding="@dimen/dp_10"
+        android:background="@color/white"
+        >
 
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -43,13 +46,25 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
+
         <com.makeramen.roundedimageview.RoundedImageView
-            android:background="@mipmap/recipe"
             android:id="@+id/img"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
+            android:src="@mipmap/recipe"
             android:scaleType="centerCrop"
+            app:riv_border_color="#333333"
             app:riv_oval="true" />
+
+        <ImageView
+            android:id="@+id/imageViewCheckMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_check_circle_24"
+            android:layout_alignRight="@+id/linearLayout"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
 </LinearLayout>

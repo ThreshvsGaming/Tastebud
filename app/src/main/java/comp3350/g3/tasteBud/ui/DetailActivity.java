@@ -1,5 +1,6 @@
 package comp3350.g3.tasteBud.ui;
 
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,13 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.logic.Messages;
+import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
+import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 
-public class DetailActivity extends FragmentActivity {
+public class DetailActivity extends FragmentActivity implements DeleteInteraction {
     TextView recipeTitle;
     TextView recipeDescription;
     TextView recipeTags;
     TextView recipeIngredients;
+    RecipeProcessor recipeProcessor;
+    Recipe recipe;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,8 +36,11 @@ public class DetailActivity extends FragmentActivity {
         recipeIngredients = findViewById(R.id.recipeIngredients);
         recipeDescription = findViewById(R.id.recipeDescription);
 
+        //Create a Recipe Processor to link to the logic layer
+        recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+
         //Create the instance of Recipe to get information of each recipe
-        Recipe recipe = (Recipe) getIntent().getSerializableExtra("bean");
+        recipe = (Recipe) getIntent().getSerializableExtra("bean");
         recipeTitle.setText(recipe.getName());
         recipeDescription.setText(recipe.getDesc());
 
@@ -49,5 +59,16 @@ public class DetailActivity extends FragmentActivity {
         recipeIngredients.setText(ingredientsCollection);
 
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+
+        findViewById(R.id.delete).setOnClickListener(v-> {
+
+            Messages.buildWarningDeleteDialogue(findViewById(R.id.delete).getContext(), "Are you sure you want to delete this recipe?", this);
+        });
+    }
+
+    public void delete()
+    {
+        recipeProcessor.deleteRecipe(recipe.getId());
+        finish();
     }
 }

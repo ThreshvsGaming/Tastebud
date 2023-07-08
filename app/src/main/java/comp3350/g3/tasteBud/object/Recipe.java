@@ -13,6 +13,10 @@ public class Recipe implements Serializable {
     private List<String> ingredients;
     private ArrayList<String> tags;
 
+    final static boolean SELECTED = true;
+    final static boolean NOT_SELECTED = false;
+    private boolean isSelected;
+
     public Recipe(String name, String desc, List ingredients) throws IllegalArgumentException {
         if (desc == null) desc = "";
 
@@ -91,6 +95,14 @@ public class Recipe implements Serializable {
 
     public void setName(String name) throws IllegalArgumentException {
         this.name = name;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void changeSelection(boolean selection) {
+        isSelected = selection;
     }
 
     /*
