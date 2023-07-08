@@ -1,5 +1,6 @@
 package comp3350.g3.tasteBud.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.g3.tasteBud.application.Services;
@@ -77,6 +78,18 @@ public class RecipeProcessor {
 
     private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags){
         return new Recipe(recipeName, recipeDesc, ingredients, tags);
+    }
+
+    public void deleteListOfRecipe(List<Recipe> recipes)
+    {
+        for(int i = 0; i < recipes.size(); i++)
+        {
+            deleteRecipe(recipes.get(i).getId());
+        }
+    }
+    public void deleteRecipe(int id)
+    {
+        recipeDB.deleteRecipe(id);
     }
 
 
