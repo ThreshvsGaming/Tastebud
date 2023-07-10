@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp_200">
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:padding="@dimen/dp_15"
+        android:src="@mipmap/ic_back"/>
+
+    <TextView
+        android:id="@+id/tagFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:drawable/editbox_background"
+        android:contentDescription="backButton"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:drawablePadding="16dp"
+        android:hint="Filter by tag"
+        android:padding="12dp"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"/>
+  </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="363dp">
+
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="Filter" />
+  </RelativeLayout>
+
+</LinearLayout>

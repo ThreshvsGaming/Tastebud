@@ -13,8 +13,6 @@ public class SearchProcessor {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-
-    //Mostly for unit testing
     public SearchProcessor(IRecipeDB newRecipeDB) {recipeDB = newRecipeDB;}
 
     public List<Recipe> searchResults(String text) {
@@ -23,6 +21,12 @@ public class SearchProcessor {
         results = searchName(results,text);
 
         return results;
+    }
+
+    public List<Recipe> searchResultsWithTag(String[] tagList, String text){
+        List<Recipe> results = searchResults(text);
+
+        return searchTags(results, tagList);
     }
 
     private List<Recipe> searchName(List<Recipe> list, String text) {
@@ -57,4 +61,26 @@ public class SearchProcessor {
         return patternText + ".+"; //puts all pattern text together to be consumed by a pattern matcher
     }
 
+    private List<Recipe> searchTags(List<Recipe> recipes, String[] tagList) {
+        List<Recipe> matchedRecipes = new ArrayList<>();
+
+        for (Recipe recipe : recipes) {
+            if(matchedTag(recipe, tagList)){
+                matchedRecipes.add(recipe);
+            }
+        }
+
+        return matchedRecipes;
+    }
+
+    private boolean matchedTag(Recipe recipe, String[] tagList){
+        for (String recipeTag : recipe.getTags()) {
+            for (String tag : tagList){
+                if (recipeTag.equals(tag)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
