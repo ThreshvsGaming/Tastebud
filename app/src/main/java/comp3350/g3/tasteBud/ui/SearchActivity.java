@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,7 @@ import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
 
-public class SearchActivity extends Fragment implements IListInteraction, DeleteInteraction{
+public class SearchActivity extends Fragment implements IListInteraction, DeleteInteraction {
     private RecyclerView recycler;
     private HomePageAdapter madapter;
     private SearchView searchView;
@@ -51,10 +52,9 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         deleteButton = view.findViewById(R.id.delete);
 
 
-
         searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
-        madapter = new HomePageAdapter(this, recycler);
+        madapter = new HomePageAdapter(getContext(), this, recycler);
 
         currentSearchQuery = "";
 
@@ -63,7 +63,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         //Enables a function that detects text changes in the Search View
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query)  {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
@@ -90,28 +90,29 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         super.onStart();
         filterRecipeList();
     }
-    public void disableDeleteMenu(){
+
+    public void disableDeleteMenu() {
         deleteLayout.setVisibility(View.GONE);
         searchView.setVisibility(View.VISIBLE);
         madapter.offSelectionMode();
     }
+
     public void filterRecipeList() {
         List<Recipe> list = searchProcessor.searchResults(currentSearchQuery);
         madapter.setNewData(list);
     }
-    public void onClickListItem(int position)
-    {
-        startActivity(new Intent(getActivity(),DetailActivity.class).putExtra("bean",madapter.getData().get(position)));
+
+    public void onClickListItem(int position) {
+        startActivity(new Intent(getActivity(), DetailActivity.class).putExtra("bean", madapter.getData().get(position)));
     }
 
 
-    public void onHoldListItem(int position)
-    {
+    public void onHoldListItem(int position) {
         deleteLayout.setVisibility(View.VISIBLE);
         searchView.setVisibility(View.GONE);
     }
-    public void delete()
-    {
+
+    public void delete() {
         recipeProcessor.deleteListOfRecipe(madapter.getSelectedItems());
         filterRecipeList();
         disableDeleteMenu();
