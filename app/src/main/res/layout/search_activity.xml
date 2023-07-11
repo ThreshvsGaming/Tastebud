@@ -28,22 +28,41 @@
             android:layout_alignParentEnd="true"
             android:padding="@dimen/dp_10"
             android:src="@drawable/baseline_delete_forever_24" />
-
-
     </RelativeLayout>
 
-    <SearchView
-        android:id="@+id/searchView"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:layout_margin="@dimen/dp_20"
-        android:background="@drawable/shape_mainbg_25"
-        android:visibility="visible"/>
+        android:layout_height="@dimen/dp_70">
 
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_weight="0.1"
+            android:background="@drawable/shape_mainbg_25" />
+
+        <ImageView
+            android:id="@+id/ivFilterButton"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/app_name"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:visibility="visible" />
+    </TableRow>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
