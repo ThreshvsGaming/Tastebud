@@ -22,6 +22,7 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/recipeImageDetail"
         android:layout_width="match_parent"
         android:layout_height="237dp"
         android:background="#adc6f0"

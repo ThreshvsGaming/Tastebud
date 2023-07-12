@@ -27,7 +27,7 @@ import comp3350.g3.tasteBud.logic.TagListKeySingleton;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
 
-public class SearchActivity extends Fragment implements IListInteraction, DeleteInteraction{
+public class SearchActivity extends Fragment implements IListInteraction, DeleteInteraction {
     private RecyclerView recycler;
     private HomePageAdapter madapter;
     private SearchView searchView;
@@ -60,7 +60,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
 
         searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
-        madapter = new HomePageAdapter(this, recycler);
+        madapter = new HomePageAdapter(getContext(), this, recycler);
 
         refineProcessor = new RefineProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
@@ -71,7 +71,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         //Enables a function that detects text changes in the Search View
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query)  {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
@@ -107,7 +107,8 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         super.onStart();
         filterRecipeList();
     }
-    public void disableDeleteMenu(){
+
+    public void disableDeleteMenu() {
         deleteLayout.setVisibility(View.GONE);
         searchView.setVisibility(View.VISIBLE);
         madapter.offSelectionMode();
@@ -138,8 +139,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         searchView.setVisibility(View.GONE);
     }
 
-    public void delete()
-    {
+    public void delete() {
         recipeProcessor.deleteListOfRecipe(madapter.getSelectedItems());
         filterRecipeList();
         disableDeleteMenu();

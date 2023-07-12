@@ -59,7 +59,7 @@ public class RecipeProcessor {
         return null;
     }
 
-    public void addRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags) throws IllegalArgumentException{
+    public void addRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags, String imageUri) throws IllegalArgumentException {
 //        String[] ingredientsArray = ingredients.split(",");
 //        String[] tagsArray = tags.split(",");
 //
@@ -70,25 +70,23 @@ public class RecipeProcessor {
 //                tagsArray
 //        );
 //        recipeDB.addRecipe(newRecipe);
-        Recipe recipe = buildRecipe(recipeName, recipeDesc, ingredients, tags);
+        Recipe recipe = buildRecipe(recipeName, recipeDesc, ingredients, tags, imageUri);
 
         recipeDB.addRecipe(recipe);
 
     }
 
-    private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags){
-        return new Recipe(recipeName, recipeDesc, ingredients, tags);
+    private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags, String imageUri) {
+        return new Recipe(recipeName, recipeDesc, ingredients, tags, imageUri);
     }
 
-    public void deleteListOfRecipe(List<Recipe> recipes)
-    {
-        for(int i = 0; i < recipes.size(); i++)
-        {
+    public void deleteListOfRecipe(List<Recipe> recipes) {
+        for (int i = 0; i < recipes.size(); i++) {
             deleteRecipe(recipes.get(i).getId());
         }
     }
-    public void deleteRecipe(int id)
-    {
+
+    public void deleteRecipe(int id) {
         recipeDB.deleteRecipe(id);
     }
 

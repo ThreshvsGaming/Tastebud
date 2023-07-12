@@ -2,12 +2,16 @@ package comp3350.g3.tasteBud.ui;
 
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
+import com.bumptech.glide.Glide;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.Messages;
@@ -23,6 +27,7 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     RecipeProcessor recipeProcessor;
     Recipe recipe;
 
+    ImageView recipeImage;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,6 +40,7 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeTags = findViewById(R.id.recipeTags);
         recipeIngredients = findViewById(R.id.recipeIngredients);
         recipeDescription = findViewById(R.id.recipeDescription);
+        recipeImage = findViewById(R.id.recipeImageDetail);
 
         //Create a Recipe Processor to link to the logic layer
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
@@ -43,6 +49,25 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
         recipeTitle.setText(recipe.getName());
         recipeDescription.setText(recipe.getDesc());
+
+        //Handling Image Viewing
+        String imagePath = recipe.getImageUri();
+
+        if (imagePath != null && !imagePath.isEmpty()) {
+            int imageId = getResources().getIdentifier(imagePath, "drawable", getPackageName());
+
+            if (imageId != 0) {
+                // This image is a default image located in the drawable folder.
+                Glide.with(this).load(imageId).into(recipeImage);
+            } else {
+                // This image is a user-picked one located in the device file system.
+                Glide.with(this).load(Uri.parse(imagePath)).into(recipeImage);
+            }
+        } else {
+            // No image available, so a placeholder image.
+            recipeImage.setImageResource(R.mipmap.recipedefault);
+        }
+
 
         String tagCollection = "";
         for (int n = 0; n < recipe.getTags().size(); n++) {
@@ -60,14 +85,13 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
 
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-        findViewById(R.id.delete).setOnClickListener(v-> {
+        findViewById(R.id.delete).setOnClickListener(v -> {
 
             Messages.buildWarningDeleteDialogue(findViewById(R.id.delete).getContext(), "Are you sure you want to delete this recipe?", this);
         });
     }
 
-    public void delete()
-    {
+    public void delete() {
         recipeProcessor.deleteRecipe(recipe.getId());
         finish();
     }
