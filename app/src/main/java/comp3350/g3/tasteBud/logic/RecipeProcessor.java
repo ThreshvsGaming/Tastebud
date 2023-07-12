@@ -92,8 +92,12 @@ public class RecipeProcessor {
             deleteRecipe(recipes.get(i).getId());
         }
     }
-    public void deleteRecipe(int id)
-    {
+
+    public Recipe getRecipe(int id){
+        return recipeDB.getRecipe(id);
+    }
+
+    public void deleteRecipe(int id)    {
         recipeDB.deleteRecipe(id);
     }
 

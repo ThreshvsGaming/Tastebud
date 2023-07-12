@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
@@ -28,6 +32,7 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     RecipeProcessor recipeProcessor;
     Recipe recipe;
 
+    Intent refresh;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,8 +75,9 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         });
 
         Intent intent = new Intent(this, EditActivity.class).putExtra("bean",  getIntent().getSerializableExtra("bean"));
+
         findViewById(R.id.edit).setOnClickListener(
-                v -> {startActivity(intent);}
+                v -> {startResult.launch(intent);}
         );
     }
 
@@ -80,4 +86,19 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeProcessor.deleteRecipe(recipe.getId());
         finish();
     }
+
+    // Checks for when a user edits a recipe with the EditActivity page; displays new version of recipe if it has been edited
+    ActivityResultLauncher<Intent> startResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            // If user cancels the editing, it returns to this screen. Otherwise, it displays the edited recipe
+            if(result != null && result.getResultCode() == RESULT_OK) {
+                finish();
+                Intent replace = getIntent();
+                replace.removeExtra("bean");
+                replace.putExtra("bean", recipeProcessor.getRecipe(recipe.getId()));
+                startActivity(getIntent());
+            }
+        }
+    });
 }

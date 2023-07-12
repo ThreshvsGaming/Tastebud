@@ -1,6 +1,7 @@
 package comp3350.g3.tasteBud.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,20 +24,24 @@ import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class EditActivity extends FragmentActivity {
+    // TextViews that populate the DetailActivity with the recipe currently being updated
     TextView previewRecipeTitle;
     TextView previewRecipeDescription;
     TextView previewRecipeTags;
     TextView previewRecipeIngredients;
-    private Button submitRecipeButton;
 
+    // Stores what the user changes in the page
     String recipeTitle;
     String recipeDescription;
     String recipeTags;
     List<String> recipeIngredients;
 
+
     int recipeId;
     private TextView validationStatus;
     private RecipeProcessor recipeProcessor;
+    private Button submitRecipeButton;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -76,10 +81,10 @@ public class EditActivity extends FragmentActivity {
         }
         previewRecipeIngredients.setText(ingredientsCollection);
 
+        // Updates the selected recipe
         submitRecipeButton.setOnClickListener(v -> {
             recipeTitle = ((EditText) findViewById(R.id.recipeTitle)).getText().toString();
             recipeDescription = ((EditText) findViewById(R.id.recipeDescription)).getText().toString();
-            //recipeIngredients = ((EditText) view.findViewById(R.id.recipeIngredients)).getText().toString();
             recipeIngredients = Arrays.asList(((EditText) findViewById(R.id.recipeIngredients)).getText().toString().split(","));
             recipeTags = ((EditText) findViewById(R.id.recipeTags)).getText().toString();
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
@@ -89,17 +94,16 @@ public class EditActivity extends FragmentActivity {
         findViewById(R.id.returnButton).setOnClickListener(v -> finish());
 
     }
+
+    // Note: refactor when possible, mostly duplicates DetailProcessor
     public void handleValidation(String validationError) {
         if (validationError == null) {
             try {
-                //recipeProcessor.addRecipes(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
-                validationStatus.setText("Recipe Successfully Added!");
-                validationStatus.setVisibility(View.VISIBLE);
-                validationStatus.setTextColor(Color.GREEN);
                 recipeProcessor.updateRecipe(recipeId, recipeTitle, recipeDescription, recipeIngredients,recipeTags);
-                new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 3000); //Show dialog for 3 seconds
+                setResult(RESULT_OK);
+                finish();
             } catch (IllegalArgumentException e) {
-                validationStatus.setText("Recipe Creation Failed: " + e.getMessage());
+                validationStatus.setText("Recipe Editing Failed: " + e.getMessage());
                 validationStatus.setVisibility(View.VISIBLE);
                 validationStatus.setTextColor(Color.RED);
                 new Handler().postDelayed(() -> validationStatus.setVisibility(View.INVISIBLE), 10000); //Show dialog for 10 seconds
