@@ -8,6 +8,6 @@ GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET FILES SCALE 32
 SET SCHEMA PUBLIC
-INSERT INTO RECIPES VALUES(0,'BLT Sandwich','Sandwich with bacon, lettuce, and tomatoes.','Bacon','sandwich','bltsandwich')
-INSERT INTO RECIPES VALUES(1,'Garden Salad','Salad with lettuce, tomato, onion, cucumber, celery, and your favourite dressing.','Lettuce','salad','gardensalad')
-INSERT INTO RECIPES VALUES(2,'Ramen','Super elaborate ramen.','Ramen','soup','ramen')
+INSERT INTO RECIPES VALUES(0,'BLT Sandwich','Sandwich with bacon, lettuce, and tomatoes.','Bacon','sandwich','android.resource://comp3350.g3.tasteBud/drawable/bltsandwich')
+INSERT INTO RECIPES VALUES(1,'Garden Salad','Salad with lettuce, tomato, onion, cucumber, celery, and your favourite dressing.','Lettuce','salad','android.resource://comp3350.g3.tasteBud/drawable/gardensalad')
+INSERT INTO RECIPES VALUES(2,'Ramen','Super elaborate ramen.','Ramen','soup','android.resource://comp3350.g3.tasteBud/drawable/ramen')
