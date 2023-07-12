@@ -80,6 +80,7 @@ public class EditActivity extends FragmentActivity {
         previewRecipeTitle.setText(recipe.getName());
         previewRecipeDescription.setText(recipe.getDesc());
         recipeId = recipe.getId();
+        recipeImageUri = recipe.getImageUri();
 
         String tagCollection = "";
         for (int n = 0; n < recipe.getTags().size(); n++) {
@@ -104,7 +105,6 @@ public class EditActivity extends FragmentActivity {
             String validationError = recipeProcessor.inputValidation(recipeTitle, recipeDescription, recipeIngredients, recipeTags);
             handleValidation(validationError);
         });
-
 
         previewRecipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
