@@ -56,6 +56,7 @@ public class EditActivity extends FragmentActivity {
         previewRecipeTags = findViewById(R.id.recipeTags);
         previewRecipeIngredients = findViewById(R.id.recipeIngredients);
         previewRecipeDescription = findViewById(R.id.recipeDescription);
+        previewRecipeUri = f
 
         submitRecipeButton = findViewById(R.id.recipeSubmit);
 
@@ -99,7 +100,7 @@ public class EditActivity extends FragmentActivity {
     public void handleValidation(String validationError) {
         if (validationError == null) {
             try {
-                recipeProcessor.updateRecipe(recipeId, recipeTitle, recipeDescription, recipeIngredients,recipeTags);
+                recipeProcessor.updateRecipe(recipeId, recipeTitle, recipeDescription, recipeIngredients,recipeTags, recipeUri);
                 setResult(RESULT_OK);
                 finish();
             } catch (IllegalArgumentException e) {

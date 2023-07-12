@@ -6,12 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Recipe implements Serializable {
-    public static final int UNSET_ID  = -1;
+    public static final int UNSET_ID = -1;
     private int id;
     private String name;
     private String desc;
     private List<String> ingredients;
     private ArrayList<String> tags;
+
+    private String imageUri;
 
     final static boolean SELECTED = true;
     final static boolean NOT_SELECTED = false;
@@ -34,20 +36,21 @@ public class Recipe implements Serializable {
     }
 
     public Recipe(String name, String desc, List ingredients, String tags) throws IllegalArgumentException {
-        this(name, desc, ingredients );
+        this(name, desc, ingredients);
 
         setTags(tags);
     }
 
-    public Recipe(String name, String desc, List ingredients, String tags, int id) throws IllegalArgumentException {
+    public Recipe(String name, String desc, List ingredients, String tags, String imageUri) throws IllegalArgumentException {
         this(name, desc, ingredients, tags);
-        setId(id);
+
+        // Initialize imageUri field
+        this.imageUri = imageUri;
     }
 
     public ArrayList<String> getTags() {
         return tags;
     }
-
 
     public List<String> getIngredients() {
         return ingredients;
@@ -109,6 +112,15 @@ public class Recipe implements Serializable {
 
     public void changeSelection(boolean selection) {
         isSelected = selection;
+    }
+
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
     /*

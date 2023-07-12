@@ -28,8 +28,8 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
      * Returns a boolean indicating successful addition to the data backend.
      * Upon success, the new id of the passed recipe with also be set.
      *
-     * @param  recipe  the recipe to add to the backend
-     * @return         successful addition indicator
+     * @param recipe the recipe to add to the backend
+     * @return successful addition indicator
      */
     public boolean addRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
@@ -45,12 +45,13 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
             recipe.setId(newID);
 
             // add new recipe
-            PreparedStatement pst = c.prepareStatement("INSERT INTO RECIPES VALUES(?,?,?,?,?)");
+            PreparedStatement pst = c.prepareStatement("INSERT INTO RECIPES VALUES(?,?,?,?,?,?)");
             pst.setInt(1, recipe.getId());
             pst.setString(2, recipe.getName());
             pst.setString(3, recipe.getDesc());
             pst.setString(4, UtilsHSQLDB.encodeString(recipe.getIngredients()));
             pst.setString(5, UtilsHSQLDB.encodeString(recipe.getTags()));
+            pst.setString(6, recipe.getImageUri());
             pst.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -62,8 +63,8 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
      * Returns the recipe specified at index id.
      * Upon failure, null we be returned.
      *
-     * @param  id  the id of the recipe to search
-     * @return     the searched recipe
+     * @param id the id of the recipe to search
+     * @return the searched recipe
      */
     public Recipe getRecipe(int id) {
         if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
@@ -82,8 +83,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
             rs.close();
             st.close();
             return recipe;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
     }
@@ -119,7 +119,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
      * Return true/false indicating successful
      * removal.
      *
-     * @param  id  the id of the recipe to remove
+     * @param id the id of the recipe to remove
      */
     public void deleteRecipe(int id) {
         if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
@@ -130,8 +130,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
             st.setInt(1, id);
             st.executeUpdate();
             st.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
     }
@@ -139,23 +138,23 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
     /**
      * Update the recipe specified by recipe.
      *
-     * @param  recipe the recipe to update
+     * @param recipe the recipe to update
      */
     public void updateRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
         try (final Connection c = connection()) {
 
             // update any recipe whose id matches the recipe id
-            final PreparedStatement st = c.prepareStatement("UPDATE RECIPES SET NAME=?, DESC=?, INGREDIENTS=?, TAGS=? WHERE ID=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE RECIPES SET NAME=?, DESC=?,  INGREDIENTS=?, TAGS=?, IMAGEPATH=? WHERE ID=?");
             st.setString(1, recipe.getName());
             st.setString(2, recipe.getDesc());
             st.setString(3, UtilsHSQLDB.encodeString(recipe.getIngredients()));
             st.setString(4, UtilsHSQLDB.encodeString(recipe.getTags()));
-            st.setInt(5, recipe.getId());
+            st.setString(5, recipe.getImageUri());
+            st.setInt(6, recipe.getId());
             st.executeUpdate();
             st.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
     }
@@ -173,6 +172,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         final String ingredientsString = rs.getString("INGREDIENTS");
         final List<String> ingredients = Arrays.asList(ingredientsString.split(",")); // 拆分字符串并转换为List
         String tags = rs.getString("TAGS");
+        final String imagePath = rs.getString("IMAGEPATH");
 
         // re-create recipe from constructor
         try {
@@ -180,6 +180,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
             // fill other fields
             recipe.setId(id);
             recipe.setTags(tags.split(UtilsHSQLDB.FIELD_SEP));
+            recipe.setImageUri(imagePath);
             return recipe;
         } catch (IllegalArgumentException e) {
             return null;
