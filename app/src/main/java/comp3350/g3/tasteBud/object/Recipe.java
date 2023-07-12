@@ -32,10 +32,16 @@ public class Recipe implements Serializable {
         }
 
     }
+
     public Recipe(String name, String desc, List ingredients, String tags) throws IllegalArgumentException {
         this(name, desc, ingredients );
 
         setTags(tags);
+    }
+
+    public Recipe(String name, String desc, List ingredients, String tags, int id) throws IllegalArgumentException {
+        this(name, desc, ingredients, tags);
+        setId(id);
     }
 
     public ArrayList<String> getTags() {

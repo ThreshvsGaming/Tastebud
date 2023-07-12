@@ -146,7 +146,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         try (final Connection c = connection()) {
 
             // update any recipe whose id matches the recipe id
-            final PreparedStatement st = c.prepareStatement("UPDATE RECIPES SET NAME=?, DESC=?,  INGREDIENTS=?, TAGS=?, FAVOURITE=? WHERE ID=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE RECIPES SET NAME=?, DESC=?, INGREDIENTS=?, TAGS=? WHERE ID=?");
             st.setString(1, recipe.getName());
             st.setString(2, recipe.getDesc());
             st.setString(3, UtilsHSQLDB.encodeString(recipe.getIngredients()));

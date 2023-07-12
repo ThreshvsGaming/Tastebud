@@ -1,13 +1,18 @@
 package comp3350.g3.tasteBud.ui;
 
 
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
+
+
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.Messages;
@@ -61,9 +66,13 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
         findViewById(R.id.delete).setOnClickListener(v-> {
-
             Messages.buildWarningDeleteDialogue(findViewById(R.id.delete).getContext(), "Are you sure you want to delete this recipe?", this);
         });
+
+        Intent intent = new Intent(this, EditActivity.class).putExtra("bean",  getIntent().getSerializableExtra("bean"));
+        findViewById(R.id.edit).setOnClickListener(
+                v -> {startActivity(intent);}
+        );
     }
 
     public void delete()
