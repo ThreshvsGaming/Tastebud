@@ -76,6 +76,12 @@ public class RecipeProcessor {
 
     }
 
+    public void updateRecipe(int recipeId, String recipeName, String recipeDesc,List<String> ingredients, String tags, String imageUri) throws IllegalArgumentException{
+        Recipe recipe = buildRecipe (recipeName, recipeDesc, ingredients, tags, imageUri);
+        recipe.setId(recipeId);
+        recipeDB.updateRecipe(recipe);
+    }
+
     private Recipe buildRecipe(String recipeName, String recipeDesc, List<String> ingredients, String tags, String imageUri) {
         return new Recipe(recipeName, recipeDesc, ingredients, tags, imageUri);
     }
@@ -86,7 +92,11 @@ public class RecipeProcessor {
         }
     }
 
-    public void deleteRecipe(int id) {
+    public Recipe getRecipe(int id){
+        return recipeDB.getRecipe(id);
+    }
+
+    public void deleteRecipe(int id)    {
         recipeDB.deleteRecipe(id);
     }
 

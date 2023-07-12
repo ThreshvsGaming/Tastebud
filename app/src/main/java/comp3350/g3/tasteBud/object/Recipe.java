@@ -41,7 +41,6 @@ public class Recipe implements Serializable {
         setTags(tags);
     }
 
-
     public Recipe(String name, String desc, List ingredients, String tags, String imageUri) throws IllegalArgumentException {
         this(name, desc, ingredients, tags);
 
@@ -49,11 +48,9 @@ public class Recipe implements Serializable {
         this.imageUri = imageUri;
     }
 
-
     public ArrayList<String> getTags() {
         return tags;
     }
-
 
     public List<String> getIngredients() {
         return ingredients;
