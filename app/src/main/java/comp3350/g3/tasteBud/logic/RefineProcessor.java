@@ -15,16 +15,15 @@ public class RefineProcessor {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-    public RefineProcessor (IRecipeDB recipeDB) {
+    public RefineProcessor(IRecipeDB recipeDB) {
         this.recipeDB = recipeDB;
     }
 
-    public String[] constructSelectedTags(String tagList)
-    {
+    public String[] constructSelectedTags(String tagList) {
         String[] results = new String[0];
-        if(tagList != null && tagList.length() > 0) {
+        if (tagList != null && tagList.length() > 0) {
             results = tagList.split("[,]");
-            for(int i = 0 ; i < results.length ; i++){
+            for (int i = 0; i < results.length; i++) {
                 results[i] = results[i].trim();
             }
         }
@@ -36,10 +35,10 @@ public class RefineProcessor {
 
         List<Recipe> recipes = recipeDB.getAllRecipes();
 
-        for(Recipe recipe: recipes) {
+        for (Recipe recipe : recipes) {
             List<String> currTagList = recipe.getTags();
 
-            for(String tag: currTagList){
+            for (String tag : currTagList) {
                 tagList.add(tag);
             }
         }

@@ -62,16 +62,16 @@ public class RefineProcessorIntegrationTest {
         //Messages
         System.out.println("Start Doing GetTagList Test!");
 
-            String[] expectedTags = {"Filipino","Fried","Appetizer", "Dinner", "Seafood", "Indian", "Lunch"};
+        String[] expectedTags = {"Filipino", "Fried", "Appetizer", "Dinner", "Seafood", "Indian", "Lunch"};
 
-            String[] tagList = refineProcessor.getTagList();
+        String[] tagList = refineProcessor.getTagList();
 
-            assertEquals(expectedTags.length, tagList.length);
-            System.out.println(expectedTags.length);
-            System.out.println(tagList.length);
-            System.out.println("TagList" + " " + Arrays.asList(tagList));
-            System.out.println(Arrays.asList(expectedTags));
-            assertTrue(Arrays.asList(tagList).containsAll(Arrays.asList(expectedTags)));
+        assertEquals(expectedTags.length, tagList.length);
+        System.out.println(expectedTags.length);
+        System.out.println(tagList.length);
+        System.out.println("TagList" + " " + Arrays.asList(tagList));
+        System.out.println(Arrays.asList(expectedTags));
+        assertTrue(Arrays.asList(tagList).containsAll(Arrays.asList(expectedTags)));
 
         //Messages
         System.out.println("End Doing GetTagList Test!");
@@ -80,11 +80,12 @@ public class RefineProcessorIntegrationTest {
 
     private void removeAllRecipes() {
         List<Recipe> list = recipeDB.getAllRecipes();
-        for(Recipe r:list) {
+        for (Recipe r : list) {
             recipeDB.deleteRecipe(r.getId());
         }
     }
-    private void defaultRecipe(){
+
+    private void defaultRecipe() {
         ArrayList<String> recipe1ingredients = new ArrayList<>(Arrays.asList("Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"));
         String recipe1tags = "Dinner, Fried";
         ArrayList<String> recipe2ingredients = new ArrayList<>(Arrays.asList("Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"));
@@ -124,8 +125,6 @@ public class RefineProcessorIntegrationTest {
         recipeDB.addRecipe(recipe3);
         recipeDB.addRecipe(recipe4);
     }
-
-
 
 
 }

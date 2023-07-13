@@ -1,4 +1,5 @@
 package comp3350.g3.tasteBud.data.hsqldb;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -139,6 +140,7 @@ public class RecipeDBPersistence implements IRecipeDB {
             return null;
         }
     }
+
     private int getNextID(Connection connection) throws SQLException {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT MAX(ID) FROM RECIPES");

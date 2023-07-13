@@ -7,8 +7,8 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class RecipeStub implements IRecipeDB {
     private static ArrayList<Recipe> storedRecipes;
 
-    public RecipeStub(){
-        if(storedRecipes == null){
+    public RecipeStub() {
+        if (storedRecipes == null) {
             initRecipeDatabase();
         }
     }
@@ -62,7 +62,7 @@ public class RecipeStub implements IRecipeDB {
     public boolean addRecipe(Recipe newRecipe) {
         final int NUM_UNIQUE_IDS = 1000;
         boolean pass = false;
-        if(storedRecipes.size() < NUM_UNIQUE_IDS) {
+        if (storedRecipes.size() < NUM_UNIQUE_IDS) {
             int newID = -1;
             while (newID == -1) {
                 newID = (int) (Math.random() * NUM_UNIQUE_IDS);
@@ -79,12 +79,12 @@ public class RecipeStub implements IRecipeDB {
         }
         return pass;
     }
+
     @Override
     public Recipe getRecipe(int id) {
         Recipe result = null;
-        for(Recipe r: storedRecipes){
-            if(r.getId() == id)
-            {
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == id) {
                 result = r;
                 break;
             }
@@ -95,11 +95,11 @@ public class RecipeStub implements IRecipeDB {
     public ArrayList<Recipe> getAllRecipes() {
         return storedRecipes;
     }
+
     @Override
     public void deleteRecipe(int id) {
-        for(Recipe r: storedRecipes){
-            if(r.getId() == id)
-            {
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == id) {
                 storedRecipes.remove(r);
                 break;
             }
@@ -108,9 +108,8 @@ public class RecipeStub implements IRecipeDB {
 
     @Override
     public void updateRecipe(Recipe recipe) {
-        for(Recipe r: storedRecipes){
-            if(r.getId() == recipe.getId())
-            {
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == recipe.getId()) {
                 storedRecipes.remove(r);
                 storedRecipes.add(recipe);
                 break;

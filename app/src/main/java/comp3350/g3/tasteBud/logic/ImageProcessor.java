@@ -33,8 +33,7 @@ public class ImageProcessor {
             is.close();
             // Get the Uri from the File that we just saved
             return Uri.fromFile(saveFile);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }

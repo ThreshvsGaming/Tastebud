@@ -67,15 +67,15 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, ViewHolder> {
             helper.checkbox.setVisibility(View.GONE);
             helper.background.setBackgroundColor(Color.WHITE);
         }
-        if(getData().size() != isSelected.length) {
+        if (getData().size() != isSelected.length) {
             setDefaultIsSelected(getData().size());
         }
-        imageSetter.setImageResource(context, recipe, helper.img );
+        imageSetter.setImageResource(context, recipe, helper.img);
     }
 
     public void setDefaultIsSelected(int length) {
         isSelected = new boolean[length];
-        for(int i = 0 ; i < length ; i++) {
+        for (int i = 0; i < length; i++) {
             isSelected[i] = false;
         }
     }
@@ -102,17 +102,25 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, ViewHolder> {
         selectedItems.clear();
         removeAllSelections();
     }
-    public void addSelectedItem(Recipe recipe){
+
+    public void addSelectedItem(Recipe recipe) {
         selectedItems.add(recipe);
     }
-    public void removeSelectedItem(Recipe recipe){
+
+    public void removeSelectedItem(Recipe recipe) {
         selectedItems.remove(recipe);
     }
 
-    public boolean getSelectionMode(){return selectionMode;}
-    public void setRecipeSelection(int position, boolean isSelect){
+    public boolean getSelectionMode() {
+        return selectionMode;
+    }
+
+    public void setRecipeSelection(int position, boolean isSelect) {
         isSelected[position] = isSelect;
     }
-    public boolean getRecipeSelection(int position){return isSelected[position];}
+
+    public boolean getRecipeSelection(int position) {
+        return isSelected[position];
+    }
 
 }

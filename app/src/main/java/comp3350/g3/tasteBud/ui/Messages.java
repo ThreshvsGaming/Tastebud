@@ -1,4 +1,4 @@
-package comp3350.g3.tasteBud.logic;
+package comp3350.g3.tasteBud.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,10 +8,8 @@ import android.content.DialogInterface;
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.ui.DeleteInteraction;
 
-public class Messages
-{
-    public static void warning(Activity owner, String message)
-    {
+public class Messages {
+    public static void warning(Activity owner, String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
 
         alertDialog.setTitle(owner.getString(R.string.warning));
@@ -20,10 +18,9 @@ public class Messages
         alertDialog.show();
     }
 
-    public static void buildWarningDeleteDialogue(Context context, String message, DeleteInteraction deleteInteraction)
-    {
+    public static void buildWarningDeleteDialogue(Context context, String message, DeleteInteraction deleteInteraction) {
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-            switch (which){
+            switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
                     deleteInteraction.delete();

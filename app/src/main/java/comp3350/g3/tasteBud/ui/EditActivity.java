@@ -85,7 +85,7 @@ public class EditActivity extends FragmentActivity {
     public void insertRecipe(String validationError) {
         if (validationError == null) {
             try {
-                recipeProcessor.updateRecipe(recipeId, recipeTitle, recipeDescription, recipeIngredients,recipeTags, recipeImageUri);
+                recipeProcessor.updateRecipe(recipeId, recipeTitle, recipeDescription, recipeIngredients, recipeTags, recipeImageUri);
                 setResult(RESULT_OK);
                 finish();
             } catch (IllegalArgumentException e) {
@@ -123,14 +123,11 @@ public class EditActivity extends FragmentActivity {
         previewRecipeImage.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-//            CreateActivity createActivity = new CreateActivity();
-//            createActivity.mGetContent.launch(intent);
             mGetContent.launch(intent);
         });
 
         findViewById(R.id.returnButton).setOnClickListener(v -> finish());
     }
-
 
 
     public final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(

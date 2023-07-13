@@ -82,6 +82,7 @@ public class SearchProcessorIntegrationTest {
         assertTrue(searchResults.size() == 1);
 
     }
+
     //Test whether the search logic will return newly added recipes
     @Test
     public void testSearchNewRecipes() {
@@ -122,10 +123,29 @@ public class SearchProcessorIntegrationTest {
 
         assertTrue(searchResults.size() == 4);
     }
+
     @Test
-    public void testSearchAndTag(){
+    public void testSearchAndTag() {
+        String[] tags = {"Indian", "Dinner"};
+
+        List<Recipe> searchResults = searchProcessor.searchResultsWithTag(tags, "");
+
+        System.out.println(searchResults.size());
+        assertTrue(searchResults.size() == 3);
+
+        searchResults = searchProcessor.searchResultsWithTag(tags, "Biryani");
+
+        assertTrue(searchResults.size() == 1);
+        assertTrue(searchResults.get(0).getName().equals("Kacchi Biryani"));
+
+        tags = new String[]{"Tag Doesn't exist", "Tag Doesn't exist 2"};
+
+        searchResults = searchProcessor.searchResultsWithTag(tags, "");
+
+        assertTrue(searchResults.size() == 0);
 
     }
+
     @After
     public void end() {
         System.out.println("Finish Test on SearchProcessor");
@@ -133,11 +153,12 @@ public class SearchProcessorIntegrationTest {
 
     private void removeAllRecipes() {
         List<Recipe> list = recipeDB.getAllRecipes();
-        for(Recipe r:list) {
+        for (Recipe r : list) {
             recipeDB.deleteRecipe(r.getId());
         }
     }
-    private void defaultRecipe(){
+
+    private void defaultRecipe() {
         ArrayList<String> recipe1ingredients = new ArrayList<>(Arrays.asList("Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"));
         String recipe1tags = "Dinner, Fried";
         ArrayList<String> recipe2ingredients = new ArrayList<>(Arrays.asList("Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"));

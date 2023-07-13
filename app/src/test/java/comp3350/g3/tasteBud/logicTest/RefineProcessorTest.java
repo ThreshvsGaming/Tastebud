@@ -43,9 +43,10 @@ public class RefineProcessorTest {
 
         assertTrue(Arrays.equals(allTags, results));
 
+        //Check if it still works on a empty database
         List<Recipe> list = recipeStub.getAllRecipes();
         List<Recipe> copyList = new ArrayList<>(list);
-        for(Recipe r: copyList){
+        for (Recipe r : copyList) {
             recipeStub.deleteRecipe(r.getId());
         }
 
@@ -63,7 +64,7 @@ public class RefineProcessorTest {
 
         String[] result = refineProcessor.constructSelectedTags(tags);
 
-        for(String s: result){
+        for (String s : result) {
             System.out.print(s);
         }
         assertTrue(Arrays.equals(tagsList, result));

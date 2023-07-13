@@ -72,6 +72,7 @@ public class SearchProcessorTest {
         assertTrue(searchResults.size() == 1);
         assertTrue(searchResults.contains(recipe1));
     }
+
     //Test whether the search logic will return newly added recipes
     @Test
     public void testSearchNewRecipes() {
@@ -111,8 +112,9 @@ public class SearchProcessorTest {
 
         assertTrue(searchResults.size() == 4);
     }
+
     @Test
-    public void testSearchAndTag(){
+    public void testSearchAndTag() {
         String[] tags = {"Indian", "Dinner"};
 
         List<Recipe> searchResults = searchProcessor.searchResultsWithTag(tags, "");
@@ -132,6 +134,7 @@ public class SearchProcessorTest {
         assertTrue(searchResults.size() == 0);
 
     }
+
     @After
     public void end() {
 

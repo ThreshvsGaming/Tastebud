@@ -43,7 +43,7 @@ public class RecipeValidatorTest {
         // This ensures that this works no matter where in .inputValidator() whitespaces are placed.
         for (int i = 0; i < inputFields.length; i++) {
             String swap = testParameters[i];
-            for (int j = 0; j < whitespaceTest.length; j++){
+            for (int j = 0; j < whitespaceTest.length; j++) {
                 testParameters[i] = whitespaceTest[j];
 
                 assertEquals(recipeValidator.inputValidation(testParameters[0], testParameters[1], Arrays.asList(testParameters[2].split(",")), testParameters[3]), inputFields[i] + whitespaceError);
@@ -90,7 +90,7 @@ public class RecipeValidatorTest {
         // This ensures that this works no matter where in .inputValidator() symbols are placed.
         for (int i = 0; i < inputFields.length; i++) {
             String swap = testParameters[i];
-            for (int j = 0; j < symbolTest.length; j++){
+            for (int j = 0; j < symbolTest.length; j++) {
                 testParameters[i] = symbolTest[j];
                 assertEquals(recipeValidator.inputValidation(testParameters[0], testParameters[1], Arrays.asList(testParameters[2].split(",")), testParameters[3]), inputFields[i] + emptyError);
             }

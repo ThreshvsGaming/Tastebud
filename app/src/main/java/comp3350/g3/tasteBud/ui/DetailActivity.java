@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Messages;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.ImageSetter;
 import comp3350.g3.tasteBud.object.Recipe;
@@ -62,7 +61,7 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         @Override
         public void onActivityResult(ActivityResult result) {
             // If user cancels the editing, it returns to this screen. Otherwise, it displays the edited recipe
-            if(result != null && result.getResultCode() == RESULT_OK) {
+            if (result != null && result.getResultCode() == RESULT_OK) {
                 finish();
                 Intent replace = getIntent();
                 replace.removeExtra("bean");
@@ -83,13 +82,15 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     private void initializeListeners() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-        findViewById(R.id.delete).setOnClickListener(v-> {
+        findViewById(R.id.delete).setOnClickListener(v -> {
             Messages.buildWarningDeleteDialogue(findViewById(R.id.delete).getContext(), "Are you sure you want to delete this recipe?", this);
         });
 
-        Intent intent = new Intent(this, EditActivity.class).putExtra("bean",  getIntent().getSerializableExtra("bean"));
+        Intent intent = new Intent(this, EditActivity.class).putExtra("bean", getIntent().getSerializableExtra("bean"));
         findViewById(R.id.edit).setOnClickListener(
-                v -> {startResult.launch(intent);}
+                v -> {
+                    startResult.launch(intent);
+                }
         );
     }
 
