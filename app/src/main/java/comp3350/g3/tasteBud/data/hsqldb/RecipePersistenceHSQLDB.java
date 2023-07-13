@@ -24,13 +24,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         this.dbType = "file";
     }
 
-    /**
-     * Returns a boolean indicating successful addition to the data backend.
-     * Upon success, the new id of the passed recipe with also be set.
-     *
-     * @param recipe the recipe to add to the backend
-     * @return successful addition indicator
-     */
+
     public boolean addRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
         try (final Connection c = connection()) {
@@ -59,13 +53,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         }
     }
 
-    /**
-     * Returns the recipe specified at index id.
-     * Upon failure, null we be returned.
-     *
-     * @param id the id of the recipe to search
-     * @return the searched recipe
-     */
+
     public Recipe getRecipe(int id) {
         if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
         try (final Connection c = connection()) {
@@ -88,11 +76,6 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         }
     }
 
-    /**
-     * Returns all stored recipes.
-     *
-     * @return ArrayList of Recipe objects.
-     */
     public ArrayList<Recipe> getAllRecipes() {
         final ArrayList<Recipe> recipes = new ArrayList<>();
         try (final Connection c = connection()) {
@@ -114,13 +97,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         }
     }
 
-    /**
-     * Delete the recipe specified by id.
-     * Return true/false indicating successful
-     * removal.
-     *
-     * @param id the id of the recipe to remove
-     */
+
     public void deleteRecipe(int id) {
         if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
         try (final Connection c = connection()) {
@@ -135,11 +112,7 @@ public class RecipePersistenceHSQLDB implements IRecipeDB {
         }
     }
 
-    /**
-     * Update the recipe specified by recipe.
-     *
-     * @param recipe the recipe to update
-     */
+
     public void updateRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
         try (final Connection c = connection()) {
