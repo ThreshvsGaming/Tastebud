@@ -37,7 +37,7 @@ public class SearchProcessorIntegrationTest {
         recipeDB = new RecipeDBPersistence(tempDB.getAbsolutePath().replace(".script", ""));
         removeAllRecipes();
         defaultRecipe();
-        searchProcessor = new SearchProcessor(true);
+        searchProcessor = new SearchProcessor(recipeDB);
     }
 
     //Test a generic search to see if it returns the correct results
@@ -115,12 +115,12 @@ public class SearchProcessorIntegrationTest {
         List<Recipe> searchResults = searchProcessor.searchResults("");
         System.out.println(searchResults.size());
 
-        assertTrue(searchResults.size() == 5);
+        assertTrue(searchResults.size() == 4);
 
         //Make sure spaces doesn't filter the list
         searchResults = searchProcessor.searchResults("                 ");
 
-        assertTrue(searchResults.size() == 5);
+        assertTrue(searchResults.size() == 4);
     }
     @Test
     public void testSearchAndTag(){
