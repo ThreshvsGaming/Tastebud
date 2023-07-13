@@ -1,5 +1,5 @@
 # Architecture
-![Architecture](Architecture.png)
+![Architecture](architecture.png)
 ## UI Layer
 ### Main
 Main is the main method of our project that creates MainActivity.
