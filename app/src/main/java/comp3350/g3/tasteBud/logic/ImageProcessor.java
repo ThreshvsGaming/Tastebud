@@ -31,7 +31,6 @@ public class ImageProcessor {
 
             // Close the InputStream
             is.close();
-
             // Get the Uri from the File that we just saved
             return Uri.fromFile(saveFile);
         }

@@ -40,7 +40,7 @@ public class RecipeProcessorTest {
         recipeProcessor.addRecipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
 
         // Asserts that the size of database changed
-        assertEquals(testStub.getAllRecipes().size(), checkSize + 1);
+        assertEquals(checkSize + 1, testStub.getAllRecipes().size());
 
         // Asserts that the recipe was created properly
         Recipe storedRecipe = testStub.getAllRecipes().get(checkSize);
@@ -55,7 +55,6 @@ public class RecipeProcessorTest {
     public void testDeleting() {
         // Tests that the processor deletes recipes from database
         Recipe recipe = new Recipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
-        recipe.setId(9);
         testStub.addRecipe(recipe);
         int checkSize = testStub.getAllRecipes().size();
 

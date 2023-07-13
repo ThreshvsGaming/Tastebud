@@ -60,8 +60,24 @@ public class RecipeStub implements IRecipeDB {
     }
 
     public boolean addRecipe(Recipe newRecipe) {
-        storedRecipes.add(newRecipe);
-        return false;
+        final int NUM_UNIQUE_IDS = 1000;
+        boolean pass = false;
+        if(storedRecipes.size() < NUM_UNIQUE_IDS) {
+            int newID = -1;
+            while (newID == -1) {
+                newID = (int) (Math.random() * NUM_UNIQUE_IDS);
+                for (Recipe r : storedRecipes) {
+                    if (newID == r.getId()) {
+                        newID = -1;
+                        break;
+                    }
+                }
+            }
+            newRecipe.setId(newID);
+            storedRecipes.add(newRecipe);
+            pass = true;
+        }
+        return pass;
     }
     @Override
     public Recipe getRecipe(int id) {

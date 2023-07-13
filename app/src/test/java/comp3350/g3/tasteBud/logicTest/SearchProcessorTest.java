@@ -17,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SearchProcessorTest {
     private RecipeStub recipeStub;
+    private SearchProcessor searchProcessor;
 
     @Before
     public void setUp() {
@@ -27,13 +28,13 @@ public class SearchProcessorTest {
         // 4) Crispy Calamari
         recipeStub = new RecipeStub();
         recipeStub.initRecipeDatabase();
+        searchProcessor = new SearchProcessor(recipeStub);
     }
 
     //Test a generic search to see if it returns the correct results
     @Test
     public void testSearchName() {
         //Does a generic search of chicken
-        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         List<Recipe> searchResults = searchProcessor.searchResults("cHicKeN");
 
@@ -58,8 +59,6 @@ public class SearchProcessorTest {
     //Example: "Chicken Adobo" and "Adobo Chicken" should return the same recipe
     @Test
     public void testSearchQueryOrder() {
-        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
-
         //Checks one way to query the search
         List<Recipe> searchResults = searchProcessor.searchResults("KacChi BIRYANI");
 
@@ -76,14 +75,10 @@ public class SearchProcessorTest {
     //Test whether the search logic will return newly added recipes
     @Test
     public void testSearchNewRecipes() {
-        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
-
         List<Recipe> searchResults = searchProcessor.searchResults("Test Recipe");
 
         //Checks if Test Recipe is not in the search
         assertTrue(searchResults.size() == 0);
-
-
 
         Recipe newRecipe = new Recipe(
                 "Test Recipe",
@@ -105,7 +100,6 @@ public class SearchProcessorTest {
     //Test whether an empty inputted search query will return all the recipes in the database
     @Test
     public void testSearchEmptyQuery() {
-        SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         //Make empty query doesn't filter the list
         List<Recipe> searchResults = searchProcessor.searchResults("");
@@ -117,12 +111,10 @@ public class SearchProcessorTest {
 
         assertTrue(searchResults.size() == 4);
     }
-
     @Test
     public void testSearchAndTag(){
 
     }
-
     @After
     public void end() {
         System.out.println("Finish Test on SearchProcessor");
