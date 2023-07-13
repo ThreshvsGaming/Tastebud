@@ -2,6 +2,7 @@ package comp3350.g3.tasteBud.object;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Recipe implements Serializable {
@@ -10,7 +11,7 @@ public class Recipe implements Serializable {
     private String name;
     private String desc;
     private List<String> ingredients;
-    private ArrayList<String> tags;
+    private List<String> tags;
     private String imageUri;
 
 
@@ -20,7 +21,7 @@ public class Recipe implements Serializable {
         }
 
         if (tags == null) {
-            this.tags = new ArrayList<>();
+            this.tags = new LinkedList<>();
         }
 
         this.id = UNSET_ID;
@@ -42,7 +43,7 @@ public class Recipe implements Serializable {
         this.imageUri = imageUri;
     }
 
-    public ArrayList<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -70,28 +71,40 @@ public class Recipe implements Serializable {
     }
 
     public void setTags(String tags) {
-        this.tags = new ArrayList<>();
+        this.tags = new LinkedList<>();
 
         if (tags != null && !tags.isEmpty()) {
             String[] tempTags = tags.split(",");
 
-            for (int i = 0; i < tempTags.length; i++) {
-                tempTags[i] = tempTags[i].trim();
-                if (!tempTags[i].equals("")) {
-                    this.tags.add("" + tempTags[i]);
+//            for (int i = 0; i < tempTags.length; i++) {
+//                tempTags[i] = tempTags[i].trim();
+//                if (!tempTags[i].equals("")) {
+//                    this.tags.add("" + tempTags[i]);
+//                }
+//            }
+            for (String i : tempTags) {
+                i = i.trim();
+                if (!i.equals("")) {
+                    this.tags.add("" + i);
                 }
             }
         }
     }
 
     //for handling db operation regarding splitting tags
-    public void setTags(String[] tags) {
-        this.tags = new ArrayList<>();
+    public void dbsetTags(String[] tags) {
+        this.tags = new LinkedList<>();
         if (tags != null) {
-            for (int i = 0; i < tags.length; i++) {
-                tags[i] = tags[i].trim();
-                if (!tags[i].equals("")) {
-                    this.tags.add(tags[i]);
+//            for (int i = 0; i < tags.length; i++) {
+//                tags[i] = tags[i].trim();
+//                if (!tags[i].equals("")) {
+//                    this.tags.add(tags[i]);
+//                }
+//            }
+            for (String i : tags) {
+                i = i.trim();
+                if (!i.equals("")) {
+                    this.tags.add(i);
                 }
             }
         }

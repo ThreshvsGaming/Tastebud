@@ -118,6 +118,11 @@ public class SearchProcessorTest {
         assertTrue(searchResults.size() == 4);
     }
 
+    @Test
+    public void testSearchAndTag(){
+
+    }
+
     @After
     public void end() {
         System.out.println("Finish Test on SearchProcessor");
