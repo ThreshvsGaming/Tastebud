@@ -2,7 +2,6 @@ package comp3350.g3.tasteBud.object;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Recipe implements Serializable {
@@ -12,27 +11,22 @@ public class Recipe implements Serializable {
     private String desc;
     private List<String> ingredients;
     private ArrayList<String> tags;
-
     private String imageUri;
 
-    final static boolean SELECTED = true;
-    final static boolean NOT_SELECTED = false;
-    private boolean isSelected;
 
     public Recipe(String name, String desc, List ingredients) throws IllegalArgumentException {
-        if (desc == null) desc = "";
-
-        this.id = UNSET_ID;
-        this.name = name;
-        this.desc = desc;
-        this.ingredients = ingredients;
-
-        //   setDirections(ingredients);
+        if (desc == null) {
+            desc = "";
+        }
 
         if (tags == null) {
             this.tags = new ArrayList<>();
         }
 
+        this.id = UNSET_ID;
+        this.name = name;
+        this.desc = desc;
+        this.ingredients = ingredients;
     }
 
     public Recipe(String name, String desc, List ingredients, String tags) throws IllegalArgumentException {
@@ -77,6 +71,7 @@ public class Recipe implements Serializable {
 
     public void setTags(String tags) {
         this.tags = new ArrayList<>();
+
         if (tags != null && !tags.isEmpty()) {
             String[] tempTags = tags.split(",");
 
@@ -84,12 +79,12 @@ public class Recipe implements Serializable {
                 tempTags[i] = tempTags[i].trim();
                 if (!tempTags[i].equals("")) {
                     this.tags.add("" + tempTags[i]);
-
                 }
             }
         }
     }
 
+    //for handling db operation regarding splitting tags
     public void setTags(String[] tags) {
         this.tags = new ArrayList<>();
         if (tags != null) {
@@ -106,15 +101,6 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void changeSelection(boolean selection) {
-        isSelected = selection;
-    }
-
-
     public String getImageUri() {
         return imageUri;
     }
@@ -122,39 +108,6 @@ public class Recipe implements Serializable {
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
     }
-
-    /*
-    public int getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getDesc() {
-        return this.desc;
-    }
-
-    public String[] getIngredients() {
-        return this.ingredients;
-    }
-
-    public String[] getTags() {
-        return this.tags;
-    }
-
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + desc + '\'' +
-                ", directions=" + ingredients +
-                ", tags=" + tags +
-                '}';
-    }
-
-     */
 }
 
 

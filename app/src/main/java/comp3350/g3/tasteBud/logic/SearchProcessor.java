@@ -13,7 +13,7 @@ public class SearchProcessor {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-    public SearchProcessor(IRecipeDB newRecipeDB) {recipeDB = newRecipeDB;}
+    public SearchProcessor(IRecipeDB newRecipeDB) { recipeDB = newRecipeDB; }
 
     public List<Recipe> searchResults(String text) {
         List<Recipe> results = recipeDB.getAllRecipes();
