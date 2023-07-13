@@ -5,6 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 public class RecipeTest {
@@ -12,7 +15,7 @@ public class RecipeTest {
     String recipeName = "Fried Chicken";
     String recipeDesc = "Combine dry ingredients. Combine wet ingredients to make a batter. Heat oil to 350 degrees. Dredge chicken and fry for 10 minutes.";
     String[] recipeIngredients = {"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"};
-    String[] recipeTags = {"Dinner", "Fried"};
+    String recipeTags = "Dinner, Fried";
 
     @Before
     public void intro() {
@@ -22,30 +25,31 @@ public class RecipeTest {
     public void testCreation() {
         // Tests if constructor works
         Recipe recipe = new Recipe(
-                recipeId,
                 recipeName,
                 recipeDesc,
-                recipeIngredients,
-                recipeTags
+                Arrays.asList(recipeIngredients),
+                recipeTags,
+                ""
         );
+        recipe.setId(recipeId);
 
         assertEquals(recipeId, recipe.getId());
         assertEquals(recipeName, recipe.getName());
         assertEquals(recipeDesc, recipe.getDesc());
         // New arrays to see if constructor copied parameter arrays properly
-        assertArrayEquals(new String[]{"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"}, recipe.getIngredients());
-        assertArrayEquals(new String[]{"Dinner", "Fried"}, recipe.getTags());
+        assertArrayEquals(new String[]{"Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"}, recipe.getIngredients().toArray());
+        assertArrayEquals(new String[]{"Dinner", "Fried"}, recipe.getTags().toArray());
     }
 
     @Test
     public void testDefaultConstructor() {
         // Tests if alternative constructor with a default id works
         Recipe recipe = new Recipe(
-                recipeId,
                 recipeName,
                 recipeDesc,
-                recipeIngredients,
-                recipeTags
+                Collections.singletonList(recipeIngredients),
+                recipeTags,
+                ""
         );
 
         // This tests if an object is given the default ID (-1) if not specified an ID
@@ -58,14 +62,14 @@ public class RecipeTest {
         String[] recipeIngredientsEmpty = {};
         // Tests if constructor works
         Recipe recipe = new Recipe(
-                recipeId,
                 recipeName,
                 recipeDesc,
-                recipeIngredientsEmpty,
+                Collections.singletonList(recipeIngredientsEmpty),
                 recipeTags
         );
+        recipe.setId(recipeId);
 
-        assertTrue(recipe.getIngredients().length == 0);
+        assertTrue(recipe.getIngredients().size() == 0);
     }
 
     @Test
@@ -75,14 +79,14 @@ public class RecipeTest {
 
         // Tests if constructor works
         Recipe recipe = new Recipe(
-                recipeId,
                 recipeName,
                 recipeDesc,
-                recipeIngredients,
-                recipeTagsEmpty
+                Collections.singletonList(recipeIngredients),
+                ""
         );
+        recipe.setId(recipeId);
 
-        assertTrue(recipe.getTags().length == 0);
+        assertTrue(recipe.getTags().size() == 0);
     }
 
     @After

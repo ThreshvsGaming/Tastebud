@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 import comp3350.g3.tasteBud.dataTest.RecipeStubTest;
 import comp3350.g3.tasteBud.logicTest.RecipeProcessorTest;
+import comp3350.g3.tasteBud.logicTest.RecipeValidatorTest;
 import comp3350.g3.tasteBud.logicTest.SearchProcessorTest;
 
 @RunWith(Suite.class)
@@ -12,7 +13,8 @@ import comp3350.g3.tasteBud.logicTest.SearchProcessorTest;
         {
                 RecipeStubTest.class,
                 SearchProcessorTest.class,
-                RecipeProcessorTest.class
+                RecipeProcessorTest.class,
+                RecipeValidatorTest.class
         }
 )
 public class AllTests {

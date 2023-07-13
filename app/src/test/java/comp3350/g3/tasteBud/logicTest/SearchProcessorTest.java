@@ -4,7 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 import comp3350.g3.tasteBud.data.RecipeStub;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
@@ -33,7 +35,7 @@ public class SearchProcessorTest {
         //Does a generic search of chicken
         SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
-        ArrayList<Recipe> searchResults = searchProcessor.searchResults("cHicKeN");
+        List<Recipe> searchResults = searchProcessor.searchResults("cHicKeN");
 
         //Searching for "cHicKN" will result in 2 recipes: Chicken Adobo and Fried Chicken
         assertTrue(searchResults.size() == 2);
@@ -59,7 +61,7 @@ public class SearchProcessorTest {
         SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         //Checks one way to query the search
-        ArrayList<Recipe> searchResults = searchProcessor.searchResults("KacChi BIRYANI");
+        List<Recipe> searchResults = searchProcessor.searchResults("KacChi BIRYANI");
 
         assertTrue(searchResults.size() == 1);
         Recipe recipe1 = searchResults.get(0);
@@ -76,17 +78,18 @@ public class SearchProcessorTest {
     public void testSearchNewRecipes() {
         SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
-        ArrayList<Recipe> searchResults = searchProcessor.searchResults("Test Recipe");
+        List<Recipe> searchResults = searchProcessor.searchResults("Test Recipe");
 
         //Checks if Test Recipe is not in the search
         assertTrue(searchResults.size() == 0);
 
+
+
         Recipe newRecipe = new Recipe(
-                5,
                 "Test Recipe",
                 "Test Description",
-                new String[]{"Ingredient1", "Ingredient2"},
-                new String[]{"Tag1", "Tag2"}
+                Arrays.asList("Ingredient1", "Ingredient2"),
+                "test"
         );
 
         recipeStub.addRecipe(newRecipe);
@@ -105,7 +108,7 @@ public class SearchProcessorTest {
         SearchProcessor searchProcessor = new SearchProcessor(recipeStub);
 
         //Make empty query doesn't filter the list
-        ArrayList<Recipe> searchResults = searchProcessor.searchResults("");
+        List<Recipe> searchResults = searchProcessor.searchResults("");
 
         assertTrue(searchResults.size() == 4);
 
