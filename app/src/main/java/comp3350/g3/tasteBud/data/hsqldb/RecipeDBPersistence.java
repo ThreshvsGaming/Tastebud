@@ -14,24 +14,15 @@ import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeDBPersistence implements IRecipeDB {
     private final String dbPath;
-    private final String dbType;
 
     public RecipeDBPersistence(final String dbPath) {
         this.dbPath = dbPath;
-        this.dbType = "file";
     }
 
 
     public boolean addRecipe(Recipe recipe) {
         try (final Connection c = connection()) {
-
-            // Looking for the ID which is unused
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM RECIPES ORDER BY ID");
-            int newID = 0;
-            while (rs.next()) {
-                newID++;
-            }
+            int newID = getNextID(c); // Get the unused ID
             recipe.setId(newID);
 
             // Add recipe
@@ -124,7 +115,7 @@ public class RecipeDBPersistence implements IRecipeDB {
     }
 
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:" + dbType + ":" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     private Recipe fromResultSet(final ResultSet rs) throws SQLException {
@@ -147,5 +138,16 @@ public class RecipeDBPersistence implements IRecipeDB {
         } catch (IllegalArgumentException e) {
             return null;
         }
+    }
+    private int getNextID(Connection connection) throws SQLException {
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery("SELECT MAX(ID) FROM RECIPES");
+        int newID = 1;
+        if (rs.next()) {
+            newID = rs.getInt(1) + 1;
+        }
+        rs.close();
+        st.close();
+        return newID;
     }
 }
