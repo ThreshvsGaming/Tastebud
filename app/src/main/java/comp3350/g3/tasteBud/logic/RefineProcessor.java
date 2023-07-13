@@ -21,11 +21,14 @@ public class RefineProcessor {
 
     public String[] constructSelectedTags(String tagList)
     {
+        String[] results = new String[0];
         if(tagList != null && tagList.length() > 0) {
-            return tagList.split("[,]");
+            results = tagList.split("[,]");
+            for(int i = 0 ; i < results.length ; i++){
+                results[i] = results[i].trim();
+            }
         }
-
-        return new String[0];
+        return results;
     }
 
     public String[] getTagList() {

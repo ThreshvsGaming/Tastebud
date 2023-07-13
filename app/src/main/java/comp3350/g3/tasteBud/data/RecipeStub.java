@@ -20,7 +20,7 @@ public class RecipeStub implements IRecipeDB {
         ArrayList<String> recipe2ingredients = new ArrayList<>(Arrays.asList("Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"));
         String recipe2tags = "Lunch, Dinner, Filipino";
         ArrayList<String> recipe3ingredients = new ArrayList<>(Arrays.asList("Basmati rice", "Marinated lamb", "Yogurt", "Onions", "Ginger", "Garlic", "Green chilies", "Saffron", "Ghee", "Whole spices"));
-        String recipe3tags = "Dinner, Indian";
+        String recipe3tags = "Dinner,Indian";
         ArrayList<String> recipe4ingredients = new ArrayList<>(Arrays.asList("Calamari", "Flour", "Cornmeal", "Paprika", "Salt", "Pepper", "Garlic powder", "Egg", "Milk", "Oil"));
         String recipe4tags = "Appetizer, Seafood, Fried";
         Recipe recipe1 = new Recipe(
