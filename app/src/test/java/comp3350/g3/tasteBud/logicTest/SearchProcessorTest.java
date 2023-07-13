@@ -113,10 +113,28 @@ public class SearchProcessorTest {
     }
     @Test
     public void testSearchAndTag(){
+        String[] tags = {"Indian", "Dinner"};
+
+        List<Recipe> searchResults = searchProcessor.searchResultsWithTag(tags, "");
+
+        System.out.println(searchResults.size());
+        assertTrue(searchResults.size() == 3);
+
+        searchResults = searchProcessor.searchResultsWithTag(tags, "Biryani");
+
+        assertTrue(searchResults.size() == 1);
+        assertTrue(searchResults.get(0).getName() == "Kacchi Biryani");
+
+        tags = new String[]{"Tag Doesn't exist", "Tag Doesn't exist 2"};
+
+        searchResults = searchProcessor.searchResultsWithTag(tags, "");
+
+        assertTrue(searchResults.size() == 0);
 
     }
     @After
     public void end() {
+
         System.out.println("Finish Test on SearchProcessor");
     }
 }
