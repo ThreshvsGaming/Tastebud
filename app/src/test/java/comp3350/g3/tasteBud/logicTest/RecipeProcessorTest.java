@@ -28,13 +28,13 @@ public class RecipeProcessorTest {
 
     @Before
     public void intro() {
+        testStub.initRecipeDatabase();
         System.out.println("Conducting test of the recipe processor...");
     }
 
     @Test
     public void testAdding() {
         // Tests that the processor adds to the database
-        testStub.initRecipeDatabase();
         int checkSize = testStub.getAllRecipes().size();
 
         recipeProcessor.addRecipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
@@ -49,6 +49,26 @@ public class RecipeProcessorTest {
         assertEquals(storedRecipe.getDesc(), recipeDesc);
         assertArrayEquals(storedRecipe.getIngredients().toArray(), recipeIngredientsArray);
         assertArrayEquals(storedRecipe.getTags().toArray(), recipeTagsArray);
+    }
+
+    @Test
+    public void testDeleting() {
+        // Tests that the processor deletes recipes from database
+        Recipe recipe = new Recipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
+        recipe.setId(9);
+        testStub.addRecipe(recipe);
+        int checkSize = testStub.getAllRecipes().size();
+
+        recipeProcessor.deleteRecipe(recipe.getId());
+
+        // Asserts that the size of database changed
+        assertEquals(testStub.getAllRecipes().size(), checkSize - 1);
+
+        // Asserts that the recipe was created properly
+        for(Recipe r : testStub.getAllRecipes())
+        {
+            assertTrue(r.getId() != recipe.getId());
+        }
     }
 
     @After
