@@ -47,7 +47,10 @@ public class RecipeStub implements IRecipeDB {
                 recipe4ingredients,
                 recipe4tags
         );
-
+        recipe1.setId(1);
+        recipe2.setId(2);
+        recipe3.setId(3);
+        recipe4.setId(4);
 
         storedRecipes = new ArrayList<>();
         storedRecipes.add(recipe1);
@@ -62,7 +65,15 @@ public class RecipeStub implements IRecipeDB {
     }
     @Override
     public Recipe getRecipe(int id) {
-        return null;
+        Recipe result = null;
+        for(Recipe r: storedRecipes){
+            if(r.getId() == id)
+            {
+                result = r;
+                break;
+            }
+        }
+        return result;
     }
 
     public ArrayList<Recipe> getAllRecipes() {
@@ -70,12 +81,25 @@ public class RecipeStub implements IRecipeDB {
     }
     @Override
     public void deleteRecipe(int id) {
-
+        for(Recipe r: storedRecipes){
+            if(r.getId() == id)
+            {
+                storedRecipes.remove(r);
+                break;
+            }
+        }
     }
 
     @Override
     public void updateRecipe(Recipe recipe) {
-
+        for(Recipe r: storedRecipes){
+            if(r.getId() == recipe.getId())
+            {
+                storedRecipes.remove(r);
+                storedRecipes.add(recipe);
+                break;
+            }
+        }
     }
 
 
