@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -37,7 +38,7 @@ public class RecipeProcessorTest {
         // Tests that the processor adds to the database
         int checkSize = testStub.getAllRecipes().size();
 
-        recipeProcessor.addRecipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
+        recipeProcessor.addRecipe(recipeName, recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
 
         // Asserts that the size of database changed
         assertEquals(checkSize + 1, testStub.getAllRecipes().size());
@@ -54,7 +55,7 @@ public class RecipeProcessorTest {
     @Test
     public void testDeleting() {
         // Tests that the processor deletes recipes from database
-        Recipe recipe = new Recipe(recipeName, recipeDesc, Arrays.asList(recipeIngredients.split(",")), recipeTags, "");
+        Recipe recipe = new Recipe(recipeName, recipeDesc, Arrays.asList(Arrays.asList(recipeIngredientsArray)), recipeTags, "");
         testStub.addRecipe(recipe);
         int checkSize = testStub.getAllRecipes().size();
 
@@ -67,6 +68,47 @@ public class RecipeProcessorTest {
         for(Recipe r : testStub.getAllRecipes())
         {
             assertTrue(r.getId() != recipe.getId());
+        }
+    }
+
+    @Test
+    public void testUpdating() {
+        Recipe recipe = new Recipe(recipeName, recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
+        testStub.addRecipe(recipe);
+
+        recipeProcessor.updateRecipe(recipe.getId(), "Updated", "Updated", Arrays.asList(recipeIngredientsArray), recipeTags, "");
+
+        // Tests that the name was updated
+        assertTrue(testStub.getRecipe(recipe.getId()).getName().equals("Updated"));
+    }
+
+    @Test
+    public void testDeleteList() {
+        Recipe recipe1 = new Recipe("recipe1", recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
+        Recipe recipe2 = new Recipe("recipe2", recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
+        Recipe recipe3 = new Recipe("recipe3", recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
+        Recipe recipe4 = new Recipe("recipe4", recipeDesc, Arrays.asList(recipeIngredientsArray), recipeTags, "");
+
+        testStub.addRecipe(recipe1);
+        testStub.addRecipe(recipe2);
+        testStub.addRecipe(recipe3);
+        testStub.addRecipe(recipe4);
+
+        ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+
+        recipeList.add(recipe1);
+        recipeList.add(recipe2);
+        recipeList.add(recipe3);
+        recipeList.add(recipe4);
+
+        recipeProcessor.deleteListOfRecipe(recipeList);
+
+        // Tests if list is deleted from the stub
+        for (Recipe r : testStub.getAllRecipes()) {
+            // this test runs n^2 deal with it B)
+            for (int i = 0; i < 4; i++) {
+                assertTrue(r.getId() != recipeList.get(i).getId());
+            }
         }
     }
 
