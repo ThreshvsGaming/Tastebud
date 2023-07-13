@@ -71,7 +71,6 @@ public class RecipeStubTest {
                 Arrays.asList("Ingredient1", "Ingredient2"),
                 "Tag1, Tag2"
         );
-        newRecipe.setId(5);
 
         // Add the new recipe to the stored recipes list
         recipeStub.addRecipe(newRecipe);
