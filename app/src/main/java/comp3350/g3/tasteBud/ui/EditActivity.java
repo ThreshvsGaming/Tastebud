@@ -126,7 +126,9 @@ public class EditActivity extends FragmentActivity {
         recipeId = recipe.getId();
         recipeImageUri = recipe.getImageUri();
 
-        previewRecipeImage.setImageURI(Uri.parse(recipe.getImageUri()));
+        if (recipe.getImageUri() != null) {
+            previewRecipeImage.setImageURI(Uri.parse(recipe.getImageUri()));
+        }
     }
 
     private void initializeRecipeTags() {
