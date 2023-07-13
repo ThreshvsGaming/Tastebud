@@ -1,6 +1,7 @@
 package comp3350.g3.tasteBud.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,13 +15,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.logic.ImageProcessor;
 import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.logic.RecipeValidator;
@@ -49,6 +57,8 @@ public class EditActivity extends FragmentActivity {
     private RecipeValidator recipeValidator;
     private ValidationStatusSetter validationStatusSetter;
 
+    private ImageProcessor imageProcessor;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +79,7 @@ public class EditActivity extends FragmentActivity {
 
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
         recipeValidator = new RecipeValidator();
+        imageProcessor = new ImageProcessor();
     }
 
     public void insertRecipe(String validationError) {
@@ -112,12 +123,41 @@ public class EditActivity extends FragmentActivity {
         previewRecipeImage.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            CreateActivity createActivity = new CreateActivity();
-            createActivity.mGetContent.launch(intent);
+//            CreateActivity createActivity = new CreateActivity();
+//            createActivity.mGetContent.launch(intent);
+            mGetContent.launch(intent);
         });
 
         findViewById(R.id.returnButton).setOnClickListener(v -> finish());
     }
+
+
+
+    public final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    try {
+                        Intent data = result.getData();
+                        assert data != null;
+
+                        // For moving image info to phone in-memory
+                        Uri selectedImage = data.getData();
+                        InputStream is = this.getContentResolver().openInputStream(selectedImage);
+
+                        File saveDirectory = Objects.requireNonNull(this).getFilesDir();
+
+                        Uri fileUri = imageProcessor.buildImageUri(saveDirectory, is);
+
+                        previewRecipeImage.setImageURI(fileUri);
+
+                        recipeImageUri = fileUri.toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
     private void initializeRecipe() {
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
