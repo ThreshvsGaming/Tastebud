@@ -18,6 +18,8 @@ import java.nio.file.Files;
 
 import comp3350.g3.tasteBud.logic.ImageProcessor;
 
+
+@SuppressWarnings("unchecked")
 @Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner.class)
 public class ImageProcessorTest {
