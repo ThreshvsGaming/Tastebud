@@ -11,9 +11,9 @@ public class UtilitiesForDB {
 
 
     public static String encoding(List<String> stringList) {
-        if (stringList == null) {
-            throw new IllegalArgumentException("String list must not be null");
-        }
+//        if (stringList == null) {
+//            throw new IllegalArgumentException("String list must not be null");
+//        }
 
         StringBuilder sb = new StringBuilder();
 

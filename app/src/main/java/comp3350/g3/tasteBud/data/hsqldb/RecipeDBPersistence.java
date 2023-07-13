@@ -23,7 +23,6 @@ public class RecipeDBPersistence implements IRecipeDB {
 
 
     public boolean addRecipe(Recipe recipe) {
-        if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
         try (final Connection c = connection()) {
 
             // Looking for the ID which is unused
