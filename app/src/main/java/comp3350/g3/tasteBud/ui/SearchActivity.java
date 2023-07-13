@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Messages;
 import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.logic.RefineProcessor;
@@ -81,23 +80,20 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         List<Recipe> list;
         String[] tags = refineProcessor.constructSelectedTags(tagList);
 
-        if(tags.length == 0){
+        if (tags.length == 0) {
             list = searchProcessor.searchResults(currentSearchQuery);
-        }
-        else {
+        } else {
             list = searchProcessor.searchResultsWithTag(tags, currentSearchQuery);
         }
 
         madapter.setNewData(list);
     }
 
-    public void onClickListItem(int position)
-    {
-        startActivity(new Intent(getActivity(),DetailActivity.class).putExtra("bean",madapter.getData().get(position)));
+    public void onClickListItem(int position) {
+        startActivity(new Intent(getActivity(), DetailActivity.class).putExtra("bean", madapter.getData().get(position)));
     }
 
-    public void onHoldListItem(int position)
-    {
+    public void onHoldListItem(int position) {
         deleteLayout.setVisibility(View.VISIBLE);
         searchMenu.setVisibility(View.GONE);
     }
@@ -111,7 +107,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
     public void initializeTagList() {
         Bundle bundle = getActivity().getIntent().getExtras();
 
-        if(bundle != null) {
+        if (bundle != null) {
             tagList = bundle.getString(TagListKeySingleton.getInstance().GetTagListKey());
         }
     }

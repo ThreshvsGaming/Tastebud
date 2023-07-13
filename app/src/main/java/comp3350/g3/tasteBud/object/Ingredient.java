@@ -7,7 +7,7 @@ public class Ingredient implements Serializable {
     private String name;
 
     public Ingredient(String[] data) {
-            this.name = data[0];
+        this.name = data[0];
     }
 
     public String getName() {

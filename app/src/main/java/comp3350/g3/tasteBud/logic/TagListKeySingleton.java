@@ -2,8 +2,14 @@ package comp3350.g3.tasteBud.logic;
 
 public class TagListKeySingleton {
     private String tagListKey = "tagList";
-    public String GetTagListKey() { return tagListKey; }
+
+    public String GetTagListKey() {
+        return tagListKey;
+    }
 
     private static final TagListKeySingleton tagListKeySingleton = new TagListKeySingleton();
-    public static TagListKeySingleton getInstance() { return tagListKeySingleton; }
+
+    public static TagListKeySingleton getInstance() {
+        return tagListKeySingleton;
+    }
 }

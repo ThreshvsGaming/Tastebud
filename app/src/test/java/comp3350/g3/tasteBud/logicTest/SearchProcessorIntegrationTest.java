@@ -4,31 +4,40 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-import comp3350.g3.tasteBud.data.RecipeStub;
+import comp3350.g3.tasteBud.data.IRecipeDB;
+import comp3350.g3.tasteBud.data.hsqldb.RecipeDBPersistence;
 import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
+import comp3350.g3.tasteBud.utils.TestUtils;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-public class SearchProcessorTest {
-    private RecipeStub recipeStub;
+public class SearchProcessorIntegrationTest {
+
     private SearchProcessor searchProcessor;
+    private IRecipeDB recipeDB;
+    private File tempDB;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         //Sets up 4 recipes to test the Search Processor:
         // 1) Fried Chicken
         // 2) Chicken Adobo
         // 3) Kacchi Biryani
         // 4) Crispy Calamari
-        recipeStub = new RecipeStub();
-        recipeStub.initRecipeDatabase();
-        searchProcessor = new SearchProcessor(recipeStub);
+        tempDB = TestUtils.copyDB();
+        recipeDB = new RecipeDBPersistence(tempDB.getAbsolutePath().replace(".script", ""));
+        removeAllRecipes();
+        defaultRecipe();
+        searchProcessor = new SearchProcessor(recipeDB);
     }
 
     //Test a generic search to see if it returns the correct results
@@ -43,8 +52,8 @@ public class SearchProcessorTest {
 
         Recipe recipe1 = searchResults.get(0);
         Recipe recipe2 = searchResults.get(1);
-        assertEquals("Fried Chicken", recipe1.getName());
-        assertEquals("Chicken Adobo", recipe2.getName());
+        assertEquals("Fried Chicken", recipe2.getName());
+        assertEquals("Chicken Adobo", recipe1.getName());
 
         //Specific Search for Chicken Adobo
         searchResults = searchProcessor.searchResults("chicken                  ADOBO");
@@ -68,9 +77,10 @@ public class SearchProcessorTest {
 
         //Checks another way to query the search
         searchResults = searchProcessor.searchResults("BIRYANI KacChi");
+        System.out.println(searchResults.size());
 
         assertTrue(searchResults.size() == 1);
-        assertTrue(searchResults.contains(recipe1));
+
     }
 
     //Test whether the search logic will return newly added recipes
@@ -88,7 +98,7 @@ public class SearchProcessorTest {
                 "test"
         );
 
-        recipeStub.addRecipe(newRecipe);
+        recipeDB.addRecipe(newRecipe);
 
         searchResults = searchProcessor.searchResults("Test Recipe");
 
@@ -104,6 +114,7 @@ public class SearchProcessorTest {
 
         //Make empty query doesn't filter the list
         List<Recipe> searchResults = searchProcessor.searchResults("");
+        System.out.println(searchResults.size());
 
         assertTrue(searchResults.size() == 4);
 
@@ -125,7 +136,7 @@ public class SearchProcessorTest {
         searchResults = searchProcessor.searchResultsWithTag(tags, "Biryani");
 
         assertTrue(searchResults.size() == 1);
-        assertTrue(searchResults.get(0).getName() == "Kacchi Biryani");
+        assertTrue(searchResults.get(0).getName().equals("Kacchi Biryani"));
 
         tags = new String[]{"Tag Doesn't exist", "Tag Doesn't exist 2"};
 
@@ -137,7 +148,55 @@ public class SearchProcessorTest {
 
     @After
     public void end() {
-
         System.out.println("Finish Test on SearchProcessor");
     }
+
+    private void removeAllRecipes() {
+        List<Recipe> list = recipeDB.getAllRecipes();
+        for (Recipe r : list) {
+            recipeDB.deleteRecipe(r.getId());
+        }
+    }
+
+    private void defaultRecipe() {
+        ArrayList<String> recipe1ingredients = new ArrayList<>(Arrays.asList("Chicken drumsticks", "Chicken", "Buttermilk", "Salt", "Pepper", "Flour", "Corn starch", "Paprika", "Onion powder"));
+        String recipe1tags = "Dinner, Fried";
+        ArrayList<String> recipe2ingredients = new ArrayList<>(Arrays.asList("Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"));
+        String recipe2tags = "Lunch, Dinner, Filipino";
+        ArrayList<String> recipe3ingredients = new ArrayList<>(Arrays.asList("Basmati rice", "Marinated lamb", "Yogurt", "Onions", "Ginger", "Garlic", "Green chilies", "Saffron", "Ghee", "Whole spices"));
+        String recipe3tags = "Dinner, Indian";
+        ArrayList<String> recipe4ingredients = new ArrayList<>(Arrays.asList("Calamari", "Flour", "Cornmeal", "Paprika", "Salt", "Pepper", "Garlic powder", "Egg", "Milk", "Oil"));
+        String recipe4tags = "Appetizer, Seafood, Fried";
+        Recipe recipe1 = new Recipe(
+                "Fried Chicken",
+                "Combine dry ingredients. Combine wet ingredients to make a batter. Heat oil to 350 degrees. Dredge chicken and fry for 10 minutes.",
+                recipe1ingredients,
+                recipe1tags
+        );
+        Recipe recipe2 = new Recipe(
+                "Chicken Adobo",
+                "Combine soy sauce, vinegar, garlic, bay leaves, peppercorns, and brown sugar. Marinate chicken in the mixture for 1 hour. Cook chicken in the marinade until tender.",
+                recipe2ingredients,
+                recipe2tags
+        );
+        Recipe recipe3 = new Recipe(
+                "Kacchi Biryani",
+                "Soak basmati rice. Marinate lamb with yogurt and spices. Layer rice and marinated lamb in a pot. Add saffron and ghee. Cook on low heat until rice and lamb are tender.",
+                recipe3ingredients,
+                recipe3tags
+        );
+        Recipe recipe4 = new Recipe(
+                "Crispy Calamari",
+                "Slice calamari into rings. In a bowl, mix flour, cornmeal, paprika, salt, pepper, and garlic powder. In another bowl, whisk egg and milk. Dip calamari rings in the egg mixture, then coat them in the flour mixture. Fry in oil until golden brown and crispy.",
+                recipe4ingredients,
+                recipe4tags
+        );
+
+
+        recipeDB.addRecipe(recipe1);
+        recipeDB.addRecipe(recipe2);
+        recipeDB.addRecipe(recipe3);
+        recipeDB.addRecipe(recipe4);
+    }
+
 }

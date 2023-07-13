@@ -15,13 +15,19 @@ public class RefineProcessor {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
-    public String[] constructSelectedTags(String tagList)
-    {
-        if(tagList != null && tagList.length() > 0) {
-            return tagList.split("[,]");
-        }
+    public RefineProcessor(IRecipeDB recipeDB) {
+        this.recipeDB = recipeDB;
+    }
 
-        return new String[0];
+    public String[] constructSelectedTags(String tagList) {
+        String[] results = new String[0];
+        if (tagList != null && tagList.length() > 0) {
+            results = tagList.split("[,]");
+            for (int i = 0; i < results.length; i++) {
+                results[i] = results[i].trim();
+            }
+        }
+        return results;
     }
 
     public String[] getTagList() {
@@ -29,10 +35,10 @@ public class RefineProcessor {
 
         List<Recipe> recipes = recipeDB.getAllRecipes();
 
-        for(Recipe recipe: recipes) {
-            ArrayList<String> currTagList = recipe.getTags();
+        for (Recipe recipe : recipes) {
+            List<String> currTagList = recipe.getTags();
 
-            for(String tag: currTagList){
+            for (String tag : currTagList) {
                 tagList.add(tag);
             }
         }

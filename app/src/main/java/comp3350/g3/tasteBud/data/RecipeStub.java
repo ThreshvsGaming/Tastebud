@@ -7,8 +7,8 @@ import comp3350.g3.tasteBud.object.Recipe;
 public class RecipeStub implements IRecipeDB {
     private static ArrayList<Recipe> storedRecipes;
 
-    public RecipeStub(){
-        if(storedRecipes == null){
+    public RecipeStub() {
+        if (storedRecipes == null) {
             initRecipeDatabase();
         }
     }
@@ -20,7 +20,7 @@ public class RecipeStub implements IRecipeDB {
         ArrayList<String> recipe2ingredients = new ArrayList<>(Arrays.asList("Chicken thighs", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Peppercorns", "Brown sugar"));
         String recipe2tags = "Lunch, Dinner, Filipino";
         ArrayList<String> recipe3ingredients = new ArrayList<>(Arrays.asList("Basmati rice", "Marinated lamb", "Yogurt", "Onions", "Ginger", "Garlic", "Green chilies", "Saffron", "Ghee", "Whole spices"));
-        String recipe3tags = "Dinner, Indian";
+        String recipe3tags = "Dinner,Indian";
         ArrayList<String> recipe4ingredients = new ArrayList<>(Arrays.asList("Calamari", "Flour", "Cornmeal", "Paprika", "Salt", "Pepper", "Garlic powder", "Egg", "Milk", "Oil"));
         String recipe4tags = "Appetizer, Seafood, Fried";
         Recipe recipe1 = new Recipe(
@@ -47,7 +47,10 @@ public class RecipeStub implements IRecipeDB {
                 recipe4ingredients,
                 recipe4tags
         );
-
+        recipe1.setId(1);
+        recipe2.setId(2);
+        recipe3.setId(3);
+        recipe4.setId(4);
 
         storedRecipes = new ArrayList<>();
         storedRecipes.add(recipe1);
@@ -57,25 +60,61 @@ public class RecipeStub implements IRecipeDB {
     }
 
     public boolean addRecipe(Recipe newRecipe) {
-        storedRecipes.add(newRecipe);
-        return false;
+        final int NUM_UNIQUE_IDS = 1000;
+        boolean pass = false;
+        if (storedRecipes.size() < NUM_UNIQUE_IDS) {
+            int newID = -1;
+            while (newID == -1) {
+                newID = (int) (Math.random() * NUM_UNIQUE_IDS);
+                for (Recipe r : storedRecipes) {
+                    if (newID == r.getId()) {
+                        newID = -1;
+                        break;
+                    }
+                }
+            }
+            newRecipe.setId(newID);
+            storedRecipes.add(newRecipe);
+            pass = true;
+        }
+        return pass;
     }
+
     @Override
     public Recipe getRecipe(int id) {
-        return null;
+        Recipe result = null;
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == id) {
+                result = r;
+                break;
+            }
+        }
+        return result;
     }
 
     public ArrayList<Recipe> getAllRecipes() {
         return storedRecipes;
     }
+
     @Override
     public void deleteRecipe(int id) {
-
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == id) {
+                storedRecipes.remove(r);
+                break;
+            }
+        }
     }
 
     @Override
     public void updateRecipe(Recipe recipe) {
-
+        for (Recipe r : storedRecipes) {
+            if (r.getId() == recipe.getId()) {
+                storedRecipes.remove(r);
+                storedRecipes.add(recipe);
+                break;
+            }
+        }
     }
 
 
