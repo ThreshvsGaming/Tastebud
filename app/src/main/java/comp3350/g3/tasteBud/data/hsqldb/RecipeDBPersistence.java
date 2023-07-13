@@ -30,7 +30,7 @@ public class RecipeDBPersistence implements IRecipeDB {
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM RECIPES ORDER BY ID");
             int newID = 0;
-            while (rs.next() && newID == rs.getInt("ID")) {
+            while (rs.next()) {
                 newID++;
             }
             recipe.setId(newID);
@@ -52,10 +52,9 @@ public class RecipeDBPersistence implements IRecipeDB {
 
 
     public Recipe getRecipe(int id) {
-        if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
+
         try (final Connection c = connection()) {
 
-            // find match by id, return null on empty result set
             final PreparedStatement st = c.prepareStatement("SELECT * FROM RECIPES WHERE ID=?");
             st.setInt(1, id);
             final ResultSet rs = st.executeQuery();
@@ -78,7 +77,6 @@ public class RecipeDBPersistence implements IRecipeDB {
         final ArrayList<Recipe> recipes = new ArrayList<>();
         try (final Connection c = connection()) {
 
-            // return all recipes in the result set
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM RECIPES ORDER BY NAME");
             while (rs.next()) {
@@ -97,10 +95,8 @@ public class RecipeDBPersistence implements IRecipeDB {
 
 
     public void deleteRecipe(int id) {
-        if (id < 0) throw new IllegalArgumentException("Recipe ID must be a non-negative integer.");
         try (final Connection c = connection()) {
 
-            // delete any recipe whose id matches passed value
             final PreparedStatement st = c.prepareStatement("DELETE FROM RECIPES WHERE ID=?");
             st.setInt(1, id);
             st.executeUpdate();
@@ -112,10 +108,8 @@ public class RecipeDBPersistence implements IRecipeDB {
 
 
     public void updateRecipe(Recipe recipe) {
-        if (recipe == null) throw new IllegalArgumentException("Recipe must not be null.");
         try (final Connection c = connection()) {
 
-            // update any recipe whose id matches the recipe id
             final PreparedStatement st = c.prepareStatement("UPDATE RECIPES SET NAME=?, DESC=?,  INGREDIENTS=?, TAGS=?, IMAGEPATH=? WHERE ID=?");
             st.setString(1, recipe.getName());
             st.setString(2, recipe.getDesc());
@@ -136,7 +130,6 @@ public class RecipeDBPersistence implements IRecipeDB {
 
     private Recipe fromResultSet(final ResultSet rs) throws SQLException {
 
-        // get all fields from database
         final int id = rs.getInt("ID");
         final String name = rs.getString("NAME");
         final String description = rs.getString("DESC");
@@ -145,7 +138,6 @@ public class RecipeDBPersistence implements IRecipeDB {
         String tags = rs.getString("TAGS");
         final String imagePath = rs.getString("IMAGEPATH");
 
-        // re-create recipe from constructor
         try {
             Recipe recipe = new Recipe(name, description, ingredients);
             // fill other fields

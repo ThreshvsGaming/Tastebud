@@ -75,13 +75,6 @@ public class Recipe implements Serializable {
 
         if (tags != null && !tags.isEmpty()) {
             String[] tempTags = tags.split(",");
-
-//            for (int i = 0; i < tempTags.length; i++) {
-//                tempTags[i] = tempTags[i].trim();
-//                if (!tempTags[i].equals("")) {
-//                    this.tags.add("" + tempTags[i]);
-//                }
-//            }
             for (String i : tempTags) {
                 i = i.trim();
                 if (!i.equals("")) {
@@ -95,12 +88,6 @@ public class Recipe implements Serializable {
     public void dbsetTags(String[] tags) {
         this.tags = new LinkedList<>();
         if (tags != null) {
-//            for (int i = 0; i < tags.length; i++) {
-//                tags[i] = tags[i].trim();
-//                if (!tags[i].equals("")) {
-//                    this.tags.add(tags[i]);
-//                }
-//            }
             for (String i : tags) {
                 i = i.trim();
                 if (!i.equals("")) {
