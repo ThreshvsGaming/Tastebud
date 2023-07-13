@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TableRow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +38,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
     private ImageView backButton, deleteButton, filterView;
     private String currentSearchQuery;
     public String tagList;
+    private TableRow searchMenu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +73,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
 
     public void disableDeleteMenu() {
         deleteLayout.setVisibility(View.GONE);
-        searchView.setVisibility(View.VISIBLE);
+        searchMenu.setVisibility(View.VISIBLE);
         madapter.offSelectionMode();
     }
 
@@ -97,7 +99,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
     public void onHoldListItem(int position)
     {
         deleteLayout.setVisibility(View.VISIBLE);
-        searchView.setVisibility(View.GONE);
+        searchMenu.setVisibility(View.GONE);
     }
 
     public void delete() {
@@ -121,6 +123,7 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         backButton = view.findViewById(R.id.ivBack);
         deleteButton = view.findViewById(R.id.delete);
         filterView = view.findViewById(R.id.ivFilterButton);
+        searchMenu = view.findViewById(R.id.searchMenu);
     }
 
     private void initializeListeners() {
