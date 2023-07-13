@@ -72,7 +72,7 @@ public class RefineProcessorIntegrationTest {
             recipeDB.addRecipe(recipe4);
 
 
-            String[] expectedTags = {"Cookies","Pasta","Asian","tag1", "tag2", "tag3", "tag4"};
+            String[] expectedTags = {"Filipino","Fried","test","Appetizer", "Dinner", "Seafood", "Indian", "Lunch"};
 
             String[] tagList = refineProcessor.getTagList();
 
