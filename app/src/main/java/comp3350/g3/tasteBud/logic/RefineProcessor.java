@@ -15,6 +15,10 @@ public class RefineProcessor {
         recipeDB = Services.getRecipeDB(isPersistence);
     }
 
+    public RefineProcessor (IRecipeDB recipeDB) {
+        this.recipeDB = recipeDB;
+    }
+
     public String[] constructSelectedTags(String tagList)
     {
         if(tagList != null && tagList.length() > 0) {
