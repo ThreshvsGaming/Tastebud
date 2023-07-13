@@ -59,6 +59,7 @@ public class MainActivity extends FragmentActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
 
@@ -82,6 +83,7 @@ public class MainActivity extends FragmentActivity {
             Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
+
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 
@@ -109,5 +111,4 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
-
 }

@@ -3,7 +3,6 @@ package comp3350.g3.tasteBud.object;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -21,28 +20,23 @@ import comp3350.g3.tasteBud.ui.IListInteraction;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//BaseQuickAdapter is a more powerful(simpler) tool for converting Recipes into a list
 public class HomePageAdapter extends BaseQuickAdapter<Recipe, HomePageAdapter.ViewHolder> {
-    //BaseQuickAdapter is a more powerful(simpler) tool for converting Recipes into a list
-
     private boolean selectionMode;
     private IListInteraction listInteraction;
-    private RecyclerView recycler;
     private ArrayList<Recipe> selectedItems;
-
     private Context context;
+    private ImageSetter imageSetter;
 
     public HomePageAdapter(Context context, IListInteraction listInteraction, RecyclerView recycler) {
         super(R.layout.view_recipe);
         this.context = context;
-        selectionMode = false;
+        this.selectionMode = false;
         this.listInteraction = listInteraction;
-        this.recycler = recycler;
+        this.imageSetter = new ImageSetter();
         this.selectedItems = new ArrayList<>();
         bindToRecyclerView(recycler);
     }
@@ -55,7 +49,6 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, HomePageAdapter.Vi
     @Override
     protected void convert(ViewHolder helper, Recipe recipe) {
         String tags = recipe.getTags().toString();
-        ;
         tags = tags.replace("[", "").replace("]", "");
 
         helper.setText(R.id.tvTitle, recipe.getName());
@@ -69,24 +62,7 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, HomePageAdapter.Vi
             helper.background.setBackgroundColor(Color.WHITE);
         }
 
-        //Handling image viewing
-        String imagePath = recipe.getImageUri();
-
-        if (imagePath != null && !imagePath.isEmpty()) {
-            int imageId = context.getResources().getIdentifier(imagePath, "drawable", context.getPackageName());
-
-            if (imageId != 0) {
-                // This image is a default image located in the drawable folder.
-                Glide.with(context).load(imageId).into(helper.img);
-            } else {
-                // This image is a user-picked one located in the device file system.
-                Glide.with(context).load(Uri.parse(imagePath)).into(helper.img);
-            }
-        } else {
-            // No image available, so a placeholder image.
-            helper.img.setImageResource(R.mipmap.recipedefault);
-        }
-
+        imageSetter.setImageResource(context, recipe, helper.img );
     }
 
 
@@ -180,5 +156,4 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, HomePageAdapter.Vi
 
         }
     }
-
 }

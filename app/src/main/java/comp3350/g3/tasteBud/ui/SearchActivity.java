@@ -2,7 +2,6 @@ package comp3350.g3.tasteBud.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,54 +50,16 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Grab Views from search_activity
-        searchView = view.findViewById(R.id.searchView);
-        recycler = view.findViewById(R.id.recycler);
-        deleteLayout = view.findViewById(R.id.deleteLayout);
-        backButton = view.findViewById(R.id.ivBack);
-        deleteButton = view.findViewById(R.id.delete);
+        initializeViewComponents(view);
+        initializeListeners();
 
         searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+        refineProcessor = new RefineProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
         madapter = new HomePageAdapter(getContext(), this, recycler);
 
-        refineProcessor = new RefineProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
-
         currentSearchQuery = "";
-
         searchView.clearFocus();
-        searchView.setOnClickListener(v -> searchView.setIconified(false));
-        //Enables a function that detects text changes in the Search View
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Filters recipes based on user input
-                currentSearchQuery = newText;
-                filterRecipeList();
-                return true;
-            }
-        });
-        backButton.setOnClickListener((view1) -> {
-            disableDeleteMenu();
-        });
-
-        deleteButton.setOnClickListener((view1) -> {
-            Messages.buildWarningDeleteDialogue(this.getContext(), "Are you sure you want to delete the following recipes?", this);
-        });
-
-        filterView = view.findViewById(R.id.ivFilterButton);
-        filterView.setOnClickListener(v -> {
-            tagList = null; //to remove current filter
-
-            Intent intent = new Intent(getActivity(), RefineActivity.class);
-            startActivity(intent);
-        });
-
     }
 
     @Override
@@ -151,5 +112,48 @@ public class SearchActivity extends Fragment implements IListInteraction, Delete
         if(bundle != null) {
             tagList = bundle.getString(TagListKeySingleton.getInstance().GetTagListKey());
         }
+    }
+
+    private void initializeViewComponents(View view) {
+        searchView = view.findViewById(R.id.searchView);
+        recycler = view.findViewById(R.id.recycler);
+        deleteLayout = view.findViewById(R.id.deleteLayout);
+        backButton = view.findViewById(R.id.ivBack);
+        deleteButton = view.findViewById(R.id.delete);
+        filterView = view.findViewById(R.id.ivFilterButton);
+    }
+
+    private void initializeListeners() {
+        searchView.setOnClickListener(v -> searchView.setIconified(false));
+        //Enables a function that detects text changes in the Search View
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Filters recipes based on user input
+                currentSearchQuery = newText;
+                filterRecipeList();
+                return true;
+            }
+        });
+
+        backButton.setOnClickListener((view1) -> {
+            disableDeleteMenu();
+        });
+
+        deleteButton.setOnClickListener((view1) -> {
+            Messages.buildWarningDeleteDialogue(this.getContext(), "Are you sure you want to delete the following recipes?", this);
+        });
+
+        filterView.setOnClickListener(v -> {
+            tagList = null; //to remove current filter
+
+            Intent intent = new Intent(getActivity(), RefineActivity.class);
+            startActivity(intent);
+        });
     }
 }

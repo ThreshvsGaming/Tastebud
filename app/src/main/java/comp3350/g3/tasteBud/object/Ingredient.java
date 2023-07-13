@@ -1,6 +1,5 @@
 package comp3350.g3.tasteBud.object;
 
-
 import java.io.Serializable;
 
 
@@ -9,7 +8,6 @@ public class Ingredient implements Serializable {
 
     public Ingredient(String[] data) {
             this.name = data[0];
-
     }
 
     public String getName() {

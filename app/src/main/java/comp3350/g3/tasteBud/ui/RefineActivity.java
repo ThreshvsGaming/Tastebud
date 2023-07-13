@@ -19,11 +19,11 @@ import comp3350.g3.tasteBud.logic.RefineProcessor;
 import comp3350.g3.tasteBud.logic.TagListKeySingleton;
 
 public class RefineActivity extends FragmentActivity {
-
     private TextView selectedTagText;
     private Button filterButton;
     private boolean[] selectedTags;
     private ArrayList<Integer> tagListChecks;
+    private String[] completeTagList;
     private RefineProcessor refineProcessor;
 
     @SuppressLint("MissingInflatedId")
@@ -34,43 +34,27 @@ public class RefineActivity extends FragmentActivity {
 
         refineProcessor = new RefineProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
-        String[] completeTagList = refineProcessor.getTagList();
+        initializeTagResource();
+
+        initializeViewComponents();
+        initializeListeners();
+    }
+
+    private void initializeTagResource() {
+        completeTagList = refineProcessor.getTagList();
         selectedTags = new boolean[completeTagList.length];
         tagListChecks = new ArrayList<>();
+    }
 
+    private void initializeViewComponents() {
         selectedTagText = findViewById(R.id.tagFilter);
         filterButton = findViewById(R.id.filterButton);
+    }
+
+    private void initializeListeners() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-        selectedTagText.setOnClickListener(view -> {
-            // Initialize alert dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(RefineActivity.this);
-
-            builder.setTitle("Select Tags");
-
-            builder.setCancelable(false);
-
-            builder.setMultiChoiceItems(completeTagList, selectedTags, (dialogInterface, index, checkBoxSelected) -> {
-                if (checkBoxSelected) {
-                    // Add position  in lang list
-                    tagListChecks.add(index);
-
-                    Collections.sort(tagListChecks);
-                } else {
-                    // Remove position from langList
-                    tagListChecks.remove(Integer.valueOf(index));
-                }
-            });
-
-            builder.setPositiveButton("OK", (dialogInterface, i) -> selectedTagText.setText(constructTextViewText(completeTagList).toString()));
-
-            builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
-
-            builder.setNeutralButton("Clear All", (dialogInterface, i) -> clearTagList());
-
-            // show dialog
-            builder.show();
-        });
+        selectedTagText.setOnClickListener(view -> builderBuilderComponent());
 
         filterButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -82,6 +66,36 @@ public class RefineActivity extends FragmentActivity {
 
     public String getTagList(){
         return selectedTagText.getText().toString();
+    }
+
+    private void builderBuilderComponent() {
+        // Initialize alert dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RefineActivity.this);
+
+        builder.setTitle("Select Tags");
+
+        builder.setCancelable(false);
+
+        builder.setMultiChoiceItems(completeTagList, selectedTags, (dialogInterface, index, checkBoxSelected) -> {
+            if (checkBoxSelected) {
+                // Add position  in lang list
+                tagListChecks.add(index);
+
+                Collections.sort(tagListChecks);
+            } else {
+                // Remove position from langList
+                tagListChecks.remove(Integer.valueOf(index));
+            }
+        });
+
+        builder.setPositiveButton("OK", (dialogInterface, i) -> selectedTagText.setText(constructTextViewText(completeTagList).toString()));
+
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+
+        builder.setNeutralButton("Clear All", (dialogInterface, i) -> clearTagList());
+
+        // show dialog
+        builder.show();
     }
 
     private StringBuilder constructTextViewText(String[] completeTagList){
