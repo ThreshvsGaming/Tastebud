@@ -30,7 +30,7 @@ public class RefineProcessor {
         List<Recipe> recipes = recipeDB.getAllRecipes();
 
         for(Recipe recipe: recipes) {
-            ArrayList<String> currTagList = recipe.getTags();
+            List<String> currTagList = recipe.getTags();
 
             for(String tag: currTagList){
                 tagList.add(tag);
