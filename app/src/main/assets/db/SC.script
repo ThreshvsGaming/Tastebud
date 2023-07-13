@@ -11,3 +11,7 @@ SET SCHEMA PUBLIC
 INSERT INTO RECIPES VALUES(0,'BLT Sandwich','Sandwich with bacon, lettuce, and tomatoes.','Bacon','sandwich','android.resource://comp3350.g3.tasteBud/drawable/bltsandwich')
 INSERT INTO RECIPES VALUES(1,'Garden Salad','Salad with lettuce, tomato, onion, cucumber, celery, and your favourite dressing.','Lettuce','salad','android.resource://comp3350.g3.tasteBud/drawable/gardensalad')
 INSERT INTO RECIPES VALUES(2,'Ramen','Super elaborate ramen.','Ramen','soup','android.resource://comp3350.g3.tasteBud/drawable/ramen')
+
+INSERT INTO RECIPES VALUES(0,'ChocolateCookies','These classic chocolate chip cookies are soft, chewy, and packed with gooey chocolate chips. They are a timeless treat that is loved by both kids and adults alike.','eggs','Cookies','android.resource://comp3350.g3.tasteBud/drawable/cookie')
+INSERT INTO RECIPES VALUES(1,'Spaghetti','Enjoy a classic Italian dish with this hearty and flavorful spaghetti Bolognese. The rich meat sauce pairs perfectly with al dente pasta for a satisfying meal.','spaghetti','Pasta','android.resource://comp3350.g3.tasteBud/drawable/spaghetti')
+INSERT INTO RECIPES VALUES(2,'TeriyakiChicken','This teriyaki chicken stir-fry is a quick and flavorful dish that combines tender chicken, crunchy vegetables, and a sticky-sweet teriyaki sauce. Serve it over steamed rice for a satisfying meal.','chicken','Asian','android.resource://comp3350.g3.tasteBud/drawable/teriyakichicken')
