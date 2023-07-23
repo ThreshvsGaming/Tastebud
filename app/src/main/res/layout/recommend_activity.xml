@@ -9,6 +9,28 @@
     android:orientation="vertical">
 
   <RelativeLayout
+      android:id="@+id/deleteLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:padding="@dimen/dp_15"
+        android:src="@mipmap/ic_back" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/baseline_delete_forever_24" />
+  </RelativeLayout>
+
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="102dp">
 
