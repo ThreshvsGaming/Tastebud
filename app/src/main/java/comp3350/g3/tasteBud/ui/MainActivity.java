@@ -47,7 +47,7 @@ public class MainActivity extends FragmentActivity {
         addFragment(new SearchActivity());
         llSearchButton.setOnClickListener(v -> addFragment(new SearchActivity()));
         llCreateButton.setOnClickListener(v -> addFragment(new CreateActivity()));
-        llRecommendButton.setOnClickListener(v -> addFragment(new ChefActivity()));
+        llRecommendButton.setOnClickListener(v -> addFragment(new RecommendActivity()));
     }
 
     private void addFragment(Fragment fragment) {

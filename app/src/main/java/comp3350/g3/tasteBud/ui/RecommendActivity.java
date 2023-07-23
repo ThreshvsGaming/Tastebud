@@ -1,14 +1,18 @@
 package comp3350.g3.tasteBud.ui;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,11 +20,14 @@ import java.util.Collections;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.PersistenceSingleton;
+import comp3350.g3.tasteBud.logic.RecipeProcessor;
+import comp3350.g3.tasteBud.logic.RecommendProcessor;
 import comp3350.g3.tasteBud.logic.RefineProcessor;
+import comp3350.g3.tasteBud.logic.SearchProcessor;
 import comp3350.g3.tasteBud.logic.TagListKeySingleton;
 import comp3350.g3.tasteBud.object.HomePageAdapter;
 
-public class RecommendActivity extends FragmentActivity {
+public class RecommendActivity extends Fragment implements IListInteraction {
     private RecyclerView recycler;
     private HomePageAdapter madapter;
     private TextView selectedRecommendText;
@@ -28,44 +35,47 @@ public class RecommendActivity extends FragmentActivity {
     private boolean[] selectedIngredients;
     private ArrayList<Integer> ingredientListChecks;
     private String[] completeIngredientList;
-    private RefineProcessor refineProcessor;
+    private RecommendProcessor recommendProcessor;
+    private SearchProcessor searchProcessor;
+    private RecipeProcessor recipeProcessor;
 
-    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.refine_activity);
-
-        refineProcessor = new RefineProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
-
-        initializeTagResource();
-
-        initializeViewComponents();
-        initializeListeners();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.recommend_activity, container, false);
     }
 
-    private void initializeTagResource() {
-        completeIngredientList = refineProcessor.getTagList();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        searchProcessor = new SearchProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+        recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+        recommendProcessor = new RecommendProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+
+        initializeIngredientResources();
+        initializeViewComponents(view);
+        initializeListeners();
+
+        madapter = new HomePageAdapter(getContext(), this, recycler);
+    }
+
+    private void initializeIngredientResources() {
+        completeIngredientList = recommendProcessor.getIngredientList();
         selectedIngredients = new boolean[completeIngredientList.length];
         ingredientListChecks = new ArrayList<>();
     }
 
-    private void initializeViewComponents() {
-        selectedRecommendText = findViewById(R.id.tagFilter);
-        recommendButton = findViewById(R.id.filterButton);
+    private void initializeViewComponents(View view) {
+        selectedRecommendText = view.findViewById(R.id.recommendFilter);
+        recommendButton = view.findViewById(R.id.recommendButton);
+        recycler = view.findViewById(R.id.recycler);
     }
 
     private void initializeListeners() {
-        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        selectedRecommendText.setOnClickListener(v -> builderBuilderComponent());
 
-        selectedRecommendText.setOnClickListener(view -> builderBuilderComponent());
-
-        recommendButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(TagListKeySingleton.getInstance().GetTagListKey(), getTagList());
-            startActivity(intent);
-            finish();
-        });
+        recommendButton.setOnClickListener(v -> showAssemblableRecipes());
     }
 
     public String getTagList(){
@@ -74,9 +84,9 @@ public class RecommendActivity extends FragmentActivity {
 
     private void builderBuilderComponent() {
         // Initialize alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(RecommendActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder.setTitle("Select Tags");
+        builder.setTitle("Select available ingredients");
 
         builder.setCancelable(false);
 
@@ -117,6 +127,7 @@ public class RecommendActivity extends FragmentActivity {
         return stringBuilder;
     }
 
+
     private void clearTagList() {
         for (int j = 0; j < selectedIngredients.length; j++) {
             // remove all selection
@@ -126,5 +137,21 @@ public class RecommendActivity extends FragmentActivity {
             // clear text view value
             selectedRecommendText.setText("");
         }
+    }
+
+    public void showAssemblableRecipes() {
+        String tagList = selectedRecommendText.getText().toString();
+
+        madapter.setNewData(recommendProcessor.searchAssemblableRecipes(tagList));
+    }
+
+    @Override
+    public void onClickListItem(int position) {
+
+    }
+
+    @Override
+    public void onHoldListItem(int position) {
+
     }
 }

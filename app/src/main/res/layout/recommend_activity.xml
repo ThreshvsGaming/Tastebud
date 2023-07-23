@@ -24,7 +24,7 @@
         android:contentDescription="backButton"
         android:drawableRight="@android:drawable/arrow_down_float"
         android:drawablePadding="16dp"
-        android:hint="Select ingredients"
+        android:hint="Select ingredients to get recommendations"
         android:padding="12dp" />
   </RelativeLayout>
 
