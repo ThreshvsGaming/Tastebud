@@ -22,6 +22,9 @@
             android:name=".ui.RefineActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.RecommendActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.EditActivity"
             android:exported="false" />
         <activity
