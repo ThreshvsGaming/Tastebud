@@ -19,4 +19,5 @@ public interface IRecipeDB {
 
     void updateRecipe(Recipe recipe);
 
+    void deleteRatings(int id);
 }

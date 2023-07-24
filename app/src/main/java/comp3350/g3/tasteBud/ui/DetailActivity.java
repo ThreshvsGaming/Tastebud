@@ -36,8 +36,6 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     private Ratings ratings;
     private ImageView recipeImage;
 
-    private TextView ratingText;
-
     private RatingBar recipeRatings;
 
     private RatingsProcessor ratingsProcessor;
@@ -46,6 +44,9 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Create a ratings processor to link to the logic layer
+        ratingsProcessor = new RatingsProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         //Connect with Layout File:"detail_activity"
         setContentView(R.layout.detail_activity);
@@ -65,14 +66,14 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
         //Create a ratings processor to link to the logic layer
-        ratingsProcessor = new RatingsProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+        // ratingsProcessor = new RatingsProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
 
     }
 
 
-
     public void delete() {
         recipeProcessor.deleteRecipe(recipe.getId());
+       // ratingsProcessor.deleteRating(recipe.getId());
         finish();
     }
 
@@ -97,7 +98,6 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeIngredients = findViewById(R.id.recipeIngredients);
         recipeDescription = findViewById(R.id.recipeDescription);
         recipeImage = findViewById(R.id.recipeImageDetail);
-        ratingText = findViewById(R.id.textViewRating);
         recipeRatings = findViewById(R.id.ratingBar);
     }
 
@@ -118,26 +118,26 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeRatings.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-               // Log.d("APP:", "Number of Stars: " + rating);
                 ratings.setRecipeRatings((int) rating);
                 initializeRecipeRatings();
             }
         });
-       // Log.d("APP:", "Number of Stars: " + recipeRatings.getRating());
+
     }
 
-    private void initializeRatings() {
-        ratings = new Ratings();
-        //if()
-       // Log.d("TAG", "initializeRatings: " +  ratingsProcessor.getRating(recipe.getId()));
-        //recipeRatings.setRating((float) ratingsProcessor.getRating(recipe.getId()));
-    }
 
     private void initializeRecipe() {
         //Create the instance of Recipe to get information of each recipe
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
         recipeTitle.setText(recipe.getName());
         recipeDescription.setText(recipe.getDesc());
+    }
+
+    private void initializeRatings() {
+        ratings = new Ratings();
+
+        //Initialize the rating for the UI if one exists for this recipe in the DB
+        recipeRatings.setRating((float) ratingsProcessor.getRating(recipe.getId()));
     }
 
     private void initializeRecipeTags() {
@@ -159,9 +159,11 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     }
 
 
-    private void initializeRecipeRatings () {
+    private void initializeRecipeRatings() {
+        //Send off the rating that the user inputted to ratingsprocessor to add to DB
         ratingsProcessor.addRatings(recipe.getId(), ratings);
-        Log.d("APP", "initializeRecipeRatings: " + (float)ratingsProcessor.getRating(recipe.getId()));
-        //recipeRatings.setNumStars(ratingsProcessor.getRating(recipe.getId()));
+
+        //And set the updated rating in the UI for it to be visible
+        recipeRatings.setRating((float) ratingsProcessor.getRating(recipe.getId()));
     }
 }

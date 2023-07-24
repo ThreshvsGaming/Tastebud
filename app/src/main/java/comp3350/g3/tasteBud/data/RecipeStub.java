@@ -81,7 +81,7 @@ public class RecipeStub implements IRecipeDB {
         return pass;
     }
 
-    // mock functions for now
+    // mock functions for now, needed in-place because of the Interface requirements
     public boolean addRatings(int recipeId, int recipeRatings) {
 
         return false;
@@ -91,6 +91,11 @@ public class RecipeStub implements IRecipeDB {
 
         return -1;
     }
+
+    public void deleteRatings(int id) {
+
+    }
+//////////
 
 
 

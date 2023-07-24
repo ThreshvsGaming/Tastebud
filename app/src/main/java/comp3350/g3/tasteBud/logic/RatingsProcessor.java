@@ -34,4 +34,7 @@ public class RatingsProcessor {
             return recipeDB.getRating(id);
     }
 
+    public void deleteRating (int id) {
+        recipeDB.deleteRatings(id);
+    }
 }
