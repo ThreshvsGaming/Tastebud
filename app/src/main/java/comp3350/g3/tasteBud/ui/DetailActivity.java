@@ -73,7 +73,6 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
 
     public void delete() {
         recipeProcessor.deleteRecipe(recipe.getId());
-       // ratingsProcessor.deleteRating(recipe.getId());
         finish();
     }
 

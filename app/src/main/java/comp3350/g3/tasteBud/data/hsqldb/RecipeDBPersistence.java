@@ -130,6 +130,8 @@ public class RecipeDBPersistence implements IRecipeDB {
 
     public void deleteRecipe(int id) {
         try (final Connection c = connection()) {
+            //Delete ratings, if there are any, before proceeding to delete recipes
+            deleteRatings(id);
 
             final PreparedStatement st = c.prepareStatement("DELETE FROM RECIPES WHERE ID=?");
             st.setInt(1, id);

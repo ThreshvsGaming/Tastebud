@@ -33,8 +33,4 @@ public class RatingsProcessor {
         Log.d("TAG", "initializeRatings: " +  recipeDB.getRating(id));
             return recipeDB.getRating(id);
     }
-
-    public void deleteRating (int id) {
-        recipeDB.deleteRatings(id);
-    }
 }
