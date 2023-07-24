@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -15,8 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import comp3350.g3.tasteBud.R;
+import comp3350.g3.tasteBud.logic.RatingsProcessor;
 import comp3350.g3.tasteBud.logic.RecipeProcessor;
 import comp3350.g3.tasteBud.object.ImageSetter;
+import comp3350.g3.tasteBud.object.Ratings;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.logic.PersistenceSingleton;
 
@@ -27,7 +32,15 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
     private TextView recipeIngredients;
     private RecipeProcessor recipeProcessor;
     private Recipe recipe;
+
+    private Ratings ratings;
     private ImageView recipeImage;
+
+    private TextView ratingText;
+
+    private RatingBar recipeRatings;
+
+    private RatingsProcessor ratingsProcessor;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +54,7 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         initializeListeners();
 
         initializeRecipe();
+        initializeRatings();
         initializeRecipeTags();
         initializeRecipeIngredients();
 
@@ -49,7 +63,13 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
 
         //Create a Recipe Processor to link to the logic layer
         recipeProcessor = new RecipeProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+
+        //Create a ratings processor to link to the logic layer
+        ratingsProcessor = new RatingsProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
+
     }
+
+
 
     public void delete() {
         recipeProcessor.deleteRecipe(recipe.getId());
@@ -77,6 +97,8 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
         recipeIngredients = findViewById(R.id.recipeIngredients);
         recipeDescription = findViewById(R.id.recipeDescription);
         recipeImage = findViewById(R.id.recipeImageDetail);
+        ratingText = findViewById(R.id.textViewRating);
+        recipeRatings = findViewById(R.id.ratingBar);
     }
 
     private void initializeListeners() {
@@ -92,6 +114,23 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
                     startResult.launch(intent);
                 }
         );
+
+        recipeRatings.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+               // Log.d("APP:", "Number of Stars: " + rating);
+                ratings.setRecipeRatings((int) rating);
+                initializeRecipeRatings();
+            }
+        });
+       // Log.d("APP:", "Number of Stars: " + recipeRatings.getRating());
+    }
+
+    private void initializeRatings() {
+        ratings = new Ratings();
+        //if()
+       // Log.d("TAG", "initializeRatings: " +  ratingsProcessor.getRating(recipe.getId()));
+        //recipeRatings.setRating((float) ratingsProcessor.getRating(recipe.getId()));
     }
 
     private void initializeRecipe() {
@@ -117,5 +156,12 @@ public class DetailActivity extends FragmentActivity implements DeleteInteractio
             ingredientsCollection = ingredients + (recipe.getIngredients().get(n)); //to get appropriately indexed ingredients
         }
         recipeIngredients.setText(ingredientsCollection);
+    }
+
+
+    private void initializeRecipeRatings () {
+        ratingsProcessor.addRatings(recipe.getId(), ratings);
+        Log.d("APP", "initializeRecipeRatings: " + (float)ratingsProcessor.getRating(recipe.getId()));
+        //recipeRatings.setNumStars(ratingsProcessor.getRating(recipe.getId()));
     }
 }

@@ -42,6 +42,41 @@ public class RecipeDBPersistence implements IRecipeDB {
     }
 
 
+    public boolean addRatings(int recipeId, int ratings) {
+        try (final Connection c = connection()) {
+            PreparedStatement pst = c.prepareStatement("INSERT INTO RATING (RECIPE_ID, RATINGS) VALUES (?, ?)");
+            pst.setInt(1, recipeId);
+            pst.setInt(2, ratings);
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new ExceptionHandler(e);
+        }
+    }
+
+    public int getRating(int id) {
+
+        try (final Connection c = connection()) {
+
+            final PreparedStatement st = c.prepareStatement("SELECT RATINGS FROM RATING WHERE RECIPE_ID=?");
+            st.setInt(1, id);
+            final ResultSet rs = st.executeQuery();
+            int rating;
+            if (rs.next()) {
+                rating = rs.getInt("RATINGS");
+            } else {
+                rating = -1; // Or any other indicator of no rating found.
+            }
+            rs.close();
+            st.close();
+            return rating;
+        } catch (SQLException e) {
+            throw new ExceptionHandler(e);
+        }
+    }
+
+
+
     public Recipe getRecipe(int id) {
 
         try (final Connection c = connection()) {

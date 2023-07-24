@@ -9,6 +9,10 @@ public interface IRecipeDB {
 
     boolean addRecipe(Recipe newRecipe);
 
+    boolean addRatings(int recipeID, int ratings);
+
+    int getRating(int id);
+
     Recipe getRecipe(int id);
 
     void deleteRecipe(int id);
