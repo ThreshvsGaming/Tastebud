@@ -2,6 +2,7 @@ package comp3350.g3.tasteBud.data;
 
 import java.util.*;
 
+import comp3350.g3.tasteBud.object.Ratings;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeStub implements IRecipeDB {
@@ -79,6 +80,24 @@ public class RecipeStub implements IRecipeDB {
         }
         return pass;
     }
+
+    // mock functions for now, needed in-place because of the Interface requirements
+    public boolean addRatings(int recipeId, int recipeRatings) {
+
+        return false;
+    }
+
+    public int getRating(int id) {
+
+        return -1;
+    }
+
+    public void deleteRatings(int id) {
+
+    }
+//////////
+
+
 
     @Override
     public Recipe getRecipe(int id) {

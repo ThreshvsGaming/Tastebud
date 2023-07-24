@@ -23,9 +23,9 @@ import comp3350.g3.tasteBud.application.Main;
 
 
 public class MainActivity extends FragmentActivity {
-    LinearLayout llSearchButton, llCreateButton, llChefButton;
+    LinearLayout llSearchButton, llCreateButton, llRecommendButton;
     TextView tvSearchButton, tvCreateButton, tvChefButton;
-    ImageView ivSearchButton, ivCreateButton, ivChefButton;
+    ImageView ivSearchButton, ivCreateButton, ivRecommendButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,18 +36,18 @@ public class MainActivity extends FragmentActivity {
         copyDatabaseToDevice();
         llSearchButton = findViewById(R.id.llSearchButton);
         llCreateButton = findViewById(R.id.llCreateButton);
-        llChefButton = findViewById(R.id.llChefButton);
+        llRecommendButton = findViewById(R.id.llRecommendButton);
         tvSearchButton = findViewById(R.id.tvSearchButton);
         tvCreateButton = findViewById(R.id.tvCreateButton);
         tvChefButton = findViewById(R.id.tvChefButton);
         ivSearchButton = findViewById(R.id.ivSearchButton);
         ivCreateButton = findViewById(R.id.ivCreateButton);
-        ivChefButton = findViewById(R.id.ivChefButton);
+        ivRecommendButton = findViewById(R.id.ivRecommendButton);
 
         addFragment(new SearchActivity());
         llSearchButton.setOnClickListener(v -> addFragment(new SearchActivity()));
         llCreateButton.setOnClickListener(v -> addFragment(new CreateActivity()));
-        llChefButton.setOnClickListener(v -> addFragment(new ChefActivity()));
+        llRecommendButton.setOnClickListener(v -> addFragment(new RecommendActivity()));
     }
 
     private void addFragment(Fragment fragment) {

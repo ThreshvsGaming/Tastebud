@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llChefButton"
+            android:id="@+id/llRecommendButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/ivChefButton"
+                android:id="@+id/ivRecommendButton"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
                 android:scaleType="centerCrop"

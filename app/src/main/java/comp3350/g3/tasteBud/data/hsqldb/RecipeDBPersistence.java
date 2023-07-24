@@ -42,6 +42,49 @@ public class RecipeDBPersistence implements IRecipeDB {
     }
 
 
+    public boolean addRatings(int recipeId, int ratings) {
+        try (final Connection c = connection()) {
+            PreparedStatement pst = c.prepareStatement("UPDATE RATING SET RATINGS = ? WHERE RECIPE_ID = ?");
+            pst.setInt(1, ratings);
+            pst.setInt(2, recipeId);
+            int updated = pst.executeUpdate();
+
+            //Meaning no previous entry for this particular Recipe, then insert a new rating
+            if (updated == 0) {
+                pst = c.prepareStatement("INSERT INTO RATING (RECIPE_ID, RATINGS) VALUES (?, ?)");
+                pst.setInt(1, recipeId);
+                pst.setInt(2, ratings);
+                pst.executeUpdate();
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new ExceptionHandler(e);
+        }
+    }
+
+    public int getRating(int id) {
+
+        try (final Connection c = connection()) {
+
+            final PreparedStatement st = c.prepareStatement("SELECT RATINGS FROM RATING WHERE RECIPE_ID=?");
+            st.setInt(1, id);
+            final ResultSet rs = st.executeQuery();
+            int rating;
+            if (rs.next()) {
+                rating = rs.getInt("RATINGS");
+            } else {
+                rating = -1; // Or any other indicator of no rating found.
+            }
+            rs.close();
+            st.close();
+            return rating;
+        } catch (SQLException e) {
+            throw new ExceptionHandler(e);
+        }
+    }
+
+
+
     public Recipe getRecipe(int id) {
 
         try (final Connection c = connection()) {
@@ -87,8 +130,22 @@ public class RecipeDBPersistence implements IRecipeDB {
 
     public void deleteRecipe(int id) {
         try (final Connection c = connection()) {
+            //Delete ratings, if there are any, before proceeding to delete recipes
+            deleteRatings(id);
 
             final PreparedStatement st = c.prepareStatement("DELETE FROM RECIPES WHERE ID=?");
+            st.setInt(1, id);
+            st.executeUpdate();
+            st.close();
+        } catch (SQLException e) {
+            throw new ExceptionHandler(e);
+        }
+    }
+
+    public void deleteRatings(int id) {
+        try (final Connection c = connection()) {
+
+            final PreparedStatement st = c.prepareStatement("DELETE FROM RATING WHERE RECIPE_ID=?");
             st.setInt(1, id);
             st.executeUpdate();
             st.close();
