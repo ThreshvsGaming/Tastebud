@@ -24,14 +24,14 @@
     <ImageView
         android:id="@+id/recipeImageDetail"
         android:layout_width="match_parent"
-        android:layout_height="237dp"
+        android:layout_height="121dp"
         android:background="#adc6f0"
         android:padding="@dimen/dp_15"
         android:src="@mipmap/ic_adds" />
 
     <EditText
         android:id="@+id/recipeTitle"
-        android:layout_width= "match_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_5"
         android:background="@color/white"

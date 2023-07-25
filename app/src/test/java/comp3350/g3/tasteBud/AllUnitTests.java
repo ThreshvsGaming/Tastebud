@@ -22,5 +22,5 @@ import comp3350.g3.tasteBud.logicTest.SearchProcessorTest;
 
         }
 )
-public class AllTests {
+public class AllUnitTests {
 }
