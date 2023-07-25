@@ -6,7 +6,11 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CreateTest.class,
-        RecommendTest.class
+        RecommendTest.class,
+        EditTest.class,
+        FilterTest.class,
+        RateTest.class,
+        SearchTest.class
 })
 public class AllAcceptanceTests
 {
