@@ -1,6 +1,5 @@
 package comp3350.g3.tasteBud.logicTest;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-import comp3350.g3.tasteBud.data.RecipeStub;
-import comp3350.g3.tasteBud.logic.RefineProcessor;
+import comp3350.g3.tasteBud.data.StubDatabase.RecipeStub;
+import comp3350.g3.tasteBud.logic.Processors.RefineProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RefineProcessorTest {

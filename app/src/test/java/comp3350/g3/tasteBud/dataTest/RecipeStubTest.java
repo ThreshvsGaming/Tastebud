@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import comp3350.g3.tasteBud.data.RecipeStub;
+import comp3350.g3.tasteBud.data.StubDatabase.RecipeStub;
 import comp3350.g3.tasteBud.object.Recipe;
 
 import static org.junit.Assert.*;

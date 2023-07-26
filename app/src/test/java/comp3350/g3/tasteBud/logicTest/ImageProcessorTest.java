@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-import comp3350.g3.tasteBud.logic.ImageProcessor;
+import comp3350.g3.tasteBud.logic.Processors.ImageProcessor;
 
 
 @SuppressWarnings("unchecked")

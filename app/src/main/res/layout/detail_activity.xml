@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#e9edf5"
     android:orientation="vertical"
-    tools:context=".ui.DetailActivity">
+    tools:context=".ui.Activities.DetailActivity">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_45">

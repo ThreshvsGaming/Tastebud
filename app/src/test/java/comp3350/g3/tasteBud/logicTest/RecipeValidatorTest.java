@@ -1,6 +1,5 @@
 package comp3350.g3.tasteBud.logicTest;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 
-import comp3350.g3.tasteBud.logic.RecipeValidator;
+import comp3350.g3.tasteBud.logic.Validators.RecipeValidator;
 
 public class RecipeValidatorTest {
     RecipeValidator recipeValidator = new RecipeValidator();
