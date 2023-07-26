@@ -1,7 +1,7 @@
 package comp3350.g3.tasteBud.logicTest;
 
-import comp3350.g3.tasteBud.data.RecipeStub;
-import comp3350.g3.tasteBud.logic.RecipeProcessor;
+import comp3350.g3.tasteBud.data.StubDatabase.RecipeStub;
+import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 import org.junit.After;
