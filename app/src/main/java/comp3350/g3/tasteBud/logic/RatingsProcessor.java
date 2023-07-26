@@ -25,12 +25,12 @@ public class RatingsProcessor {
 
     public void addRatings(int recipeID, Ratings ratings) throws IllegalArgumentException {
         recipeDB.addRatings(recipeID, ratings.getRecipeRatings());
-        Log.d("APP", "addRatings: " + ratings.getRecipeRatings() + "  recipeID: " + recipeID);
+        //Log.d("APP", "addRatings: " + ratings.getRecipeRatings() + "  recipeID: " + recipeID);
 
     }
 
     public int getRating (int id){
-        Log.d("TAG", "initializeRatings: " +  recipeDB.getRating(id));
+        //Log.d("TAG", "initializeRatings: " +  recipeDB.getRating(id));
             return recipeDB.getRating(id);
     }
 }
