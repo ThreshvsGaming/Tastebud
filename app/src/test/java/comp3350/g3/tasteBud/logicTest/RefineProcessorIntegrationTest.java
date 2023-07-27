@@ -1,8 +1,8 @@
 package comp3350.g3.tasteBud.logicTest;
 
-import comp3350.g3.tasteBud.data.IRecipeDB;
+import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.data.hsqldb.RecipeDBPersistence;
-import comp3350.g3.tasteBud.logic.RefineProcessor;
+import comp3350.g3.tasteBud.logic.Processors.RefineProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.utils.TestUtils;
 
@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

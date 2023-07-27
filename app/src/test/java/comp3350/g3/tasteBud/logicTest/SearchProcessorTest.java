@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import comp3350.g3.tasteBud.data.RecipeStub;
-import comp3350.g3.tasteBud.logic.SearchProcessor;
+import comp3350.g3.tasteBud.data.StubDatabase.RecipeStub;
+import comp3350.g3.tasteBud.logic.Processors.SearchProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 import static org.junit.Assert.*;

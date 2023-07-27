@@ -1,8 +1,6 @@
 package comp3350.g3.tasteBud.application;
 
-import comp3350.g3.tasteBud.data.IRecipeDB;
-import comp3350.g3.tasteBud.data.RecipeStub;
-import comp3350.g3.tasteBud.data.hsqldb.RecipeDBPersistence;
+import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 
 public class Services {
     private static IRecipeDB recipeDB;
@@ -10,13 +8,10 @@ public class Services {
     public static IRecipeDB getRecipeDB(boolean isPersistence) {
         if (recipeDB == null) {
             if(isPersistence){
-                recipeDB = new RecipeDBPersistence(Main.getDBPathName());
+                recipeDB = DatabaseFactory.createHSQLDatabase();
             }
             else{
-                RecipeStub stub = new RecipeStub();
-                stub.initRecipeDatabase();
-                recipeDB = stub;
-
+                recipeDB = StubDatabaseFactory.createArrayListDatabase();
             }
         }
 

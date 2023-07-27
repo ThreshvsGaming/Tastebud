@@ -1,11 +1,6 @@
 package comp3350.g3.tasteBud.data.hsqldb;
 
-import comp3350.g3.tasteBud.object.Ingredient;
-
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 
 public class UtilitiesForDB {
     public static final String FIELD_SEP = "\n";

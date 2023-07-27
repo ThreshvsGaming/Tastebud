@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import comp3350.g3.tasteBud.data.IRecipeDB;
+import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecipeDBPersistence implements IRecipeDB {
