@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,6 +136,28 @@ public class CreateActivity extends Fragment {
         recipeImage.setOnClickListener(view1 -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             mGetContent.launch(intent);
+        });
+
+        EditText recipeIngredientsView = view.findViewById(R.id.recipeIngredients);
+        recipeIngredientsView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            //Replace spaces with strings as users type
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                recipeIngredientsView.removeTextChangedListener(this);
+                String modifiedText = s.toString().replaceAll(" ", ",");
+                recipeIngredientsView.setText(modifiedText);
+                recipeIngredientsView.setSelection(modifiedText.length()); // Move the pointer to the end
+                recipeIngredientsView.addTextChangedListener(this);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 }
