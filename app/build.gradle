@@ -76,4 +76,7 @@ dependencies {
     // guava
     implementation group: 'com.google.guava', name: 'guava', version: '25.1-jre'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    // Other dependencies
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    testImplementation 'org.mockito:mockito-inline:3.11.2'
 }
