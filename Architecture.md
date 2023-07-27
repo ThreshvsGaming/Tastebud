@@ -35,19 +35,19 @@ Passed between HomePageAdapter and SearchActivity, allows the user to interact w
 ### TagListKeySingleton
 TagListKeySingleton provides a single point of access for our list of tags that the user can filter on.
 
-## AndroidCopyDatabase
+### AndroidCopyDatabase
 A high coupled class that copies the database to the device
 
-## AndroidImageReader
+### AndroidImageReader
 A high coupled class that adds a selected image to a device's local file
 
-## IDeleteInteraction
+### IDeleteInteraction
 An interface that implements Delete functions such that the Logic layer can interact with the UI Layer
 
-## IDisplaySelectionInteractions
+### IDisplaySelectionInteractions
 An interface that implements functions used to display the state of a Recipe (whether it is selected or not) such that the Logic Layer can interact with the UI Layer
 
-## IListInteraction
+### IListInteraction
 An interface that implements functions used to interact with the list of display, like pressing a recipe, such that the Logic layer can interact with the UI Layer
 
 ## Logic Layer
