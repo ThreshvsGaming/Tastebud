@@ -15,8 +15,8 @@ public class RecipeSelectionProcessor {
     private boolean[] isSelected;
     private boolean selectionMode;
     public RecipeSelectionProcessor(){
-        isSelected = null;
-        selectionMode = false;
+        isSelected = NO_SELECTIONS;
+        selectionMode = SELECTMODE_OFF;
     }
     public RecipeSelectionProcessor(int length){
         if(length > 0) {
@@ -24,7 +24,7 @@ public class RecipeSelectionProcessor {
         }else{
             isSelected = NO_SELECTIONS;
         }
-        selectionMode = false;
+        selectionMode = SELECTMODE_OFF;
     }
     public void setDefaultIsSelected(int length) {
         isSelected = new boolean[length];
@@ -69,9 +69,6 @@ public class RecipeSelectionProcessor {
         }
 
         return selectedItems;
-    }
-    public void setDisplaySelections(){
-
     }
 
 }

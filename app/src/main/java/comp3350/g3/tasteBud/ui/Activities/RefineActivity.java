@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.Processors.RefineProcessor;
 import comp3350.g3.tasteBud.logic.Singletons.TagListKeySingleton;
 
