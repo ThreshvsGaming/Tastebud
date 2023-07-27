@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,7 +36,7 @@ public class EditActivity extends FragmentActivity {
     private TextView previewRecipeTitle;
     private TextView previewRecipeDescription;
     private TextView previewRecipeTags;
-    private TextView previewRecipeIngredients;
+    private EditText previewRecipeIngredients;
     private ImageView previewRecipeImage;
     private TextView validationStatus;
     private Button submitRecipeButton;
@@ -121,6 +123,27 @@ public class EditActivity extends FragmentActivity {
         });
 
         findViewById(R.id.returnButton).setOnClickListener(v -> finish());
+
+        previewRecipeIngredients.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            //Replace spaces with strings as users type, but dont replace the first space because thats used by the label
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                previewRecipeIngredients.removeTextChangedListener(this);
+                String modifiedText = s.toString().replaceAll(" ", ",").replaceFirst(",", " ");
+                previewRecipeIngredients.setText(modifiedText);
+                previewRecipeIngredients.setSelection(modifiedText.length()); // Move the pointer to the end
+                previewRecipeIngredients.addTextChangedListener(this);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
 
@@ -152,7 +175,7 @@ public class EditActivity extends FragmentActivity {
 
     private void initializeRecipe() {
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
-        previewRecipeTitle.setText(recipe.getName());
+        previewRecipeTitle.setText("Recipe Name: " + recipe.getName());
         previewRecipeDescription.setText(recipe.getDesc());
         recipeId = recipe.getId();
         recipeImageUri = recipe.getImageUri();
@@ -168,7 +191,7 @@ public class EditActivity extends FragmentActivity {
             String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
             tagCollection = tag + (recipe.getTags().get(n)); //to get appropriately indexed tag
         }
-        previewRecipeTags.setText(tagCollection);
+        previewRecipeTags.setText("Tags: " + tagCollection);
     }
 
     private void initializeRecipeIngredients() {
@@ -177,6 +200,6 @@ public class EditActivity extends FragmentActivity {
             String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
             ingredientsCollection = ingredients + (recipe.getIngredients().get(n)); //to get appropriately indexed ingredients
         }
-        previewRecipeIngredients.setText(ingredientsCollection);
+        previewRecipeIngredients.setText("Ingredients: " + ingredientsCollection);
     }
 }

@@ -37,6 +37,8 @@ public class RecipeValidator {
             return fieldName + " cannot be spaces only!!!";
         } else if (input.matches("^\\p{Punct}+$") || input.matches("\\d+$")) {
             return fieldName + " cannot be numbers or symbols only!!!";
+        } else if (input.length() > 512) {
+            return fieldName + " cannot be longer than 512, sorry our database is small";
         }
 
         //return null for any uncaught exceptions for now
