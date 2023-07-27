@@ -7,7 +7,7 @@ Load the g3canada-3 repo in android studio, select the 'app' configuration in th
 [VIsion](https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/blob/main/VISION.md)
 
 ## ARCHITECTURE.md
-[Architecture](Architecture.md).
+[Architecture](Architecture.md)
 
 ## RETROSPECTIVE.md
 [Retrospective](https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/blob/main/RETROSPECTIVE.md)
