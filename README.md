@@ -12,3 +12,5 @@ See [Architecture](Architecture.md).
 ## RETROSPECTIVE.md
 [List of user stories](https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/issues/?sort=created_date&state=opened&label_name%5B%5D=User%20Story&first_page_size=20)
  
+## ITERATION3-WORKSHEET.md
+[Iteration 3 Worksheet] (https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/blob/main/ITERATION3-WORKSHEET.md)
