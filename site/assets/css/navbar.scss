@@ -1,0 +1,48 @@
+// Contents
+//
+// Navbar
+// Navbar brand
+// Navbar nav
+// Navbar text
+// Navbar divider
+// Responsive navbar
+// Navbar position
+// Navbar themes
+
+
+// Navbar
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+.navbar {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; // space out brand from logo
+    height:125px;
+    border-bottom:2px solid grey;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(230, 230, 230);
+}
+
+.navbar h1 a {
+    font-size: 75px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        text-decoration: underline
+    }
+}
+
+.navbar .links {
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+

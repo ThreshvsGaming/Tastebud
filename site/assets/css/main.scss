@@ -1,0 +1,26 @@
+---
+---
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(237, 237, 237);
+
+}
+
+.content {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 75%;
+    margin: auto;
+    //border: 5px solid black;
+    //padding: 20px;
+    //padding-top: 5px;
+    //border-radius: 30px;
+    font-size: 25px;
+}
+
+@import "navbar.scss";
+@import "footer.scss";
+@import "banner.scss";
+@import "preview.scss";

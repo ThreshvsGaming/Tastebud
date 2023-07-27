@@ -1,0 +1,13 @@
+.footer {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around; 
+    height:100px;
+    border-top:1px solid grey;
+    background-color: rgb(230, 230, 230);
+    margin: 0;
+    padding: 0;
+}
