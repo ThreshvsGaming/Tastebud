@@ -4,8 +4,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import comp3350.g3.tasteBud.dataTest.RecipeStubTest;
+import comp3350.g3.tasteBud.logicTest.ImageProcessorTest;
 import comp3350.g3.tasteBud.logicTest.RecipeProcessorTest;
 import comp3350.g3.tasteBud.logicTest.RecipeValidatorTest;
+import comp3350.g3.tasteBud.logicTest.RecommendProcessorTest;
 import comp3350.g3.tasteBud.logicTest.RefineProcessorTest;
 import comp3350.g3.tasteBud.logicTest.SearchProcessorTest;
 
@@ -16,10 +18,11 @@ import comp3350.g3.tasteBud.logicTest.SearchProcessorTest;
                 SearchProcessorTest.class,
                 RecipeProcessorTest.class,
                 RecipeValidatorTest.class,
-                RefineProcessorTest.class
-
+                RefineProcessorTest.class,
+                ImageProcessorTest.class,
+                RecommendProcessorTest.class
 
         }
 )
-public class AllTests {
+public class AllUnitTests {
 }

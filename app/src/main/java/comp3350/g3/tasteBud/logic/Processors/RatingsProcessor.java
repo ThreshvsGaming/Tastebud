@@ -1,9 +1,13 @@
-package comp3350.g3.tasteBud.logic.Processors;
+package comp3350.g3.tasteBud.logic;
+
+import android.util.Log;
+
+import java.util.List;
 
 import comp3350.g3.tasteBud.application.Services;
-import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
-import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
+import comp3350.g3.tasteBud.data.IRecipeDB;
 import comp3350.g3.tasteBud.object.Ratings;
+import comp3350.g3.tasteBud.object.Recipe;
 
 public class RatingsProcessor {
     private static IRecipeDB recipeDB;
@@ -14,8 +18,8 @@ public class RatingsProcessor {
     }
 
     // Production constructor
-    public RatingsProcessor () {
-        recipeDB = Services.getRecipeDB(PersistenceSingleton.getInstance().GetIsPersistence());
+    public RatingsProcessor (Boolean isPersistence) {
+        recipeDB = Services.getRecipeDB(isPersistence);
     }
 
 
@@ -24,6 +28,6 @@ public class RatingsProcessor {
     }
 
     public int getRating (int id){
-            return recipeDB.getRating(id);
+        return recipeDB.getRating(id);
     }
 }
