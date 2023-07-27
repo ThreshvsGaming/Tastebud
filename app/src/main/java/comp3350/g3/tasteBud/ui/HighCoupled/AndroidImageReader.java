@@ -24,7 +24,7 @@ public class AndroidImageReader {
 
     private Activity owner;
 
-    public AndroidImageReader(Activity owner){
+    public AndroidImageReader(Activity owner) {
         this.owner = owner;
     }
 

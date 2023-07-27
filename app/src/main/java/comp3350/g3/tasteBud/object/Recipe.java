@@ -1,8 +1,6 @@
 package comp3350.g3.tasteBud.object;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,7 +51,7 @@ public class Recipe implements Serializable {
         return formatIngredients();
     }
 
-    private List<String> formatIngredients(){
+    private List<String> formatIngredients() {
         //the database stores new recipe's ingredients as a string (done to avoid a more complicated database structure)
         //thus, pushing ingredients initially as a list converts them to a format of: "ingredient1\ningredient2" or "ingredient1\n ingredient2"
         //thus, when retrieving, we return them in a nicely formatted way, free of \n and actually as a list instead of a string
@@ -63,10 +61,9 @@ public class Recipe implements Serializable {
         //see if ingredient already previously formatted,
         //if not(as shown by "\n" in ingredient) format it
         //else just return the formatted ingredient list
-        if(ingredient.contains("\n")){
+        if (ingredient.contains("\n")) {
             formattedIngredients = Arrays.asList(ingredient.replaceAll(" ", "").split("\\r?\\n"));
-        }
-        else{
+        } else {
             formattedIngredients = ingredients;
         }
 

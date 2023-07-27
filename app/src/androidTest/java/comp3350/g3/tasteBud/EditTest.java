@@ -17,9 +17,6 @@ import org.junit.runner.RunWith;
 import comp3350.g3.tasteBud.ui.Activities.MainActivity;
 
 
-//import comp3350.g3.tasteBud.ui.MainActivity;
-
-
 @RunWith(AndroidJUnit4.class)
 public class EditTest {
 
@@ -73,11 +70,6 @@ public class EditTest {
         Espresso.onView(ViewMatchers.withId(R.id.delete)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withText("YES"))
                 .perform(ViewActions.click());
-
-
-
-
-
 
 
     }

@@ -64,8 +64,7 @@ public class RecipeProcessorTest {
         assertEquals(testStub.getAllRecipes().size(), checkSize - 1);
 
         // Asserts that the recipe was created properly
-        for(Recipe r : testStub.getAllRecipes())
-        {
+        for (Recipe r : testStub.getAllRecipes()) {
             assertTrue(r.getId() != recipe.getId());
         }
     }

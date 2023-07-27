@@ -7,10 +7,9 @@ public class Services {
 
     public static IRecipeDB getRecipeDB(boolean isPersistence) {
         if (recipeDB == null) {
-            if(isPersistence){
+            if (isPersistence) {
                 recipeDB = DatabaseFactory.createHSQLDatabase();
-            }
-            else{
+            } else {
                 recipeDB = StubDatabaseFactory.createArrayListDatabase();
             }
         }

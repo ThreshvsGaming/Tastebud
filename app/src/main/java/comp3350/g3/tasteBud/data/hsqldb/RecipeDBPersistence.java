@@ -84,7 +84,6 @@ public class RecipeDBPersistence implements IRecipeDB {
     }
 
 
-
     public Recipe getRecipe(int id) {
 
         try (final Connection c = connection()) {

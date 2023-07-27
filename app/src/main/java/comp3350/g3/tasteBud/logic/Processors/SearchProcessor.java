@@ -2,6 +2,7 @@ package comp3350.g3.tasteBud.logic.Processors;
 
 import java.util.*;
 import java.util.regex.*;
+
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
@@ -14,17 +15,19 @@ public class SearchProcessor {
         recipeDB = Services.getRecipeDB(PersistenceSingleton.getInstance().GetIsPersistence());
     }
 
-    public SearchProcessor(IRecipeDB newRecipeDB) { recipeDB = newRecipeDB; }
+    public SearchProcessor(IRecipeDB newRecipeDB) {
+        recipeDB = newRecipeDB;
+    }
 
     public List<Recipe> searchResults(String text) {
         List<Recipe> results = recipeDB.getAllRecipes();
 
-        results = searchName(results,text);
+        results = searchName(results, text);
 
         return results;
     }
 
-    public List<Recipe> searchResultsWithTag(String[] tagList, String text){
+    public List<Recipe> searchResultsWithTag(String[] tagList, String text) {
         List<Recipe> results = searchResults(text);
 
         return searchTags(results, tagList);
@@ -33,7 +36,7 @@ public class SearchProcessor {
     private List<Recipe> searchName(List<Recipe> list, String text) {
         List<Recipe> searchResults = new ArrayList<>();
 
-        if(list != null) {
+        if (list != null) {
             String patternText = tokenizer(text);
             Pattern pattern = Pattern.compile(patternText, Pattern.CASE_INSENSITIVE);
             Matcher matcher;
@@ -55,7 +58,7 @@ public class SearchProcessor {
 
         //Assembles the regex pattern so that it contains all tokens
         String patternText = "";
-        for(int i = 0; i < textSplit.length; i++) {
+        for (int i = 0; i < textSplit.length; i++) {
             patternText += "(?=.*" + textSplit[i] + ")";
         }
 
@@ -66,7 +69,7 @@ public class SearchProcessor {
         List<Recipe> matchedRecipes = new ArrayList<>();
 
         for (Recipe recipe : recipes) {
-            if(matchedTag(recipe, tagList)){
+            if (matchedTag(recipe, tagList)) {
                 matchedRecipes.add(recipe);
             }
         }
@@ -74,10 +77,10 @@ public class SearchProcessor {
         return matchedRecipes;
     }
 
-    private boolean matchedTag(Recipe recipe, String[] tagList){
+    private boolean matchedTag(Recipe recipe, String[] tagList) {
         for (String recipeTag : recipe.getTags()) {
-            for (String tag : tagList){
-                if (recipeTag.equals(tag)){
+            for (String tag : tagList) {
+                if (recipeTag.equals(tag)) {
                     return true;
                 }
             }

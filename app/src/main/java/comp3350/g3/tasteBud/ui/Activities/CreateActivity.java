@@ -90,6 +90,7 @@ public class CreateActivity extends Fragment {
                     }
                 }
             });
+
     public void handleValidation(String validationError) {
         if (validationError == null) {
 

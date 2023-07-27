@@ -98,7 +98,6 @@ public class RecipeStub implements IRecipeDB {
 //////////
 
 
-
     @Override
     public Recipe getRecipe(int id) {
         Recipe result = null;

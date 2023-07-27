@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -20,18 +21,18 @@ public class RecommendProcessorTest {
 
     @Before
     public void setUp() {
-            // Create a mock for IRecipeDB
-            mockRecipeDB = mock(IRecipeDB.class);
-            recommendProcessor = new RecommendProcessor(mockRecipeDB);
+        // Create a mock for IRecipeDB
+        mockRecipeDB = mock(IRecipeDB.class);
+        recommendProcessor = new RecommendProcessor(mockRecipeDB);
 
-            // Set up mock data for IRecipeDB
-            Recipe recipe1 = new Recipe("Cookies", "Recipe for delicious cookies", Arrays.asList("flour"), "dessert");
-            Recipe recipe2 = new Recipe("Spaghetti", "Classic spaghetti recipe", Arrays.asList("spaghetti"), "pasta");
-            ArrayList<Recipe> mockRecipes = new ArrayList<>(Arrays.asList(recipe1, recipe2));
+        // Set up mock data for IRecipeDB
+        Recipe recipe1 = new Recipe("Cookies", "Recipe for delicious cookies", Arrays.asList("flour"), "dessert");
+        Recipe recipe2 = new Recipe("Spaghetti", "Classic spaghetti recipe", Arrays.asList("spaghetti"), "pasta");
+        ArrayList<Recipe> mockRecipes = new ArrayList<>(Arrays.asList(recipe1, recipe2));
 
-            // Mock the behavior of IRecipeDB to return the mockRecipes
-            when(mockRecipeDB.getAllRecipes()).thenReturn(mockRecipes);
-        }
+        // Mock the behavior of IRecipeDB to return the mockRecipes
+        when(mockRecipeDB.getAllRecipes()).thenReturn(mockRecipes);
+    }
 
 
     @Test
@@ -49,7 +50,7 @@ public class RecommendProcessorTest {
         // Test the getIngredientList method
         String[] result = recommendProcessor.getIngredientList();
 
-        String[] expected = {"flour","spaghetti"};
+        String[] expected = {"flour", "spaghetti"};
         Arrays.sort(result);
         Arrays.sort(expected);
         assertArrayEquals(expected, result);

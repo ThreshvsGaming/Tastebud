@@ -54,7 +54,7 @@ public class RecommendProcessor {
         List<Recipe> allRecipes = recipeDB.getAllRecipes();
 
         for (Recipe recipe : allRecipes) {
-            if( matchesAllIngredients(recipe, ingredientList) ) {
+            if (matchesAllIngredients(recipe, ingredientList)) {
                 matchedRecipes.add(recipe);
             }
         }
@@ -66,13 +66,13 @@ public class RecommendProcessor {
         List<String> currIngredientList = new LinkedList<>(recipe.getIngredients());
         boolean matches = false;
 
-        for(int i = 0; i < ingredientList.length && !currIngredientList.isEmpty(); i++) {
-            if( currIngredientList.contains(ingredientList[i]) ) {
+        for (int i = 0; i < ingredientList.length && !currIngredientList.isEmpty(); i++) {
+            if (currIngredientList.contains(ingredientList[i])) {
                 currIngredientList.remove(ingredientList[i]);
             }
         }
 
-        if(currIngredientList.isEmpty()){
+        if (currIngredientList.isEmpty()) {
             matches = true;
         }
 

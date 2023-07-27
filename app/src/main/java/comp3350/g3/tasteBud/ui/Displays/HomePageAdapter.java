@@ -47,6 +47,7 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, ViewHolder> {
 
         imageSetter.setImageResource(context, recipe, helper.img);
     }
+
     public void removeAllSelections() {
         final int dataSize = this.getData().size();
         for (int i = 0; i < dataSize; i++) {
@@ -55,12 +56,18 @@ public class HomePageAdapter extends BaseQuickAdapter<Recipe, ViewHolder> {
         recipeSelectionProcessor.setDefaultIsSelected(dataSize);
     }
 
-    public List<Recipe> getSelectedItems() {return recipeSelectionProcessor.getSelectedItems(getData());}
+    public List<Recipe> getSelectedItems() {
+        return recipeSelectionProcessor.getSelectedItems(getData());
+    }
 
-    public RecipeSelectionProcessor getRecipeSelectionProcessor(){return recipeSelectionProcessor;}
+    public RecipeSelectionProcessor getRecipeSelectionProcessor() {
+        return recipeSelectionProcessor;
+    }
+
     public void onSelectionMode() {
         recipeSelectionProcessor.setSelectionMode(recipeSelectionProcessor.SELECTMODE_ON);
     }
+
     public void offSelectionMode() {
         recipeSelectionProcessor.setSelectionMode(recipeSelectionProcessor.SELECTMODE_OFF);
         removeAllSelections();

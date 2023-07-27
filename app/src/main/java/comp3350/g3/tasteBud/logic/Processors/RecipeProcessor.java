@@ -26,7 +26,7 @@ public class RecipeProcessor {
         recipeDB.addRecipe(recipe);
     }
 
-    public void updateRecipe(int recipeId, String recipeName, String recipeDesc,List<String> ingredients, String tags, String imageUri) throws IllegalArgumentException{
+    public void updateRecipe(int recipeId, String recipeName, String recipeDesc, List<String> ingredients, String tags, String imageUri) throws IllegalArgumentException {
         Recipe recipe = buildRecipe(recipeName, recipeDesc, ingredients, tags, imageUri);
         recipe.setId(recipeId);
         recipeDB.updateRecipe(recipe);
@@ -42,11 +42,11 @@ public class RecipeProcessor {
         }
     }
 
-    public Recipe getRecipe(int id){
+    public Recipe getRecipe(int id) {
         return recipeDB.getRecipe(id);
     }
 
-    public void deleteRecipe(int id)    {
+    public void deleteRecipe(int id) {
         recipeDB.deleteRecipe(id);
     }
 

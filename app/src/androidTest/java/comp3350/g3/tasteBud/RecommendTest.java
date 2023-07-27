@@ -5,16 +5,15 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import comp3350.g3.tasteBud.ui.Activities.MainActivity;
-//import comp3350.g3.tasteBud.ui.MainActivity;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -68,6 +67,6 @@ public class RecommendTest {
     }
 
 
-    }
+}
 
 

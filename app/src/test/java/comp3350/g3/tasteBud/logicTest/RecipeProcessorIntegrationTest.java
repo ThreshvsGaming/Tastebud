@@ -1,9 +1,11 @@
 package comp3350.g3.tasteBud.logicTest;
+
 import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.data.hsqldb.RecipeDBPersistence;
 import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.utils.TestUtils;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +25,6 @@ public class RecipeProcessorIntegrationTest {
     private RecipeProcessor recipeProcessor;
     private IRecipeDB recipeDB;
     private File tempDB;
-
 
 
     @Before
@@ -75,7 +76,7 @@ public class RecipeProcessorIntegrationTest {
         int recipeId = existingRecipe.getId();
         String newRecipeName = "Updated Recipe";
         String newRecipeDesc = "New Description";
-        List<String> newIngredients = Arrays.asList( "New Ingredient 2");
+        List<String> newIngredients = Arrays.asList("New Ingredient 2");
         String newTags = " New Tag 2";
         String newImageUri = "new_image_uri";
 
@@ -99,7 +100,7 @@ public class RecipeProcessorIntegrationTest {
         //Message
         System.out.println("Start Test!");
         // Arrange
-        Recipe recipe1 = new Recipe("Recipe 1", "Description 1", Arrays.asList("Ingredient 3"),  "Tag 3");
+        Recipe recipe1 = new Recipe("Recipe 1", "Description 1", Arrays.asList("Ingredient 3"), "Tag 3");
         Recipe recipe2 = new Recipe("Recipe 2", "Description 2", Arrays.asList("Ingredient 4"), "Tag 4");
         recipeDB.addRecipe(recipe1);
         recipeDB.addRecipe(recipe2);

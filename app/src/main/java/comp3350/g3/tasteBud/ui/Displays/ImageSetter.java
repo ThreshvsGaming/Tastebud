@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 
 import com.bumptech.glide.Glide;
+
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.object.Recipe;
 

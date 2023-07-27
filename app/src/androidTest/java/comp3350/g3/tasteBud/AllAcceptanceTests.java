@@ -12,6 +12,5 @@ import org.junit.runners.Suite;
         RateTest.class,
         SearchTest.class
 })
-public class AllAcceptanceTests
-{
+public class AllAcceptanceTests {
 }

@@ -1,7 +1,6 @@
 package comp3350.g3.tasteBud.logic.Processors;
 
 
-
 import comp3350.g3.tasteBud.application.Services;
 import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
@@ -17,7 +16,7 @@ public class RatingsProcessor {
     }
 
     // Production constructor
-    public RatingsProcessor () {
+    public RatingsProcessor() {
         recipeDB = Services.getRecipeDB(PersistenceSingleton.getInstance().GetIsPersistence());
     }
 
@@ -26,7 +25,7 @@ public class RatingsProcessor {
         recipeDB.addRatings(recipeID, ratings.getRecipeRatings());
     }
 
-    public int getRating (int id){
+    public int getRating(int id) {
         return recipeDB.getRating(id);
     }
 }

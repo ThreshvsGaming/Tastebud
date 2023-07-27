@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 
 import comp3350.g3.tasteBud.application.Main;
 import comp3350.g3.tasteBud.ui.Displays.Messages;
+
 /*
 Due to android studio's dependencies being the only way to get our database and copy it to a device's local files, we have
 to make a class that is highly coupled to Android Studio and we cannot put the methods below to a Service/configuration/helper layer
@@ -22,7 +23,8 @@ Store the Database in the device.
 public class AndroidCopyDatabase {
 
     private Activity owner;
-    public AndroidCopyDatabase(Activity activity){
+
+    public AndroidCopyDatabase(Activity activity) {
         this.owner = activity;
     }
 

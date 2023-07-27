@@ -1,4 +1,5 @@
 package comp3350.g3.tasteBud.objectTest;
+
 import comp3350.g3.tasteBud.object.Recipe;
 
 import org.junit.After;
@@ -21,6 +22,7 @@ public class RecipeTest {
     public void intro() {
         System.out.println("Conducting test of the recipe object...\n");
     }
+
     @Test
     public void testCreation() {
         // Tests if constructor works

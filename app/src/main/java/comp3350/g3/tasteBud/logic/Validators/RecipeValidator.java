@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RecipeValidator {
     private final String NO_ERRORS = null;
+
     public String inputValidation(String recipeName, String recipeInstructions, List recipeIngredients, String recipeTags) {
         String[] inputTypes = {
                 recipeName,

@@ -63,7 +63,7 @@ public class RefineActivity extends FragmentActivity {
         });
     }
 
-    public String getTagList(){
+    public String getTagList() {
         return selectedTagText.getText().toString();
     }
 
@@ -97,7 +97,7 @@ public class RefineActivity extends FragmentActivity {
         builder.show();
     }
 
-    private StringBuilder constructTextViewText(String[] completeTagList){
+    private StringBuilder constructTextViewText(String[] completeTagList) {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int j = 0; j < tagListChecks.size(); j++) {

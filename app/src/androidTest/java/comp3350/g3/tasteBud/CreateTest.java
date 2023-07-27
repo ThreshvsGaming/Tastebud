@@ -13,7 +13,6 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import comp3350.g3.tasteBud.ui.MainActivity;
 
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -56,9 +55,11 @@ public class CreateTest {
         Espresso.onView(ViewMatchers.withText("YES"))
                 .perform(ViewActions.click());
     }
+
     private static ViewInteraction onViewWithDrawable(int drawableResId) {
         return Espresso.onView(allOf(isAssignableFrom(ImageView.class), withDrawable(drawableResId)));
     }
+
     private static Matcher<Object> withDrawable(final int drawableResId) {
         return new TypeSafeMatcher<Object>() {
             @Override

@@ -83,7 +83,7 @@ public class RecipeStubTest {
     }
 
     @After
-    public void end(){
+    public void end() {
         System.out.println("End of test for RecipeStub");
     }
 

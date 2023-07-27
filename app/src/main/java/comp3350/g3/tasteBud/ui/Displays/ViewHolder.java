@@ -44,8 +44,7 @@ public class ViewHolder extends BaseViewHolder implements IDisplaySelectInteract
 
     }
 
-    public void setDisplay(Recipe recipe)
-    {
+    public void setDisplay(Recipe recipe) {
         int position = getAbsoluteAdapterPosition();
         String tags = recipe.getTags().toString();
         tags = tags.replace("[", "").replace("]", "");
@@ -57,11 +56,12 @@ public class ViewHolder extends BaseViewHolder implements IDisplaySelectInteract
 
     }
 
-    public void setDefaultDisplay(){
+    public void setDefaultDisplay() {
         checkbox.setVisibility(View.GONE);
         background.setBackgroundColor(Color.WHITE);
     }
-    public void setSelectedDisplay(){
+
+    public void setSelectedDisplay() {
         checkbox.setVisibility(View.VISIBLE);
         background.setBackgroundColor(Color.LTGRAY);
     }

@@ -124,7 +124,7 @@ public class RecommendActivity extends Fragment implements IListInteraction, IDe
         builder.show();
     }
 
-    private StringBuilder constructTextViewText(String[] completeIngredientList){
+    private StringBuilder constructTextViewText(String[] completeIngredientList) {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int j = 0; j < ingredientListChecks.size(); j++) {
