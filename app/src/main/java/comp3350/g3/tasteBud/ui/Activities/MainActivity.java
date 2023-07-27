@@ -1,7 +1,5 @@
 package comp3350.g3.tasteBud.ui.Activities;
 
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,14 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.application.Main;
-import comp3350.g3.tasteBud.ui.Displays.Messages;
 import comp3350.g3.tasteBud.ui.HighCoupled.AndroidCopyDatabase;
 
 

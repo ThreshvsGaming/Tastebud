@@ -1,4 +1,4 @@
-package comp3350.g3.tasteBud.logic.Singletons;
+package comp3350.g3.tasteBud.ui.Singletons;
 
 public class TagListKeySingleton {
     private String tagListKey = "tagList";

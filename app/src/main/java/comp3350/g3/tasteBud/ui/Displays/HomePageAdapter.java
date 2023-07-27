@@ -10,7 +10,6 @@ import comp3350.g3.tasteBud.logic.Processors.RecipeSelectionProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.ui.Interface.IListInteraction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //BaseQuickAdapter is a more powerful(simpler) tool for converting Recipes into a list

@@ -18,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.logic.Processors.RefineProcessor;
 import comp3350.g3.tasteBud.logic.Processors.SearchProcessor;
-import comp3350.g3.tasteBud.logic.Singletons.TagListKeySingleton;
+import comp3350.g3.tasteBud.ui.Singletons.TagListKeySingleton;
 import comp3350.g3.tasteBud.ui.Displays.HomePageAdapter;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.ui.Interface.IDeleteInteraction;
