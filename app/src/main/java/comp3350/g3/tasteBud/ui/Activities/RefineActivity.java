@@ -15,7 +15,7 @@ import java.util.Collections;
 
 import comp3350.g3.tasteBud.R;
 import comp3350.g3.tasteBud.logic.Processors.RefineProcessor;
-import comp3350.g3.tasteBud.logic.Singletons.TagListKeySingleton;
+import comp3350.g3.tasteBud.ui.Singletons.TagListKeySingleton;
 
 public class RefineActivity extends FragmentActivity {
     private TextView selectedTagText;

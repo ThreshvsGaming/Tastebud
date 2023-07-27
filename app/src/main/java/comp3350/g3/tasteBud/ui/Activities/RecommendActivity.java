@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
 import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.logic.Processors.RecommendProcessor;
 import comp3350.g3.tasteBud.logic.Processors.SearchProcessor;

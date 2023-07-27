@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import comp3350.g3.tasteBud.R;
-import comp3350.g3.tasteBud.logic.Processors.ImageProcessor;
 import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.logic.Validators.RecipeValidator;
 import comp3350.g3.tasteBud.ui.Displays.ImageSetter;
@@ -53,7 +52,6 @@ public class EditActivity extends FragmentActivity {
     private RecipeValidator recipeValidator;
     private ValidationStatusSetter validationStatusSetter;
 
-    private ImageProcessor imageProcessor;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,7 +73,6 @@ public class EditActivity extends FragmentActivity {
 
         recipeProcessor = new RecipeProcessor();
         recipeValidator = new RecipeValidator();
-        imageProcessor = new ImageProcessor();
     }
 
     public void insertRecipe(String validationError) {
