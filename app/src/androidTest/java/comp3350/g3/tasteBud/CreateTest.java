@@ -13,7 +13,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import comp3350.g3.tasteBud.ui.MainActivity;
+//import comp3350.g3.tasteBud.ui.MainActivity;
 
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -22,6 +22,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 
 import android.widget.ImageView;
+
+import comp3350.g3.tasteBud.ui.Activities.MainActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class CreateTest {

@@ -12,7 +12,9 @@ import androidx.test.runner.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import comp3350.g3.tasteBud.ui.MainActivity;
+
+import comp3350.g3.tasteBud.ui.Activities.MainActivity;
+//import comp3350.g3.tasteBud.ui.MainActivity;
 
 
 @RunWith(AndroidJUnit4.class)
