@@ -128,7 +128,7 @@ public class DetailActivity extends FragmentActivity implements IDeleteInteracti
     private void initializeRecipe() {
         //Create the instance of Recipe to get information of each recipe
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
-        recipeTitle.setText(recipe.getName());
+        recipeTitle.setText("Recipe Name: " + recipe.getName());
         recipeDescription.setText(recipe.getDesc());
     }
 
@@ -145,7 +145,7 @@ public class DetailActivity extends FragmentActivity implements IDeleteInteracti
             String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
             tagCollection = tag + (recipe.getTags().get(n)); //to get appropriately indexed tag
         }
-        recipeTags.setText(tagCollection);
+        recipeTags.setText("Tags: " + tagCollection);
     }
 
     private void initializeRecipeIngredients() {
@@ -154,7 +154,7 @@ public class DetailActivity extends FragmentActivity implements IDeleteInteracti
             String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
             ingredientsCollection = ingredients + (recipe.getIngredients().get(n)); //to get appropriately indexed ingredients
         }
-        recipeIngredients.setText(ingredientsCollection);
+        recipeIngredients.setText("Ingredients: " + ingredientsCollection);
     }
 
 

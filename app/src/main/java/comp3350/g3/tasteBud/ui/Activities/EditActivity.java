@@ -152,7 +152,7 @@ public class EditActivity extends FragmentActivity {
 
     private void initializeRecipe() {
         recipe = (Recipe) getIntent().getSerializableExtra("bean");
-        previewRecipeTitle.setText(recipe.getName());
+        previewRecipeTitle.setText("Recipe Name: " + recipe.getName());
         previewRecipeDescription.setText(recipe.getDesc());
         recipeId = recipe.getId();
         recipeImageUri = recipe.getImageUri();
@@ -168,7 +168,7 @@ public class EditActivity extends FragmentActivity {
             String tag = TextUtils.isEmpty(tagCollection) ? "" : "" + tagCollection + ",";
             tagCollection = tag + (recipe.getTags().get(n)); //to get appropriately indexed tag
         }
-        previewRecipeTags.setText(tagCollection);
+        previewRecipeTags.setText("Tags: " + tagCollection);
     }
 
     private void initializeRecipeIngredients() {
@@ -177,6 +177,6 @@ public class EditActivity extends FragmentActivity {
             String ingredients = TextUtils.isEmpty(ingredientsCollection) ? "" : "" + ingredientsCollection + ",";
             ingredientsCollection = ingredients + (recipe.getIngredients().get(n)); //to get appropriately indexed ingredients
         }
-        previewRecipeIngredients.setText(ingredientsCollection);
+        previewRecipeIngredients.setText("Ingredients: " + ingredientsCollection);
     }
 }
