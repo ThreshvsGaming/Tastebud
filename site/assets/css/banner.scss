@@ -1,0 +1,29 @@
+.banner {
+    width: 100%;
+    height: 300px;
+    background-color: blue;
+    position: relative;
+}
+
+.banner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%
+}
+
+.banner-content {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.banner .text {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    font-size:75px;
+    font-weight: 600;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}

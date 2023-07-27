@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+  </head>
+  <body>
+    <div class="banner-container">
+        <div class="banner">
+            <img src="{{ site.baseurl }}/assets/img/{{page.image}}" alt="{{page.title}}">
+            <div class="text">{{page.title}}</div>
+        </div>
+        <div class="banner-content">
+            {{page.content}}
+        </div>
+    </div>
+  </body>
+</html>
