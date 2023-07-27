@@ -12,7 +12,9 @@ import androidx.test.runner.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import comp3350.g3.tasteBud.ui.MainActivity;
+
+import comp3350.g3.tasteBud.ui.Activities.MainActivity;
+//import comp3350.g3.tasteBud.ui.MainActivity;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -29,7 +31,7 @@ public class RecommendTest {
         Espresso.onView(ViewMatchers.withId(R.id.recipeTitle)).check(matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withId(R.id.recipeTitle)).perform(ViewActions.typeText("Test Recipe"));
         Espresso.onView(ViewMatchers.withId(R.id.recipeDescription)).perform(ViewActions.typeText("This is Test Recipe"));
-        Espresso.onView(ViewMatchers.withId(R.id.recipeIngredients)).perform(ViewActions.typeText("Test Ingredient"));
+        Espresso.onView(ViewMatchers.withId(R.id.recipeIngredients)).perform(ViewActions.typeText("Test"));
         Espresso.onView(ViewMatchers.withId(R.id.recipeTags)).perform(ViewActions.typeText("Test Tag"));
 
         // Click on the "Submit" button
@@ -43,7 +45,7 @@ public class RecommendTest {
                 .perform(ViewActions.click());
 
         // Click on the first ingredient checkbox to select it
-        Espresso.onView(ViewMatchers.withText("Test Ingredient"))
+        Espresso.onView(ViewMatchers.withText("Test"))
                 .perform(ViewActions.click());
 
 

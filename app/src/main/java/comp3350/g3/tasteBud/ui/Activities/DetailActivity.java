@@ -21,7 +21,6 @@ import comp3350.g3.tasteBud.logic.Processors.RecipeProcessor;
 import comp3350.g3.tasteBud.ui.Displays.ImageSetter;
 import comp3350.g3.tasteBud.object.Ratings;
 import comp3350.g3.tasteBud.object.Recipe;
-import comp3350.g3.tasteBud.logic.Singletons.PersistenceSingleton;
 import comp3350.g3.tasteBud.ui.Interface.IDeleteInteraction;
 import comp3350.g3.tasteBud.ui.Displays.Messages;
 
