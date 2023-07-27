@@ -7,10 +7,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Objects;
 
+/*
+Due to android dependencies being the only way for us to grab said selected image, we cannot
+Create a class in the Persistence/Data Layer because we require methods that exist in the activities classes.
+Therefore we have to create a high coupled class in order to get the selected image, get the local file that android studio can make,
+and save the selected image in the local file
+Reason why we can't put this in the persistence/data layer
+Android Studio has their own pathing to read so we can't get the desired file we want
+Android Studio has their own methods to read the selected file, but it won't give us the absolute path
+ */
 
 public class AndroidImageReader {
 

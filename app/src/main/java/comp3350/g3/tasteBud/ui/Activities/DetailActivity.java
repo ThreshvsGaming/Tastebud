@@ -65,9 +65,6 @@ public class DetailActivity extends FragmentActivity implements IDeleteInteracti
         //Create a Recipe Processor to link to the logic layer
         recipeProcessor = new RecipeProcessor();
 
-        //Create a ratings processor to link to the logic layer
-        // ratingsProcessor = new RatingsProcessor(PersistenceSingleton.getInstance().GetIsPersistence());
-
     }
 
 
