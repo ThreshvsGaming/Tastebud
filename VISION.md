@@ -19,15 +19,3 @@ TasteBud's value comes from the ease of use the app provides. The app acts like 
 ## How will TasteBud be successful?  
 
 TasteBud will be considered a success based on 3 objectives. First, whether or not the users find TasteBud to be more convenient to use than anything else that is available on the market. This will be determined from a survey that the users will be asked to take after 3 weeks of use, and we are hoping to see at least a 10% improvement in convenience ratings compared to existing systems currently available.  Second, users should find searching for their favorite recipes simple and accurate, and we are hoping to see users picking the first recipe after searching 30% of the time. The last objective is at least 50% of the users decisively picking TasteBud over other competitors, as determined from the survey. If any two out of these three objectives are met, TasteBud will be considered a successful project. 
-
-## Iteration 2 Worksheet
-Please see [Iteration 2 Worksheet](Iteration_2_Worksheet.pdf). It is in PDF format.
-
-## Architecture
-See [Architecture](Architecture.md).
-
-## Features
-[List of features](https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&first_page_size=20)
-
-## User stories
-[List of user stories](https://code.cs.umanitoba.ca/3350-summer2023/g3canada-3/-/issues/?sort=created_date&state=opened&label_name%5B%5D=User%20Story&first_page_size=20)
