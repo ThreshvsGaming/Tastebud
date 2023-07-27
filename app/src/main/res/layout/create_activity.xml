@@ -24,7 +24,7 @@
     <ImageView
         android:id="@+id/recipeImageDetail"
         android:layout_width="match_parent"
-        android:layout_height="121dp"
+        android:layout_height="120dp"
         android:background="#adc6f0"
         android:padding="@dimen/dp_15"
         android:src="@mipmap/ic_adds" />

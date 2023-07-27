@@ -9,8 +9,9 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import comp3350.g3.tasteBud.data.IRecipeDB;
-import comp3350.g3.tasteBud.logic.RecommendProcessor;
+
+import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
+import comp3350.g3.tasteBud.logic.Processors.RecommendProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 
 public class RecommendProcessorTest {

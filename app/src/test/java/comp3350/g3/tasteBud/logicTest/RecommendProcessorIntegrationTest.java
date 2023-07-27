@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import comp3350.g3.tasteBud.data.IRecipeDB;
+//import comp3350.g3.tasteBud.data.IRecipeDB;
+import comp3350.g3.tasteBud.data.Interface.IRecipeDB;
 import comp3350.g3.tasteBud.data.hsqldb.RecipeDBPersistence;
-import comp3350.g3.tasteBud.logic.RecommendProcessor;
+//import comp3350.g3.tasteBud.logic.RecommendProcessor;
+import comp3350.g3.tasteBud.logic.Processors.RecommendProcessor;
 import comp3350.g3.tasteBud.object.Recipe;
 import comp3350.g3.tasteBud.utils.TestUtils;
 

@@ -31,7 +31,7 @@ public class RecommendTest {
         Espresso.onView(ViewMatchers.withId(R.id.recipeTitle)).check(matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withId(R.id.recipeTitle)).perform(ViewActions.typeText("Test Recipe"));
         Espresso.onView(ViewMatchers.withId(R.id.recipeDescription)).perform(ViewActions.typeText("This is Test Recipe"));
-        Espresso.onView(ViewMatchers.withId(R.id.recipeIngredients)).perform(ViewActions.typeText("Test Ingredient"));
+        Espresso.onView(ViewMatchers.withId(R.id.recipeIngredients)).perform(ViewActions.typeText("Test"));
         Espresso.onView(ViewMatchers.withId(R.id.recipeTags)).perform(ViewActions.typeText("Test Tag"));
 
         // Click on the "Submit" button
@@ -45,7 +45,7 @@ public class RecommendTest {
                 .perform(ViewActions.click());
 
         // Click on the first ingredient checkbox to select it
-        Espresso.onView(ViewMatchers.withText("Test Ingredient"))
+        Espresso.onView(ViewMatchers.withText("Test"))
                 .perform(ViewActions.click());
 
 
